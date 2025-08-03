@@ -1,0 +1,474 @@
+"use client";
+
+import { useLayoutEffect, useRef } from "react";
+
+import Breadcrumb from "../components/Breadcrumb";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import CTA from "../components/CTA";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export default function About() {
+  const containerRef = useRef(null);
+  const imageRef = useRef(null);
+  const headingRef = useRef(null);
+  const paraRef = useRef(null);
+  const cardsRef = useRef([]);
+  const cardSectionRef = useRef(null);
+  const nextContentRef = useRef(null);
+  const firstImageRef = useRef(null);
+  const secondImageRef = useRef(null);
+  const nextTextRef = useRef(null);
+  const nextParaRef = useRef(null);
+  const nextHeadRef = useRef(null);
+
+  const splitText = (element) => {
+    if (!element || element.querySelector("span span")) return; // Already split
+
+    const text = element.innerText;
+    const words = text.split(" ");
+    element.innerHTML = "";
+
+    words.forEach((word) => {
+      const wordSpan = document.createElement("span");
+      wordSpan.style.display = "inline-block";
+      wordSpan.style.whiteSpace = "nowrap";
+      wordSpan.style.marginRight = "8px";
+
+      word.split("").forEach((char) => {
+        const charSpan = document.createElement("span");
+        charSpan.textContent = char;
+        charSpan.style.display = "inline-block";
+        charSpan.style.opacity = "0";
+        wordSpan.appendChild(charSpan);
+      });
+
+      element.appendChild(wordSpan);
+    });
+  };
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      requestAnimationFrame(() => {
+        splitText(headingRef.current);
+        splitText(paraRef.current);
+        splitText(nextTextRef.current);
+        splitText(nextHeadRef.current);
+        splitText(nextParaRef.current);
+
+        const headingSpans = headingRef.current.querySelectorAll("span span");
+        const paraSpans = paraRef.current.querySelectorAll("span span");
+        const nextTextSpans = nextTextRef.current.querySelectorAll("span span");
+        const nextHeadSpans = nextHeadRef.current.querySelectorAll("span span");
+        const nextParaSpans = nextParaRef.current.querySelectorAll("span span");
+
+        gsap.set(
+          [
+            headingSpans,
+            paraSpans,
+            nextTextSpans,
+            nextHeadSpans,
+            nextParaSpans,
+          ],
+          {
+            y: 0,
+            opacity: 0,
+          }
+        );
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "+=4000",
+            scrub: true,
+            pin: true,
+          },
+        });
+
+        tl.to(imageRef.current, {
+          scale: 0.4,
+          xPercent: -50,
+          ease: "power2.out",
+        });
+
+        tl.set(headingRef.current, { opacity: 1 });
+        tl.to(headingSpans, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.03,
+          duration: 1,
+          ease: "power3.out",
+        });
+
+        tl.set(paraRef.current, { opacity: 1 });
+        tl.to(paraSpans, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.01,
+          duration: 1,
+          ease: "power2.out",
+        });
+
+        // ---- Cards Animation ----
+        // ---- Cards Slide-up One-by-One ----
+        const cards = cardSectionRef.current.querySelectorAll(".slide-card");
+
+        // Set initial state
+        gsap.set(cards, { y: 100, opacity: 0 });
+
+        const totalCards = cards.length;
+        const cardTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: cardSectionRef.current,
+            start: "top top",
+            end: `+=${totalCards * 600}`, // adjust scroll distance per card
+            scrub: true,
+            pin: true,
+            anticipatePin: 1,
+          },
+        });
+
+        // Animate each card one after another
+        cards.forEach((card, i) => {
+          cardTimeline.to(
+            card,
+            {
+              y: 0,
+              opacity: 1,
+              ease: "power3.out",
+              duration: 1,
+            },
+            i * 1 // controls when each animation starts in the scroll timeline
+          );
+        });
+
+        // Jiggle effect (looping while pinned)
+        cards.forEach((card, i) => {
+          cardTimeline.to(
+            card,
+            {
+              rotation: () => gsap.utils.random(-2, 2),
+              scale: () => gsap.utils.random(0.98, 1.02),
+              duration: 0.3,
+              ease: "sine.inOut",
+              repeat: 2,
+              yoyo: true,
+            },
+            totalCards + i * 1 // after entry
+          );
+        });
+
+        cards.forEach((card, i) => {
+          cardTimeline.to(
+            card,
+            {
+              y: -100,
+              opacity: 0,
+              ease: "power3.in",
+              duration: 1,
+            },
+            totalCards * 2 + i * 1 // after jiggle
+          );
+        });
+
+        // --- Reveal Next Content ---
+        // --- Reveal Next Content ---
+      const nextTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: nextContentRef.current,
+          start: "top top",
+          end: "+=4000",
+          scrub: true,
+          pin: true,
+          markers: false,
+        },
+      });
+
+      nextTl
+        // Reveal text under h1 (e.g., "Founder")
+        .set(nextHeadRef.current, { opacity: 1 }, ">")
+        .to(
+          nextTextRef.current.querySelectorAll("span span"),
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.03,
+            duration: 2,
+            ease: "power3.out",
+          },
+          ">0.2"
+        )
+
+        // Animate first image in
+        .to(
+          firstImageRef.current,
+          {
+            clipPath: "inset(0% 0% 0% 0%)",
+            opacity: 1,
+            scale: 1,
+            ease: "power2.out",
+            duration: 1.5,
+          },
+          ">0.2"
+        )
+
+        // Animate heading text (e.g., "BINDU BASKARAN")
+        .set(nextHeadRef.current, { opacity: 1 }, ">")
+        .to(
+          nextHeadRef.current.querySelectorAll("span span"),
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.03,
+            duration: 1.5,
+            ease: "power3.out",
+          },
+          ">0.2"
+        )
+
+        // Animate second image on top of first
+        .to(
+          secondImageRef.current,
+          {
+            opacity: 1,
+            clipPath: "inset(0% 0% 0% 0%)",
+            scale: 1,
+            duration: 1.5,
+            ease: "power2.out",
+          },
+          ">0.2"
+        )
+
+        // Animate paragraph text
+        .set(nextParaRef.current, { opacity: 1 }, ">")
+        .to(
+          nextParaRef.current.querySelectorAll("span span"),
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.01,
+            duration: 1,
+            ease: "power2.out",
+          },
+          ">0.2"
+        );
+
+      }, containerRef);
+      ScrollTrigger.refresh();
+    }); // --- End Scroll Trigger ---
+    return () => ctx.revert();
+  }, []);
+
+  const cardData = [
+    {
+      img: "https://madewithgsap.com/assets/img/card1.svg",
+      title: "Beginners friendly",
+      text: "Perfect for all skill levels.",
+    },
+    {
+      img: "https://madewithgsap.com/assets/img/card2.svg",
+      title: "Easy to implement",
+      text: "Reusable and quick to integrate.",
+    },
+    {
+      img: "https://madewithgsap.com/assets/img/card3.svg",
+      title: "Performance optimized",
+      text: "Built for speed and polish.",
+    },
+  ];
+
+  return (
+    <>
+      <div style={{ padding: "0" }}>
+        <Breadcrumb />
+        <div
+          ref={containerRef}
+          className="about-container"
+          style={{
+            height: "100vh",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            className="about-img"
+            ref={imageRef}
+            style={{
+              width: "90%",
+              height: "100%",
+              overflow: "hidden",
+              margin: "auto",
+            }}
+          >
+            <img
+              src="https://cdn.pixabay.com/photo/2023/01/08/14/22/sample-7705346_640.jpg"
+              alt="About"
+              rel="preload"
+              style={{
+                width: "100%",
+                height: "90%",
+                objectFit: "cover",
+                transformOrigin: "center center",
+              }}
+            />
+          </div>
+          <div
+            className="about-head"
+            style={{
+              position: "absolute",
+              top: "60%",
+              left: "28%",
+              transform: "translateY(-50%)",
+              color: "#000",
+              maxWidth: "100%",
+            }}
+          >
+            <h1
+              ref={headingRef}
+              style={{
+                fontSize: "2rem",
+                fontWeight: "bold",
+                marginBottom: "1rem",
+              }}
+            >
+              About Instyl
+            </h1>
+            <p ref={paraRef} style={{ fontSize: "2rem", marginTop: "1rem" }}>
+              Instyl Hair N Bridal Studio was established in the year of March
+              11, 2010 (which is now of 14 years) by Bindu Baskaran. INSTYL is
+              renowned for their creative haircuts , In which they have created
+              atmost of 65,000+ haircuts, they even has a record of creating
+              100+ cuts in just one day. INSTYL is known for the affordable
+              price rage with extra-ordinary services to their clients who's
+              been trusting the for years. Over the past 14 years INSTYL have
+              achevied almost 30,000+ regular customers, 1,50,000+ satified
+              services. And INSTYL have created 3000+ makeups. The service
+              providers at INSTYL are extremely experienced, talented and
+              trained specially by the Founder of INSTYL. INSTYL motive is to
+              make every ladies who come to them feel like a queen. So what
+              keeps you waiting visit INSTYL get #instylifed
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Horizontal Cards Section */}
+      <section
+        className="card-stack"
+        ref={cardSectionRef}
+        style={{
+          height: "100vh", // extended scroll space
+          position: "relative",
+        }}
+      >
+        <div
+          className="card-wrapper"
+          style={{
+            position: "sticky",
+            top: "20vh",
+            height: "60vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-end",
+            gap: "2rem",
+          }}
+        >
+          {[...Array(3)].map((_, i) => (
+            <div
+              key={i}
+              className="slide-card"
+              style={{
+                width: "280px",
+                height: "380px",
+                background: "#fff",
+                borderRadius: "1rem",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+                padding: "2rem",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+                transform: `rotate(${[-4, 3, -2][i]}deg)`,
+                // opacity: 0,
+              }}
+            >
+              <img
+                src={`https://madewithgsap.com/assets/img/card${i + 1}.svg`}
+                alt={`Card ${i + 1}`}
+                style={{ width: "80px", marginBottom: "1rem" }}
+              />
+              <h3 style={{ fontSize: "1.3rem" }}>
+                {
+                  [
+                    "Beginners Friendly",
+                    "Easy to Implement",
+                    "Performance Optimized",
+                  ][i]
+                }
+              </h3>
+              <p style={{ fontSize: "0.9rem", marginTop: "0.5rem" }}>
+                {
+                  [
+                    "Perfect for all skill levels.",
+                    "Reusable and quick to integrate.",
+                    "Built for speed and polish.",
+                  ][i]
+                }
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="next-content" ref={nextContentRef}>
+        <div className="next-image">
+          <div>
+            <h1 ref={nextTextRef}>Founder</h1>
+          </div>
+          <div className="imaga-div">
+            <img
+              src="https://cdn.pixabay.com/photo/2023/01/08/14/22/sample-7705346_640.jpg"
+              alt="Initial"
+              ref={firstImageRef}
+              className="image-layer"
+              
+            />
+            <img
+              src="https://pics.craiyon.com/2024-09-04/lVIdzSccREy2xW2pf853oA.webp"
+              alt="Second"
+              ref={secondImageRef}
+              className="image-layer"
+              
+            />
+          </div>
+        </div>
+        <div className="next-text">
+          <h2 ref={nextHeadRef}>BINDU BASKARAN </h2>
+          <p ref={nextParaRef}>
+            Founder of INSTYL who has 20+years of experience in the beauty
+            industry. She is renowned for her creative Haircuts and  Skin-on
+            finish Makeups. She have curated atmost of 50,000+
+            haircuts and 3000+ makeups in her beauty jouney. Graduating
+            from international based beauty school and worked with top beauty
+            professionals, she have masters the skill on providing the best
+            service. With a 20+years of experience and so much of struggles
+            she owned her own salon INSTYL HAIR N BRIDAL STUDIO in the years
+            of 2010, which is now celebrating 14 years. She is always passionate
+            about her work and never miss following trends when it comes to
+            makeup or haircut. Her only motive is to give highclass service in
+            a minimal budget to her customers. And she super encoraging towards
+            her team members. She keeps a periodical training for her team if
+            she updates herself.  All ladies come to her for a cut or makeup
+            will defintely love her work. So if it is a cut or makeup your
+            looking for Bindu is the best choice.
+          </p>
+        </div>
+      </section>
+      <section>
+                    <CTA />
+                  </section>
+    </>
+  );
+}

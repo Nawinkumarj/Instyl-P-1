@@ -1,0 +1,36 @@
+/* portfolio */
+@media (max-width: 1024px) {
+  .portfolio-heading h1 {
+    font-size: 3.5rem;
+    color: blue !important;
+    background-color: red;
+  }
+  .portfolio-grid {
+      width: 90vw;
+    }
+}
+
+@media (max-width: 768px) {
+  .portfolio-heading h1 {
+    font-size: 2.5rem;
+    gap: 0.3rem;
+  }
+  .portfolio-grid {
+      width: 95vw;
+    }
+    .grid-item {
+      width: 150px;
+      height: 100px;
+    }
+}
+/* Portfolio ends */
+
+
+
+
+/* footer starts */
+
+
+
+
+/* footer ends */
