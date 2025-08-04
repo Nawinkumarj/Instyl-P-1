@@ -129,7 +129,18 @@ export default function ModelScroll() {
         <div className="home-main-content">
           <h1>About us</h1>
           <p>
-            Established continues to set new standards in the beauty industry.
+            Instyl Hair N Bridal Studio stands as North Chennai’s biggest female
+            salon, celebrated for its exceptional creativity and commitment to
+            excellence. With over 15 years of dedicated service, INSTYL has
+            redefined hairstyling and beauty, earning a reputation for
+            innovative haircuts and remarkable client satisfaction.<br/> Renowned for
+            its artistry, INSTYL has crafted over 1,00,000 unique haircuts,
+            including a record-breaking achievement of 100+ cuts in a single
+            day. Their unwavering dedication to quality and personalized service
+            has cultivated a loyal clientele, with nearly 40,000 regular
+            customers and over 1,50,000 satisfied services delivered.
+            Additionally, INSTYL has transformed more than 3,000 clients with
+            their expert makeup artistry.
           </p>
         </div>
       </section>

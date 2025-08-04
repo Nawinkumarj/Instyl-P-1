@@ -55,6 +55,9 @@ const Navbar = () => {
         <Link href="/Offers" onClick={() => setIsOpen(false)}>
           Offers
         </Link>
+        <Link href="/Membership" onClick={() => setIsOpen(false)}>
+          Membership
+        </Link>
       </div>
     </nav>
   );

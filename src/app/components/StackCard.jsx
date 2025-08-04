@@ -13,11 +13,23 @@
     useEffect(() => {
         const ctx = gsap.context(() => {
 
-             gsap.set(cardsRef.current, {
-               y: 200,
-               opacity: 0,
-               scale: 0.9,
-             });
+        cardsRef.current.forEach((card, index) => {
+          if (index === 0) {
+            gsap.set(card, {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              zIndex: 0, // Put it below the stacking cards
+            });
+          } else {
+            gsap.set(card, {
+              y: 200,
+              opacity: 0,
+              scale: 0.9,
+            });
+          }
+        });
+
             
         const tl = gsap.timeline({
             scrollTrigger: {
@@ -29,7 +41,9 @@
             },
         });
 
-        cardsRef.current.forEach((card, index) => {
+            cardsRef.current.forEach((card, index) => {
+                if (index === 0) return; 
+                
             tl.to(
             card,
             {
@@ -38,7 +52,7 @@
                 opacity: 1,
                 zIndex: index + 1,
                 ease: "power2.out",
-                duration: 1,
+                duration: 0.2,
             },
             index * 0.5 // Staggering based on timeline position
             );

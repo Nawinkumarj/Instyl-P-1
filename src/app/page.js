@@ -76,7 +76,6 @@ import ModelScroll from "./components/ModelScroll";
         <div className="home-container">
       
          <ModelScroll/>
-          <div style={{ height: "100vh" }}></div>
 
           <div className="home-section3">
             <section>

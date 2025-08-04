@@ -12,7 +12,7 @@
       <html lang="en">
         <body>
           <Navbar />
-          <div style={{ paddingLeft: "220px" }}>
+          <div className="main-content" style={{ paddingLeft: "220px" }}>
             <main>{children}</main>
             <Footer />
           </div>
