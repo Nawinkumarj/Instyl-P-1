@@ -49,6 +49,10 @@ export default function About() {
   };
 
   useLayoutEffect(() => {
+const mediaQuery = window.matchMedia("(min-width: 768px)");
+
+if (!mediaQuery.matches) return; 
+
     const ctx = gsap.context(() => {
       requestAnimationFrame(() => {
         splitText(headingRef.current);
@@ -286,56 +290,27 @@ export default function About() {
         <div
           ref={containerRef}
           className="about-container"
-          style={{
-            height: "100vh",
-            position: "relative",
-            overflow: "hidden",
-          }}
+        
         >
           <div
             className="about-img"
             ref={imageRef}
-            style={{
-              width: "90%",
-              height: "100%",
-              overflow: "hidden",
-              margin: "auto",
-            }}
           >
             <img
               src="https://cdn.pixabay.com/photo/2023/01/08/14/22/sample-7705346_640.jpg"
               alt="About"
               rel="preload"
-              style={{
-                width: "100%",
-                height: "90%",
-                objectFit: "cover",
-                transformOrigin: "center center",
-              }}
             />
           </div>
           <div
             className="about-head"
-            style={{
-              position: "absolute",
-              top: "60%",
-              left: "28%",
-              transform: "translateY(-50%)",
-              color: "#000",
-              maxWidth: "100%",
-            }}
           >
             <h1
               ref={headingRef}
-              style={{
-                fontSize: "2rem",
-                fontWeight: "bold",
-                marginBottom: "1rem",
-              }}
             >
               About Instyl
             </h1>
-            <p ref={paraRef} style={{ fontSize: "2rem", marginTop: "1rem" }}>
+            <p ref={paraRef} >
               Instyl Hair N Bridal Studio was established in the year of March
               11, 2010 (which is now of 14 years) by Bindu Baskaran. INSTYL is
               renowned for their creative haircuts , In which they have created
@@ -356,41 +331,18 @@ export default function About() {
 
       {/* Horizontal Cards Section */}
       <section
-        className="card-stack"
+        className="about-card-stack"
         ref={cardSectionRef}
-        style={{
-          height: "100vh", // extended scroll space
-          position: "relative",
-        }}
       >
         <div
-          className="card-wrapper"
-          style={{
-            position: "sticky",
-            top: "20vh",
-            height: "60vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "flex-end",
-            gap: "2rem",
-          }}
+          className="about-card-wrapper"
+        
         >
           {[...Array(3)].map((_, i) => (
             <div
               key={i}
-              className="slide-card"
+              className="about-slide-card"
               style={{
-                width: "280px",
-                height: "380px",
-                background: "#fff",
-                borderRadius: "1rem",
-                boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-                padding: "2rem",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                textAlign: "center",
                 transform: `rotate(${[-4, 3, -2][i]}deg)`,
                 // opacity: 0,
               }}
@@ -432,14 +384,14 @@ export default function About() {
               src="https://cdn.pixabay.com/photo/2023/01/08/14/22/sample-7705346_640.jpg"
               alt="Initial"
               ref={firstImageRef}
-              className="image-layer"
+              className="image-layer1"
               
             />
             <img
               src="https://pics.craiyon.com/2024-09-04/lVIdzSccREy2xW2pf853oA.webp"
               alt="Second"
               ref={secondImageRef}
-              className="image-layer"
+              className="image-layer2"
               
             />
           </div>
