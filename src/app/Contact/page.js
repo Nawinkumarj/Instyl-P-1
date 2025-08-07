@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Breadcrumb from "../components/Breadcrumb";
 import { Milestone, Phone, Mail } from "lucide-react";
 import Image from "next/image";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function Contact() {
   const sectionRef = useRef(null);
@@ -17,7 +18,6 @@ export default function Contact() {
   const afterCardsRef = useRef(null);
 
   cardRefs.current = [];
-
   const addToRefs = (el) => {
     if (el && !cardRefs.current.includes(el)) {
       cardRefs.current.push(el);
@@ -25,18 +25,15 @@ export default function Contact() {
   };
 
   const splitText = (element) => {
-    if (!element || element.querySelector("span span")) return; // Already split
-  
+    if (!element || element.querySelector("span span")) return;
     const text = element.innerText;
     const words = text.split(" ");
     element.innerHTML = "";
-  
     words.forEach((word) => {
       const wordSpan = document.createElement("span");
       wordSpan.style.display = "inline-block";
       wordSpan.style.whiteSpace = "nowrap";
       wordSpan.style.marginRight = "8px";
-  
       word.split("").forEach((char) => {
         const charSpan = document.createElement("span");
         charSpan.textContent = char;
@@ -44,17 +41,16 @@ export default function Contact() {
         charSpan.style.opacity = "0";
         wordSpan.appendChild(charSpan);
       });
-  
       element.appendChild(wordSpan);
     });
   };
-  
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
+  useGSAP(
+    () => {
+      // Split heading, intro, and final message
       splitText(headingRef.current);
       splitText(paraRef.current);
-      splitText(afterCardsRef.current)
+      splitText(afterCardsRef.current);
 
       const headingSpans = headingRef.current.querySelectorAll("span span");
       const paraSpans = paraRef.current.querySelectorAll("span span");
@@ -81,7 +77,6 @@ export default function Contact() {
           headingSpans,
           {
             opacity: 0,
-            // y: -30,
             stagger: 0.05,
             duration: 1,
             ease: "power3.in",
@@ -103,7 +98,6 @@ export default function Contact() {
           paraSpans,
           {
             opacity: 0,
-            // y: 30,
             stagger: 0.03,
             duration: 1,
             ease: "power3.in",
@@ -140,7 +134,6 @@ export default function Contact() {
           },
           "+=0.2"
         )
-
         .to(
           afterSpans,
           {
@@ -156,22 +149,15 @@ export default function Contact() {
           afterSpans,
           {
             opacity: 0,
-            // y: 30,
             stagger: 0.03,
             duration: 1,
             ease: "power3.in",
           },
           "+=0.3"
         );
-        
-        
-        
-
-      
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+    },
+    { scope: sectionRef }
+  );
 
   return (
     <div style={{ padding: "20px" }}>
@@ -180,11 +166,7 @@ export default function Contact() {
         <div className="contact-section1" ref={sectionRef}>
           <div
             className="contact-section1-content"
-            style={{
-              position: "relative",
-              textAlign: "center",
-              width: "100%",
-            }}
+            style={{ position: "relative", textAlign: "center", width: "100%" }}
           >
             <h1 ref={headingRef}>ready to glow?</h1>
             <p ref={paraRef} className="intro-text">
@@ -193,7 +175,6 @@ export default function Contact() {
               appointments.
             </p>
 
-            {/* Cards */}
             <div
               className="cards-wrapper"
               style={{
@@ -218,11 +199,9 @@ export default function Contact() {
               </div>
             </div>
 
-            <p
-              className="final-message"
-              ref={afterCardsRef}>
-              We&apos;re here to help you shine — whether it&apos;s your first visit or
-              your hundredth, your beauty journey begins here.
+            <p className="final-message" ref={afterCardsRef}>
+              We&apos;re here to help you shine — whether it&apos;s your first
+              visit or your hundredth, your beauty journey begins here.
             </p>
           </div>
         </div>

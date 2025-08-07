@@ -1,45 +1,58 @@
 "use client";
 
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const StackCards = () => {
   const containerRef = useRef(null);
   const cardsRef = useRef([]);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      cardsRef.current.forEach((card, index) => {
+  // Use GSAP's official React hook for automatic cleanup
+  useGSAP(
+    () => {
+      const validCards = cardsRef.current.filter(
+        (card) => card && card.parentNode
+      );
+
+      if (validCards.length === 0) return;
+
+      // Set initial positions
+      validCards.forEach((card, index) => {
         if (index === 0) {
           gsap.set(card, {
             y: 0,
             opacity: 1,
             scale: 1,
-            zIndex: 0, // Put it below the stacking cards
+            zIndex: 0,
           });
         } else {
           gsap.set(card, {
             y: 200,
             opacity: 0,
             scale: 0.9,
+            zIndex: index,
           });
         }
       });
 
+      // Create animation timeline
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=3000", // Increase this to make the scroll longer
+          end: "+=3000",
           scrub: true,
           pin: true,
+          anticipatePin: 1,
         },
       });
 
-      cardsRef.current.forEach((card, index) => {
+      // Animate cards
+      validCards.forEach((card, index) => {
         if (index === 0) return;
 
         tl.to(
@@ -52,25 +65,31 @@ const StackCards = () => {
             ease: "power2.out",
             duration: 0.2,
           },
-          index * 0.5 // Staggering based on timeline position
+          index * 0.5
         );
       });
-    }, containerRef);
 
-    return () => ctx.revert();
-  }, []);
+      // Cleanup is handled automatically by useGSAP
+    },
+    { scope: containerRef }
+  ); // Scope animations to container
+
+  const addToRefs = (el, index) => {
+    if (el) {
+      cardsRef.current[index] = el;
+    }
+  };
 
   return (
-    <section className="stack-section" ref={containerRef}>
+    <section className="stack-section" ref={containerRef} translate="no">
       <div className="stack-inner">
         {[...Array(5)].map((_, i) => (
           <div
             className="stack-card"
             key={i}
-            ref={(el) => {
-              if (el) cardsRef.current[i] = el;
-            }}
+            ref={(el) => addToRefs(el, i)}
             style={{ zIndex: 5 - i }}
+            translate="no"
           >
             <h3>Card {i + 1}</h3>
           </div>

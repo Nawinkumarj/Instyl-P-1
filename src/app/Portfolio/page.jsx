@@ -95,13 +95,16 @@ const Page = () => {
 
       <div className="card-section" ref={cardsRef}>
         <div className="category-card">
-          <img src="/images/kids-cover.jpg" alt="Kids" />
+          <img src="https://wallpaperaccess.com/full/4788268.jpg" alt="Kids" />
           <h2>For Kids</h2>
           <p>Fun and educational visuals crafted for young minds.</p>
           <button onClick={() => handleNavigate("kids")}>Explore More</button>
         </div>
         <div className="category-card">
-          <img src="/images/adults-cover.jpg" alt="Adults" />
+          <img
+            src="https://static.getimg.ai/media/getimg_ai_img-8rcnXGXwyWJ8VqJOKChpf.webp"
+            alt="Adults"
+          />
           <h2>For Adults</h2>
           <p>Elegant and professional designs suited for mature audiences.</p>
           <button onClick={() => handleNavigate("adults")}>Explore More</button>
