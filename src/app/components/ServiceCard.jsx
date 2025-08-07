@@ -28,41 +28,41 @@
         },
     ];
 
-    useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-        const sections = gsap.utils.toArray(".servicecard-section");
-        const sectionHeight = window.innerHeight;
-    // console.log(window.innerHeight);
-        const tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: () => `+=${sectionHeight * sections.length}`,
-            scrub: true,
-            pin: true,
-        },
-        });
+useLayoutEffect(() => {
+  const ctx = gsap.context(() => {
+    requestAnimationFrame(() => {
+      const sections = gsap.utils.toArray(".servicecard-section");
+      const sectionHeight = window.innerHeight;
 
-        sections.forEach((section, index) => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: () => `+=${sectionHeight * sections.length}`,
+          scrub: true,
+          pin: true,
+        },
+      });
+
+      sections.forEach((section, index) => {
         if (index === 0) return;
         const prev = sections[index - 1];
 
         tl.to(prev, { height: "20vh", ease: "power1.out" }, "+=0.1").fromTo(
-            section,
-            { height: "20vh" },
-            { height: "100vh", ease: "power1.out" },
-            "<"
+          section,
+          { height: "20vh" },
+          { height: "70vh", ease: "power1.out" },
+          "<"
         );
-        });
+      });
 
-        // Shrink the last section AND unpin correctly
-        const last = sections[sections.length - 1];
-        tl.to(last, { height: "20vh", ease: "power1.out" }, "+=0.1");
-    }, containerRef);
+      const last = sections[sections.length - 1];
+      tl.to(last, { height: "20vh", ease: "power1.out" }, "+=0.1");
+    });
+  }, containerRef);
 
-    return () => ctx.revert();
-    }, []);
-
+  return () => ctx.revert();
+}, []);
 
 
 

@@ -117,7 +117,7 @@ if (!mediaQuery.matches) return;
 
         // ---- Cards Animation ----
         // ---- Cards Slide-up One-by-One ----
-        const cards = cardSectionRef.current.querySelectorAll(".slide-card");
+        const cards = cardSectionRef.current.querySelectorAll(".about-slide-card");
 
         // Set initial state
         gsap.set(cards, { y: 100, opacity: 0 });
