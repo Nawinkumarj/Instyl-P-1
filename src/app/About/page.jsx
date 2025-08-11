@@ -238,7 +238,7 @@ export default function About() {
               opacity: 1,
               y: 0,
               stagger: 0.03,
-              duration: 2,
+              duration: 1,
               ease: "power3.out",
             },
             ">0.2"
@@ -346,7 +346,7 @@ export default function About() {
               alt="About"
               rel="preload"
             />
-          </div>
+          </div>  
           <div className="about-head">
             <h1 ref={headingRef}>About Instyl</h1>
             <p ref={paraRef}>

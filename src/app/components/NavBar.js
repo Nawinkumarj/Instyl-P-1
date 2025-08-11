@@ -21,13 +21,27 @@ const Navbar = () => {
     <nav className={`navbar-container ${scrolled ? "scrolled" : ""}`}>
       <div className="navbar-header">
         <div className="navbar-logo">
-          <Image
-            src={scrolled ? "/Instyl.webp" : "/instyl-s.png"}
-            alt="Logo"
-            width={100}
-            height={80}
-            priority
-          />
+          <div className="logo-wrapper">
+            {/* Large logo */}
+            <Image
+              src="/Instyl.webp"
+              alt="Large Logo"
+              fill
+              className={`logo-image large ${scrolled ? "visible" : "hidden"}`}
+              style={{ objectFit: "contain" }}
+              priority
+            />
+
+            {/* Small logo */}
+            <Image
+              src="/instyl-s.png"
+              alt="Small Logo"
+              fill
+              className={`logo-image small ${!scrolled ? "visible" : "hidden"}`}
+              style={{ objectFit: "contain" }}
+              priority
+            />
+          </div>
         </div>
 
         {/* Hamburger button */}

@@ -1,6 +1,5 @@
 "use client";
-
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function CardForm() {
   const [formData, setFormData] = useState({
@@ -12,25 +11,111 @@ export default function CardForm() {
     leftDesc: "",
   });
 
-  const handleChange = (e) =>
+  const [rotation, setRotation] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+
+  const lastX = useRef(0);
+  const rotationRef = useRef(0);
+  const typingTimeoutRef = useRef(null);
+  const autoRotateInterval = useRef(null);
+
+  // Auto rotation
+  useEffect(() => {
+    startAutoRotate();
+    return () => stopAutoRotate();
+  }, []);
+
+  const startAutoRotate = () => {
+    stopAutoRotate();
+    autoRotateInterval.current = setInterval(() => {
+      if (!isDragging && !isTyping) {
+        setRotation((prev) => {
+          const newRot = prev + 0.2;
+          rotationRef.current = newRot;
+          return newRot;
+        });
+      }
+    }, 16);
+  };
+
+  const stopAutoRotate = () => {
+    if (autoRotateInterval.current) {
+      clearInterval(autoRotateInterval.current);
+      autoRotateInterval.current = null;
+    }
+  };
+
+  // Mouse events
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    stopAutoRotate();
+    lastX.current = e.clientX;
+  };
+
+  const handleMouseMove = (e) => {
+    if (isDragging) {
+      const delta = e.clientX - lastX.current;
+      lastX.current = e.clientX;
+      setRotation((prev) => {
+        const newRot = prev + delta * 0.5;
+        rotationRef.current = newRot;
+        return newRot;
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    if (!isTyping) startAutoRotate();
+  };
+
+  // Typing
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setIsTyping(true);
+    setRotation(0);
+    rotationRef.current = 0;
+    stopAutoRotate();
+
+    clearTimeout(typingTimeoutRef.current);
+    typingTimeoutRef.current = setTimeout(() => {
+      setIsTyping(false);
+      startAutoRotate();
+    }, 2000);
+  };
+
+  // Submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setShowPopup(true);
+    setTimeout(() => setShowPopup(false), 3000); // auto-hide after 3s
+  };
 
   return (
-    <div className="card-form-container">
+    <div
+      className="card-form-container"
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+    >
       {/* 3D Card */}
-      <div className="card-3d-wrapper">
-        <div className="card-3d">
-          {/* Front Side */}
+      <div
+        className="card-3d-wrapper"
+        onMouseDown={handleMouseDown}
+        style={{ cursor: isDragging ? "grabbing" : "grab" }}
+      >
+        <div
+          className="card-3d"
+          style={{ transform: `rotateY(${rotation}deg)` }}
+        >
+          {/* Front */}
           <div className="card-face card-front">
             <div className="card-left">
               <img src="/Instyl.webp" alt="Logo" />
               <div className="qr-code">
-                {/* You can replace with actual QR later */}
-                <img
-                  src="/instyl-s.png"
-                  alt="QR"
-                  style={{ width: "100%", height: "100%" }}
-                />
+                <img src="/instyl-s.png" alt="QR" />
               </div>
               <small>{formData.leftDesc || "Short desc"}</small>
             </div>
@@ -38,7 +123,7 @@ export default function CardForm() {
               <div>
                 <h2>{formData.name || "Your Name"}</h2>
                 <p>Expires On: {formData.expiresOn || "MM/YYYY"}</p>
-                <p>Phone: {formData.phone || "+91 XXXXXXXXXX"}</p>
+                <p>Phone: +91 {formData.phone || "XXXXXXXXXX"}</p>
                 <p>{formData.description || "Small description here..."}</p>
               </div>
               <div>
@@ -47,55 +132,44 @@ export default function CardForm() {
             </div>
           </div>
 
-          {/* Back Side */}
+          {/* Back */}
           <div className="card-face card-back">
             <img src="/Instyl.webp" alt="Logo" />
           </div>
         </div>
       </div>
 
-      {/* Input Form */}
-      <form
-        className="card-input-form"
-        style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-      >
+      {/* Form */}
+      <form className="card-input-form" onSubmit={handleSubmit}>
         <input
           name="name"
           value={formData.name}
           placeholder="Name"
           onChange={handleChange}
         />
-          {/* <input
-            name="expiresOn"
-            value={formData.expiresOn}
-            placeholder="Expires On"
-            onChange={handleChange}
-          /> */}
+
         <input
           name="phone"
           value={formData.phone}
           placeholder="Phone"
           onChange={handleChange}
+          type="tel"
+          pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
         />
-        {/* <input
-          name="description"
-          value={formData.description}
-          placeholder="Description"
-          onChange={handleChange}
-        />
-        <input
-          name="contact"
-          value={formData.contact}
-          placeholder="Contact Details"
-          onChange={handleChange}
-        />
-        <input
-          name="leftDesc"
-          value={formData.leftDesc}
-          placeholder="Short Description (Left side)"
-          onChange={handleChange}
-        /> */}
+
+        <button type="submit" className="submit-btn">
+          Submit
+        </button>
       </form>
+
+      {/* Popup */}
+      {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup">
+            <h3>🎉 Collect your membership card in store!</h3>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

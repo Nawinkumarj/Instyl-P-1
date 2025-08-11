@@ -115,7 +115,7 @@ export default function ServiceCard() {
             ).fromTo(
               section,
               { height: "20vh" },
-              { height: "70vh", ease: "power1.out" },
+              { height: "100vh", ease: "power1.out" },
               "<"
             );
           } catch (error) {

@@ -123,7 +123,7 @@ export default function ModelScroll() {
       <section
         className="home-section2"
         ref={section2Ref}
-        style={{ height: "100vh", backgroundColor: "#f5f5f5" }}
+        style={{ height: "100vh"}}
       >
         <div className="home-main-content">
           <h1>About us</h1>
