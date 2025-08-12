@@ -196,7 +196,7 @@ body {
   .navbar-links {
     display: none;
     position: absolute;
-    top: 70px;
+    top: 115px;
     left: 0;
     flex-direction: column;
     background-color: #fff;
@@ -351,6 +351,56 @@ body {
   background-color: #333;
 }
 
+
+@media (max-width: 768px) {
+  .portfolio-container {
+    height: auto; /* Let content define height */
+    overflow: visible; /* No hidden parts */
+    padding: 20px 0;
+    margin-top: 8rem;
+  }
+
+  .portfolio-heading {
+    position: relative; /* Not absolutely pinned */
+    height: auto;
+    padding: 20px 0;
+  }
+
+  .portfolio-heading h1 {
+    font-size: 2rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .portfolio-blur-layer {
+    display: none; /* Blur not needed on mobile */
+  }
+
+  .card-section {
+    opacity: 1 !important; /* Ensure visible without GSAP */
+    visibility: visible !important;
+    pointer-events: auto;
+    transform: none !important;
+    flex-direction: column;
+    gap: 20px;
+    height: auto;
+    padding: 20px;
+  }
+
+  .category-card {
+    opacity: 1 !important;
+    transform: none !important;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+
+  .category-card img {
+    height: auto;
+    max-height: 200px;
+  }
+}
+
 /* portfolio ends */
 
 /* new grid starts */
@@ -361,6 +411,7 @@ body {
   grid-auto-rows: 10px;
   gap: 8px;
   padding: 2rem;
+  margin-top: 7rem;
 }
 
 .masonry-item {
@@ -967,10 +1018,10 @@ position: relative;
 
 /* PriceList Starts */
 
-
+/* 
 .cover {
   width:75%; 
-  height: 85%; /* 12px * 42.6 */
+  height: 85%; 
   box-shadow: 0 0 100px rgba(0, 0, 0, 0.3);
 }
 
@@ -1019,7 +1070,7 @@ position: relative;
 
 .book__page--4 {
   cursor: pointer;
-  padding: 0 36px; /* 12px * 3 */
+  padding: 0 36px;
 }
 
 .book__page-front {
@@ -1033,7 +1084,7 @@ position: relative;
   position: absolute;
   width: 100%;
   height: 100%;
-  padding: 0 21.6px; /* 12px * 1.8 */
+  padding: 0 21.6px; 
   transform: rotateY(180deg) translateZ(1px);
 }
 
@@ -1046,7 +1097,7 @@ position: relative;
 
 .page__content-book-title {
   font-family: 'Tulpen One', sans-serif;
-  font-size: 43.2px; /* 12 * 1.2 * 3 */
+  font-size: 43.2px; 
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -1084,7 +1135,7 @@ position: relative;
 
 .page__content-copyright {
   position: absolute;
-  width: calc(100% - 24px); /* 12 * 2 */
+  width: calc(100% - 24px); 
   bottom: 24px;
   font-family: 'Cormorant Garamond', serif;
   font-size: 11.52px;
@@ -1156,7 +1207,6 @@ input[type="radio"]:checked + .book__page {
   transform: rotateY(-180deg);
 }
 
-
 .Pricelist-container{
   height:150vh;
   display:flex;
@@ -1168,6 +1218,383 @@ input[type="radio"]:checked + .book__page {
   justify-content: center;
   height: 100vh;
 }
+
+@media (max-width:1200px){
+  .cover{
+    width: 90%;
+  }
+} */
+
+/* Book Container */
+ .flipbook-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 2rem;
+          background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+          min-height: 100vh;
+          font-family: "Georgia", serif;
+        }
+
+        .flipbook {
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+          border-radius: 10px;
+          overflow: hidden;
+        }
+
+        .page {
+          background: #ffffff;
+          border: none;
+          box-sizing: border-box;
+          padding: 2rem;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          overflow-y: auto;
+        }
+
+        /* Cover Styles */
+        .cover {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .cover h1 {
+          font-size: 2.8rem;
+          margin-bottom: 1rem;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .cover p {
+          font-size: 1.3rem;
+          opacity: 0.9;
+          margin: 0.5rem 0;
+        }
+
+        .back-cover {
+          background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        /* Category Page Layout */
+        .category-page {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+        }
+
+        .category-header {
+          text-align: center;
+          margin-bottom: 1.5rem;
+          border-bottom: 3px solid #e74c3c;
+          padding-bottom: 1rem;
+        }
+
+        .category-header h2 {
+          margin: 0 0 0.5rem 0;
+          font-size: 2rem;
+          color: #2c3e50;
+        }
+
+        .category-header p {
+          margin: 0;
+          font-size: 1rem;
+          color: #7f8c8d;
+          font-style: italic;
+        }
+
+        /* Menu Table Layout */
+        .menu-table {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+        }
+
+        /* Pricing Header */
+        .pricing-header {
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+          gap: 0.5rem;
+          padding: 0.8rem;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          font-weight: bold;
+          border-radius: 8px 8px 0 0;
+          font-size: 0.9rem;
+          text-align: center;
+        }
+
+        .pricing-header .dish-column {
+          text-align: left;
+          padding-left: 1rem;
+        }
+
+        /* Menu Items List */
+        .menu-items-list {
+          flex: 1;
+          border: 2px solid #667eea;
+          border-top: none;
+          border-radius: 0 0 8px 8px;
+        }
+
+        .menu-item-row {
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+          gap: 0.5rem;
+          padding: 1rem 0.8rem;
+          border-bottom: 1px solid #ecf0f1;
+          transition: all 0.3s ease;
+          align-items: start;
+        }
+
+        .menu-item-row:hover {
+          background: #f8f9fa;
+        }
+
+        .menu-item-row:last-child {
+          border-bottom: none;
+        }
+
+        /* Dish Info Column */
+        .dish-info {
+          padding-left: 1rem;
+        }
+
+        .dish-name {
+          font-weight: bold;
+          color: #2c3e50;
+          font-size: 1.1rem;
+          margin-bottom: 0.3rem;
+          line-height: 1.3;
+        }
+
+        .dish-description {
+          color: #7f8c8d;
+          font-size: 0.85rem;
+          line-height: 1.4;
+          margin: 0;
+        }
+
+        /* Price Columns */
+        .price-cell {
+          text-align: center;
+          font-weight: 600;
+          font-size: 0.95rem;
+          padding: 0.3rem;
+          border-radius: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 2rem;
+        }
+
+        .price-regular {
+          background: #e8f5e8;
+          color: #27ae60;
+          border: 1px solid #27ae60;
+        }
+
+        .price-premium {
+          background: #fff3cd;
+          color: #f39c12;
+          border: 1px solid #f39c12;
+        }
+
+        .price-elite-regular {
+          background: #e3f2fd;
+          color: #2196f3;
+          border: 1px solid #2196f3;
+        }
+
+        .price-elite-premium {
+          background: #fce4ec;
+          color: #e91e63;
+          border: 1px solid #e91e63;
+        }
+
+        /* Page Number */
+        .page-number {
+          position: absolute;
+          bottom: 15px;
+          right: 20px;
+          font-size: 0.9rem;
+          color: #7f8c8d;
+          font-style: italic;
+        }
+
+        /* Controls */
+        .book-controls {
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+          margin-top: 1.5rem;
+        }
+
+        .nav-btn {
+          padding: 0.7rem 1.3rem;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          border: none;
+          border-radius: 25px;
+          cursor: pointer;
+          font-size: 0.95rem;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-btn:hover:not(:disabled) {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 18px rgba(102, 126, 234, 0.4);
+        }
+
+        .nav-btn:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          transform: none;
+        }
+
+        .page-indicator {
+          padding: 0.5rem 1rem;
+          background: rgba(255, 255, 255, 0.9);
+          border-radius: 20px;
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: #2c3e50;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Page Navigator */
+        .page-navigator {
+          display: flex;
+          gap: 0.3rem;
+          flex-wrap: wrap;
+          justify-content: center;
+          margin-top: 1rem;
+        }
+
+        .page-dot {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          border: 2px solid #bdc3c7;
+          background: white;
+          color: #7f8c8d;
+          font-size: 0.75rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 500;
+        }
+
+        .page-dot:hover {
+          border-color: #667eea;
+          color: #667eea;
+          transform: scale(1.1);
+        }
+
+        .page-dot.active {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          border-color: #667eea;
+          color: white;
+          transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .flipbook-container {
+            padding: 1rem;
+          }
+
+          .page {
+            padding: 1.5rem;
+          }
+
+          .pricing-header,
+          .menu-item-row {
+            grid-template-columns: 1.5fr 0.8fr 0.8fr 0.8fr 0.8fr;
+            font-size: 0.8rem;
+          }
+
+          .dish-name {
+            font-size: 1rem;
+          }
+
+          .dish-description {
+            font-size: 0.8rem;
+          }
+
+          .price-cell {
+            font-size: 0.85rem;
+            min-height: 1.8rem;
+            padding: 0.2rem;
+          }
+
+          .book-controls {
+            gap: 1rem;
+            flex-wrap: wrap;
+          }
+
+          .page-navigator {
+            gap: 0.2rem;
+          }
+
+          .page-dot {
+            width: 30px;
+            height: 30px;
+            font-size: 0.7rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .page {
+            padding: 1rem;
+          }
+
+          .category-header h2 {
+            font-size: 1.6rem;
+          }
+
+          .pricing-header,
+          .menu-item-row {
+            grid-template-columns: 1fr;
+            gap: 0.3rem;
+          }
+
+          .pricing-header {
+            display: none; /* Hide header on mobile for better space */
+          }
+
+          .menu-item-row {
+            display: block;
+            padding: 0.8rem;
+          }
+
+          .dish-info {
+            padding-left: 0;
+            margin-bottom: 0.5rem;
+          }
+
+          .price-cell {
+            display: inline-block;
+            margin: 0.2rem;
+            padding: 0.3rem 0.6rem;
+            min-height: auto;
+          }
+
+          .cover h1 {
+            font-size: 2.2rem;
+          }
+
+          .cover p {
+            font-size: 1.1rem;
+          }
+        }
 
 /* PriceList Ends */
 
@@ -1266,7 +1693,15 @@ padding-top:3rem;
 }
 
 
-
+@media (max-width: 1280px) {
+.home-main-content h1{
+  font-size: 6rem;
+}
+.home-model{
+  width: 500px;
+  height: 500px;
+}
+}
 
 
 
@@ -1317,6 +1752,7 @@ padding-top:3rem;
    width:90%;
 margin: auto;
 }
+
 
 
 /* service card ends */

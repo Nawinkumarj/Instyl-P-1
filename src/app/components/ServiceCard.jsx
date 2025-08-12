@@ -193,6 +193,8 @@ export default function ServiceCard() {
                   e.target.style.display = "none";
                 }}
               />
+
+              
             </div>
           </section>
         ))}

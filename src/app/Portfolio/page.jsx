@@ -18,6 +18,9 @@ const Page = () => {
   const router = useRouter();
 
   useLayoutEffect(() => {
+
+      if (window.innerWidth <= 768) return;
+
     const ctx = gsap.context(() => {
       if (
         !leftTextRef.current ||
