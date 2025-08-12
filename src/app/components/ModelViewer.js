@@ -54,7 +54,7 @@
   const ModelViewer = () => {
     return (
       <Canvas
-        style={{ height: "100vh", background: "transparent" }}
+        style={{  background: "transparent" }}
         camera={{ position: [0, 0, 20] }}
       >
         <ambientLight intensity={0.5} />

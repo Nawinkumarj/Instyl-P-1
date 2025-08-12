@@ -651,13 +651,21 @@ body {
 @media (max-width:768px) {
   .breadcrumb-container{
       padding: 5rem 0 6rem 0;
+      margin-top: 6rem;
 
   }
   .breadcrumb-content h1{
-    font-size: 5rem;
+    font-size: 4rem;
   }
   .breadcrumb-content{
     height: 300px;
+  }
+  .breadcrumb-button button{
+    font-size: 16px;
+    padding: 0.5rem;
+  }
+  .breadcrumb-content{
+    --x:230px
   }
 }
 
@@ -771,6 +779,41 @@ body {
   top: -50px;
 }
 
+.contact-cards-wrapper{
+display: flex;
+gap: 20px;
+justify-content: center;
+margin-top: 60px;
+opacity: 0;
+}
+
+.cardStyle{
+  width: 400px;
+  height: 250px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 500;
+  gap: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .contact-cards-wrapper{
+    flex-direction: column;
+    align-items: center;
+  }
+  .cardStyle{
+    width: 70%;
+    height: 150px;
+  }
+}
 
 /* Contact Ends */
 
@@ -1701,6 +1744,63 @@ padding-top:3rem;
   width: 500px;
   height: 500px;
 }
+.home-section1{
+  width: 95%;
+}
+.home-section2{
+  height: 100% !important;
+  padding: 2rem 0;
+}
+.home-section2 .home-main-content h1{
+  padding-top: 2rem;
+}
+.home-section2 .home-main-content p{
+  font-size: 1.2rem;
+}
+}
+@media (max-width: 1024px) {
+  .home-model{
+  width: 400px !important;
+  height: 400px;
+}
+.home-main-content h1{
+  font-size: 4.5rem;
+}
+
+}
+
+@media (max-width: 768px) {
+  .home-container{
+    margin-top: 6rem;
+  }
+  .home-model{
+  width: 320px !important;
+  height: 400px;
+}
+.home-section1{
+  height: 100%  !important;
+}
+.home-section1-content{
+  flex-direction: column;
+}
+.home-main-content {
+  width: 90%;
+}
+.home-section2{
+  flex-direction: column;
+}
+.home-section2 .home-main-content p{
+  line-height: 30px;
+}
+}
+
+@media (max-width: 576px) {
+  .home-main-content h1{
+    font-size: 3.5rem;
+  }
+  .home-section2 .home-main-content h1 {
+    font-size: 3rem;
+  }
 }
 
 
@@ -1752,7 +1852,29 @@ padding-top:3rem;
    width:90%;
 margin: auto;
 }
+.service-card-dummy{
+margin-top: -70vh;
+}
 
+@media (max-width: 768px) {
+  .servicecard-section{
+    flex-direction: column;
+    height: 100%;
+    align-items: flex-start;
+  }
+  .service-card-img{
+    width: 100%;
+    height:300px
+  }
+  .service-card-dummy{
+margin-top: 0;
+}
+}
+@media (max-width: 576px) {
+  .servicecard-heading h1{
+    font-size: 3rem;
+  }
+}
 
 
 /* service card ends */
@@ -1914,6 +2036,12 @@ gap: 0.5rem
 
 .test-branding h1{
   font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .test-head h1{
+    font-size: 3rem;
+  }
 }
 
 /* testimonial Ends */
@@ -2316,6 +2444,21 @@ align-items: center;
   to { transform: scale(1); opacity: 1; }
 }
 
+
+@media (max-width:768px){
+  .card-form-container{
+    margin-top: 7rem;
+  }
+  .card-3d-wrapper{
+    width: 350px;
+  }
+  .card-right h2{
+    font-size: 1rem;
+  }
+  .card-right p{
+    font-size: 0.8rem;
+  }
+}
 
 /* Membership Ends */
 

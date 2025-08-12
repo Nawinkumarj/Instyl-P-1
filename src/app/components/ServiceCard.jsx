@@ -55,6 +55,10 @@ export default function ServiceCard() {
   // Use GSAP's official React hook for automatic cleanup
   useGSAP(
     () => {
+
+      if (window.innerWidth <= 768) {
+        return;
+      }
       // Apply DOM protection
       applyGoogleTranslateDOMPatch();
 
@@ -199,7 +203,7 @@ export default function ServiceCard() {
           </section>
         ))}
       </div>
-      <div style={{ marginTop: "-70vh" }}></div>
+      <div className="service-card-dummy" ></div>
     </>
   );
 }
