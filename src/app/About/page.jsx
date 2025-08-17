@@ -238,7 +238,7 @@ export default function About() {
               opacity: 1,
               y: 0,
               stagger: 0.03,
-              duration: 1,
+              duration: 1.5,
               ease: "power3.out",
             },
             ">0.2"
@@ -272,7 +272,7 @@ export default function About() {
               opacity: 1,
               clipPath: "inset(0% 0% 0% 0%)",
               scale: 1,
-              duration: 1.5,
+              duration: 2.5,
               ease: "power2.out",
             },
             ">0.2"
@@ -413,7 +413,7 @@ export default function About() {
           </div>
           <div className="imaga-div">
             <img
-              src="https://cdn.pixabay.com/photo/2023/01/08/14/22/sample-7705346_640.jpg"
+              src="/Team/Bindu-Mam.webp"
               alt="Initial"
               ref={firstImageRef}
               className="image-layer1"

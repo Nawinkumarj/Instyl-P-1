@@ -14,6 +14,7 @@ const Page = () => {
   const rightTextRef = useRef(null);
   const blurRef = useRef(null);
   const cardsRef = useRef(null);
+  const spacerRef = useRef(null)
 
   const router = useRouter();
 
@@ -37,6 +38,7 @@ const Page = () => {
           end: "+=150%",
           scrub: true,
           pin: true,
+          // pinSpacing:false,
         },
       });
 
@@ -73,6 +75,9 @@ const Page = () => {
         0.5
       );
     }, containerRef);
+    if (spacerRef.current) {
+      spacerRef.current.style.height = `${window.innerHeight * 1.5}px`; // For end: '+=150%'
+    }
 
     return () => ctx.revert();
   }, []);
@@ -113,6 +118,7 @@ const Page = () => {
           <button onClick={() => handleNavigate("adults")}>Explore More</button>
         </div>
       </div>
+      <div ref={spacerRef}></div>
     </div>
   );
 };

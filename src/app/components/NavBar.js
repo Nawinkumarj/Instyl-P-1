@@ -57,6 +57,9 @@ const Navbar = () => {
         <Link href="/About" onClick={() => setIsOpen(false)}>
           About
         </Link>
+        <Link href="/Services" onClick={() => setIsOpen(false)}>
+          Services
+        </Link>
         <Link href="/Portfolio" onClick={() => setIsOpen(false)}>
           Portfolio
         </Link>
@@ -72,6 +75,19 @@ const Navbar = () => {
         <Link href="/Membership" onClick={() => setIsOpen(false)}>
           Membership
         </Link>
+      </div>
+      <div className="navbar-grid1">
+        <p>
+          <span>@</span>instyl_hairnbridalstudio
+        </p>
+        <p>
+          {" "}
+          <span>@</span>instyl_makeupartistry
+        </p>
+        <p>
+          {" "}
+          <span>@</span>binduinstyl_
+        </p>
       </div>
     </nav>
   );

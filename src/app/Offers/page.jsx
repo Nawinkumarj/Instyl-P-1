@@ -16,16 +16,17 @@ export default function ScrollFocusList() {
       const items = itemsRef.current;
       if (items.length === 0) return;
 
-      // Set initial states: first item focused, others with less focus
+      // Initial states
       items.forEach((item, index) => {
-        if (index === 0) {
-          gsap.set(item, { scale: 1, opacity: 1, filter: "blur(0px)" });
-        } else {
-          gsap.set(item, { scale: 0.9, opacity: 0.6, filter: "blur(2px)" });
-        }
+        gsap.set(item, {
+          scale: index === 0 ? 1 : 0.9,
+          opacity: index === 0 ? 1 : 0.6,
+          filter: index === 0 ? "blur(0px)" : "blur(2px)",
+          rotationX: index === 0 ? 0 : 5, // slight tilt
+          // rotationY: index === 0 ? 0 : -5,
+        });
       });
 
-      // Update focus styles as you scroll
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: "top bottom",
@@ -38,12 +39,16 @@ export default function ScrollFocusList() {
             const distance = Math.abs(itemCenter - viewportCenter);
             const threshold = window.innerHeight * 0.15;
             const isInFocus = distance < threshold;
+            
+            const isAboveCenter = itemCenter < viewportCenter;
 
             if (isInFocus) {
               gsap.to(item, {
                 scale: 1,
                 opacity: 1,
                 filter: "blur(0px)",
+                rotationX: 0,
+                rotationY: 0,
                 duration: 0.4,
                 ease: "power2.out",
               });
@@ -65,6 +70,7 @@ export default function ScrollFocusList() {
                 scale: scaleAmount,
                 opacity: opacityAmount,
                 filter: `blur(${blurAmount}px)`,
+                rotationX: isAboveCenter ? 15 :-40,
                 duration: 0.4,
                 ease: "power2.out",
               });
@@ -74,9 +80,8 @@ export default function ScrollFocusList() {
       });
     },
     { scope: containerRef }
-  ); // useGSAP ensures cleanup and correct context!
+  );
 
-  // Your content
   const content = [
     {
       title: "SERVICES",

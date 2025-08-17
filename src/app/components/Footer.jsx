@@ -4,7 +4,7 @@ import Image from 'next/image'
 import React from 'react'
 import { CgProfile } from "react-icons/cg";
 import { TbSignRight } from "react-icons/tb";
-import '../page.module.css'
+import Link from 'next/link';
 
 
     export default function Footer() {
@@ -31,16 +31,33 @@ import '../page.module.css'
               <div className="sect1-grid">
                 <div className="sect1-grid1">
                   <h1>heading</h1>
-                  <p>about us</p>
-                  <p>services</p>
-                  <p>contact</p>
-                  <p>faq's</p>
+                  <Link href="/About">
+                    <p>about us</p>
+                  </Link>
+                  <Link href="/Services">
+                    <p>services</p>
+                  </Link>
+                  <Link href="/Contact">
+                    <p>contact</p>
+                  </Link>
+                  <Link href="/About">
+                    <p>faq's</p>
+                  </Link>
                 </div>
                 <div className="sect1-grid1">
                   <h1>heading</h1>
-                  <p>rate card</p>
-                  <p>exclusive offers</p>
-                  <p>makeup packages</p>
+                  <Link href="/Pricelsit">
+                    <p>Pricelist</p>
+                  </Link>
+                  <Link href="/Offers">
+                    <p>Exclusive offers</p>
+                  </Link>
+                  <Link href="/Portfolio">
+                    <p>Portfolio</p>
+                  </Link>
+                  <Link href="/HappyClients">
+                    <p>Happy Clients</p>
+                  </Link>
                 </div>
                 <div className="sect1-grid1">
                   <h1>heading</h1>

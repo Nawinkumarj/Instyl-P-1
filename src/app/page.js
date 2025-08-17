@@ -8,6 +8,7 @@
     import CTA from "./components/CTA";
 import { Testimonials } from "./components/Testimonials";
 import ModelScroll from "./components/ModelScroll";
+import PlaygroundCarousel from "./components/HappyClients";
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -15,6 +16,15 @@ import ModelScroll from "./components/ModelScroll";
       const modelRef = useRef(null);
       const section1Ref = useRef(null);
       const section2Ref = useRef(null);
+
+      const playgroundItems = [
+        { image: "/Gallery/01.webp", title: "Experiment 1" },
+        { image: "/Gallery/02.webp", title: "Experiment 2" },
+        { image: "/Gallery/03.webp", title: "Experiment 3" },
+        { image: "/Gallery/04.webp", title: "Experiment 4" },
+        { image: "/Gallery/05.webp", title: "Experiment 5" },
+        { image: "/Gallery/06.webp", title: "Experiment 6" },
+      ];
 
      useLayoutEffect(() => {
        const model = modelRef.current;
@@ -74,8 +84,7 @@ import ModelScroll from "./components/ModelScroll";
 
       return (
         <div className="home-container">
-      
-         <ModelScroll/>
+          <ModelScroll />
 
           <div className="home-section3">
             <section>
@@ -92,6 +101,9 @@ import ModelScroll from "./components/ModelScroll";
             <section>
               <Testimonials />
             </section>
+          </div>
+          <div className="ome-section6">
+            <PlaygroundCarousel items={playgroundItems} />
           </div>
         </div>
       );

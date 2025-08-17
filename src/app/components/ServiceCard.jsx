@@ -86,7 +86,7 @@ export default function ServiceCard() {
             trigger: containerRef.current,
             start: "top top",
             end: () => `+=${sectionHeight * sections.length}`,
-            scrub: true,
+            scrub: 0.6,
             pin: true,
             anticipatePin: 1,
             invalidateOnRefresh: true,
@@ -109,19 +109,20 @@ export default function ServiceCard() {
           if (!prev) return;
 
           try {
-            tl.to(
-              prev,
-              {
-                height: "20vh",
-                ease: "power1.out",
-              },
-              "+=0.1"
-            ).fromTo(
-              section,
-              { height: "20vh" },
-              { height: "100vh", ease: "power1.out" },
-              "<"
-            );
+           tl.to(
+             prev,
+             {
+               height: "20vh",
+               ease: "power2.inOut", // smoother acceleration
+               duration: 0.1,
+             },
+             "+=0.05"
+           ).fromTo(
+             section,
+             { height: "20vh" },
+             { height: "80vh", ease: "power2.inOut", duration: 0.1 },
+             "<"
+           );
           } catch (error) {
             console.warn(`Failed to animate section ${index}:`, error);
           }
