@@ -621,7 +621,7 @@ bottom: 50px;
 /* Breadcrumb Starts */
 
 .breadcrumb-container {
-  padding: 15rem 0 6rem 0;
+  padding: 5rem 0 6rem 0;
 }
 
 .breadcrumb-main {
@@ -3017,29 +3017,77 @@ gap:0.5rem;
 
  .clientpage-container {
   padding: 2rem;
+  height:550vh;
 }
 
 .clientpage-main {
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  position: relative;
+  height: 100%;
+}
+
+.clientcontrol-main{
+position: absolute;
 }
 
 .clientpage-section {
-  display: flex;
+  /* display: flex; */
   gap: 1.5rem;
   flex-wrap: wrap;
   justify-content: center;
+  position: relative;
+}
+
+
+
+.clientcard-control0{
+  top: 1%;
+  left: 6%;
+}
+
+.clientcard-control1{
+  top: 20%;
+  right: 6%;
+}
+
+.clientcard-control2{
+  top: 39%;
+  left: 6%;
+}
+
+.clientcard-control3{
+  top: 58%;
+  right: 6%;
+}
+
+.clientcard-control4{
+  top: 77%;
+  left: 6%;
 }
 
 .client-card {
   position: relative;
   width: 300px;
-  height: 200px;
+  height: 400px;
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.section1-card0,
+.section3-card0,
+.section5-card0{
+  top: 80px;
+  left:200px;
+}
+
+.section2-card0,
+.section4-card0{
+  top: 80px;
+  right:200px;
 }
 
 .client-card img.thumbnail,
@@ -3073,25 +3121,7 @@ gap:0.5rem;
   opacity: 1;
 }
 
-.see-more-container {
-  margin-top: 3rem;
-  text-align: center;
-}
 
-.see-more-btn {
-  background: black;
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 500;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
 
-.see-more-btn:hover {
-  background: #444;
-}
 
 /* clients page ends */
