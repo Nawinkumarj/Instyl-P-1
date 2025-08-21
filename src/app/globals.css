@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Passions+Conflict&display=swap');
 
 .italiana-regular {
   font-family: "Italiana", sans-serif;
@@ -21,6 +22,21 @@
   font-style: italic;
 }
 
+.passions-conflict-regular {
+  font-family: "Passions Conflict", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'RusillaSerif';
+  src: url('/fonts/RusillaSerif-2OZpl.woff2') format("woff2"),
+  url('/fonts/RusillaSerif-2OZpl.otf') format("opentype");
+}
+
+
+
 
 :root {
   --primary-color: #F8DFEF;
@@ -29,6 +45,9 @@
   --text-font: 1.5rem;
   --banner-font: "Italiana", sans-serif; 
   --border-radius: .6rem;
+  --heading-font:'RusillaSerif', sans-serif;
+  --founder-font:"Passions Conflict", cursive
+
 }
 
 
@@ -52,7 +71,7 @@ html {
 body {
   width: 100%;
   height: 100vh;
-  margin: 5px auto;
+  margin: 0px auto;
   /* background: url("/bg1.svg"); */
   background-size: cover;
   scrollbar-width: none;
@@ -730,11 +749,6 @@ bottom: 50px;
 
 }
 
-/* .contact-section1 {
-  display: grid;
-  grid-template-columns: 70% 30%;
-} */
-
 .contact-section1 {
   min-height: 100vh;
   display: flex;
@@ -778,7 +792,7 @@ bottom: 50px;
   max-width:800px;
 }
 
-.content1-section1- h1 {
+.content1-section1-content h1 {
   font-size: 4rem;
   text-transform: capitalize;
   padding-bottom: 1rem;
@@ -848,6 +862,27 @@ opacity: 0;
   padding: 20px;
   text-align: center;
 }
+
+.insta-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: row; /* ✅ put image + text side by side */
+  align-items: center;
+  gap: 40px;
+  opacity: 0;
+}
+
+.insta-text {
+  font-size: 2rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 1; /* start hidden */
+}
+
+
 
 @media (max-width: 768px) {
   .contact-cards-wrapper{
@@ -947,26 +982,31 @@ position: sticky;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  padding: 0 10vw; 
+  padding: 0 5vw !important; 
 }
 
 .next-image{
   overflow:hidden;
   position:relative;
-  height: 80%;
+  height: 100%;
   width: 35%;
+  
 }
 
 .next-image h1{
-  padding-bottom:4rem;
-  font-size: 2rem;
+  padding-top:3rem;
+  font-size:4rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-size: 3rem;
+  font-family: var(--heading-font);
+  color: var(--third-color);
+  letter-spacing: 1px;
 }
 
 .image-div{
 position: relative;
+
+  
 }
 
 .image-layer1,
@@ -976,11 +1016,12 @@ position: relative;
   left: 0;
   opacity: 0;
   width:400px;
-  height:400px;
+  height:500px;
   transform:scale(1.2);
   opacity:0;
   clip-path:inset(100% 0 0 0);
   object-fit:cover;
+  border-radius: 10px;
 }
 
 .next-text{
@@ -990,9 +1031,11 @@ position: relative;
 }
 
 .next-text h2{
-  font-size:2rem;
+  font-size:5rem;
   margin:1rem 0;
   opacity:0;
+  font-family: var(--founder-font);
+  font-weight: 500;
 }
 
 .next-text p{
@@ -1320,7 +1363,7 @@ input[type="radio"]:checked + .book__page {
           align-items: center;
           padding: 2rem;
           background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-          min-height: 100vh;
+          max-height: 100vh;
           font-family: "Georgia", serif;
         }
 
@@ -1758,7 +1801,8 @@ padding-top:3rem;
 
 .home-main-content h1 {
   font-size: 7rem;
-  font-family: var(--banner-font);
+  font-family: var(--heading-font);
+  /* font-family: 'RusillaSerif', sans-serif  ; */
   color: var(--third-color);
   text-transform: capitalize;
   padding-top: 5rem;
@@ -1901,6 +1945,31 @@ margin: auto;
 margin-top: -50vh;
 }
 
+.view-more-wrapper{
+  text-align: right;
+  margin-top: 1rem;
+  margin-right: 2rem;
+}
+.view-more-btn{
+ padding: 0.5rem 1rem;
+ font-size: 1.5rem;
+ background-color: var(--third-color);
+ border: none;
+ outline: none;
+ border-radius: 10px;
+ color: white;
+ cursor: pointer;
+}
+
+.view-more-btn:hover{
+ background-color: var(--primary-color);
+ border: none;
+ outline: none;
+ border-radius: 10px;
+ color: black;
+ cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .servicecard-section{
     flex-direction: column;
@@ -2007,11 +2076,11 @@ line-height: 35px;
 }
 
 .testi-scroll-track.scroll-left {
-  animation: scroll-left 10s linear infinite;
+  animation: scroll-left 15s linear infinite;
 }
 
 .testi-scroll-track.scroll-right {
-  animation: scroll-right 10s linear infinite;
+  animation: scroll-right 15s linear infinite;
 }
 
 @keyframes scroll-left {
@@ -2525,10 +2594,22 @@ align-items: center;
   background-color: #000;  
   /* min-height: 600vh;        */
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 40vh 0;        /* Padding so first/last items center */
+  padding: 40vh 0;      /* Padding so first/last items center */
+}
+
+.offerpage-bg1{
+  width: 500px;
+  height: 500px;
+  background:  linear-gradient(126deg,rgba(156, 39, 176, 1) 0%, rgba(156, 39, 176, 1) 9%, rgba(255, 214, 232, 1) 61%, rgba(156, 39, 176, 1) 100%);
+  position: fixed;
+  border-radius: 50%;
+  top: 20%;
+  left: 40%;
+  transform: translate(-50% -50%);
 }
 
 .scroll-focus-item {
@@ -2598,17 +2679,19 @@ align-items: center;
 
 
 /* Happy clients starts */
-/* .clients-container {
+.clients-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
+ padding: 2rem 0;
+  background: var(--secondary-color);
 }
 
 .client-main {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .client-card {
@@ -2648,22 +2731,24 @@ align-items: center;
 
 .see-more-container {
   margin-top: 20px;
+  text-align: right;
+
 }
 
 .see-more-btn {
-  background: black;
+  background: var(--third-color );
   color: white;
   padding: 12px 24px;
   border: none;
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s ease;
+  border-radius: 10px;
 }
 
 .see-more-btn:hover {
   background: #333;
-} */
-
+}
 .clients-head h1{
   font-size: 5rem;
     font-family: var(--banner-font);
@@ -2674,6 +2759,9 @@ align-items: center;
     text-align: left;
     padding-bottom: 2rem;
 }
+
+/* 
+
 
 .playground-carousel {
   padding: 80px 20px;
@@ -2692,7 +2780,7 @@ align-items: center;
 }
 
 .carousel-card {
-  width: 250px;
+  width: 350px;
   height: 400px;
   background: #111;
   border-radius: 16px;
@@ -2714,7 +2802,7 @@ align-items: center;
   font-size: 1.1rem;
   line-height: 1.6;
   color: #ddd;
-}
+} */
 
 
 /* Happyclient ends */

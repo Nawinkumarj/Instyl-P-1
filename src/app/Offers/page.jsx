@@ -119,6 +119,8 @@ export default function ScrollFocusList() {
 
   return (
     <div className="scroll-focus-container" ref={containerRef}>
+      <div className="offerpage-bg1"></div>
+      <div className="offerpage-bg2"></div>
       {content.map(({ title, desc }, i) => (
         <div
           className="scroll-focus-item"

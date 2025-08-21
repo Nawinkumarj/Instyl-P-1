@@ -1,10 +1,11 @@
 "use client";
-
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import CTA from "./CTA";
+import Link from "next/link";
+import CTA from "./CTA"; // Assuming you have a CTA component
+import RippleImage from "./RippleImage";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -16,7 +17,6 @@ function applyGoogleTranslateDOMPatch() {
     !Node.prototype._removeChildPatched
   ) {
     const originalRemoveChild = Node.prototype.removeChild;
-
     Node.prototype.removeChild = function (child) {
       if (!child || child.parentNode !== this) {
         console.warn(
@@ -26,7 +26,6 @@ function applyGoogleTranslateDOMPatch() {
       }
       return originalRemoveChild.apply(this, arguments);
     };
-
     Node.prototype._removeChildPatched = true;
   }
 }
@@ -38,7 +37,7 @@ export default function ServiceCard() {
     {
       title: "Service 1",
       desc: "Detail about service 1",
-      img: "https://pics.craiyon.com/2024-09-04/lVIdzSccREy2xW2pf853oA.webp",
+      img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
     },
     {
       title: "Service 2",
@@ -52,121 +51,72 @@ export default function ServiceCard() {
     },
   ];
 
-  // Use GSAP's official React hook for automatic cleanup
   useGSAP(
     () => {
+      if (window.innerWidth <= 768) return;
 
-      if (window.innerWidth <= 768) {
-        return;
-      }
-      // Apply DOM protection
       applyGoogleTranslateDOMPatch();
+      if (!containerRef.current) return;
 
-      // Ensure container exists before proceeding
-      if (!containerRef.current) {
-        console.warn("Container ref not available");
-        return;
-      }
+      const ctx = gsap.context(() => {
+        const sections = gsap.utils.toArray(".servicecard-section"); // or ".servicemain-section"
+        if (!sections.length) return;
 
-      // Use requestAnimationFrame to ensure DOM is ready
-      requestAnimationFrame(() => {
-        const sections = gsap.utils.toArray(".servicecard-section");
+        // Always reset heights initially
+        gsap.set(sections, { height: "50vh" });
 
-        // Validate sections exist
-        if (!sections || sections.length === 0) {
-          console.warn("No service card sections found");
-          return;
-        }
+        // Compute smart pin distance
+        const pinDistance =
+          window.innerHeight * (sections.length - 1) +
+          window.innerHeight * 0.25;
 
-        const sectionHeight = window.innerHeight;
-
-        // Create timeline with ScrollTrigger
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top top",
-            end: () => `+=${sectionHeight * sections.length}`,
-            scrub: 0.6,
+            end: "+=" + pinDistance,
+            scrub: 0.7, // smoother!
             pin: true,
             anticipatePin: 1,
             invalidateOnRefresh: true,
-            id: "service-cards-timeline", // Add ID for debugging
-            onRefresh: () => {
-              // Recalculate on window resize
-              const newSections = gsap.utils.toArray(".servicecard-section");
-              if (newSections.length !== sections.length) {
-                console.warn("Section count changed during scroll");
-              }
-            },
           },
         });
 
-        // Animate sections with error handling
         sections.forEach((section, index) => {
-          if (index === 0 || !section) return;
-
+          if (index === 0) return;
           const prev = sections[index - 1];
           if (!prev) return;
 
-          try {
-           tl.to(
-             prev,
-             {
-               height: "20vh",
-               ease: "power2.inOut", // smoother acceleration
-               duration: 0.1,
-             },
-             "+=0.05"
-           ).fromTo(
-             section,
-             { height: "20vh" },
-             { height: "80vh", ease: "power2.inOut", duration: 0.1 },
-             "<"
-           );
-          } catch (error) {
-            console.warn(`Failed to animate section ${index}:`, error);
-          }
+          tl.to(prev, {
+            height: "20vh",
+            ease: "power2.inOut",
+            duration: 0.4,
+          }).to(
+            section,
+            { height: "50vh", ease: "power2.inOut", duration: 0.4 },
+            "<"
+          );
         });
 
-        // Animate the last section
         const last = sections[sections.length - 1];
         if (last) {
-          try {
-            tl.to(
-              last,
-              {
-                height: "20vh",
-                ease: "power1.out",
-              },
-              "+=0.1"
-            );
-          } catch (error) {
-            console.warn("Failed to animate last section:", error);
-          }
+          tl.to(last, { height: "25vh", ease: "power2.out", duration: 0.4 });
         }
+      }, containerRef);
 
-        // Optional: Add completion callback
-        tl.eventCallback("onComplete", () => {
-          console.log("Service cards animation completed");
-        });
-      });
-
-      // Cleanup is handled automatically by useGSAP hook
+      return () => ctx.revert();
     },
-    {
-      scope: containerRef, // Scope animations to the container
-      dependencies: [data.length], // Re-run if data changes
-    }
+    { scope: containerRef, dependencies: [data.length] }
   );
+
 
   return (
     <>
       <div
         ref={containerRef}
         className="servicecard-container"
-        translate="no" // Prevent Google Translate interference
+        translate="no"
         style={{
-          // Ensure proper stacking context
           position: "relative",
           isolation: "isolate",
         }}
@@ -174,37 +124,41 @@ export default function ServiceCard() {
         <div className="servicecard-heading" translate="no">
           <h1>Services</h1>
         </div>
+
         {data.map((item, i) => (
           <section
             className="servicecard-section"
             key={i}
-            translate="no" // Prevent translation on individual sections
-            style={{
-              // Ensure sections have proper positioning context
-              position: "relative",
-            }}
+            translate="no"
+            style={{ position: "relative" }}
           >
             <div className="service-card-content">
               <h2>{item.title}</h2>
               <p>{item.desc}</p>
             </div>
             <div className="service-card-img">
-              <img
+              <RippleImage
                 src={item.img}
                 alt={`service ${i + 1}`}
-                loading="lazy" // Add lazy loading for performance
+                loading="lazy"
                 onError={(e) => {
                   console.warn(`Failed to load image for service ${i + 1}`);
                   e.target.style.display = "none";
                 }}
               />
-
-              
             </div>
           </section>
         ))}
+        <Link href="/Services">
+          <div className="view-more-wrapper">
+            <button className="view-more-btn">View More</button>
+          </div>
+        </Link>
       </div>
-      <div className="service-card-dummy" ></div>
+
+      {/* ✅ Single "View More" button below all cards */}
+
+      {/* <div className="service-card-dummy"></div> */}
     </>
   );
 }

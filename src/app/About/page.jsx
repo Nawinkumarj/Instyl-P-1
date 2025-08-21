@@ -427,7 +427,7 @@ export default function About() {
           </div>
         </div>
         <div className="next-text">
-          <h2 ref={nextHeadRef}>BINDU BASKARAN</h2>
+          <h2 ref={nextHeadRef}>Bindu Baskaran</h2>
           <p ref={nextParaRef}>
             Founder of INSTYL who has 20+years of experience in the beauty
             industry. She is renowned for her creative Haircuts and  Skin-on

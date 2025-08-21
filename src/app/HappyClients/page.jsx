@@ -1,13 +1,14 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+import { useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function HappyClients() {
-  const router = useRouter();
+  const containerRef = useRef(null);
 
   const sections = [
     [
@@ -30,88 +31,67 @@ export default function HappyClients() {
         video: "https://www.w3schools.com/html/movie.mp4",
       },
     ],
-    [
-      {
-        img: "https://static.getimg.ai/media/getimg_ai_img-uXoR2am8GLjT2zVydBc9t.webp",
-        video: "https://www.w3schools.com/html/mov_bbb.mp4",
-      },
-      {
-        img: "https://static.getimg.ai/media/getimg_ai_img-8rcnXGXwyWJ8VqJOKChpf.webp",
-        video: "https://www.w3schools.com/html/movie.mp4",
-      },
-    ],
-    [
-      {
-        img: "https://static.getimg.ai/media/getimg_ai_img-uXoR2am8GLjT2zVydBc9t.webp",
-        video: "https://www.w3schools.com/html/mov_bbb.mp4",
-      },
-      {
-        img: "https://static.getimg.ai/media/getimg_ai_img-8rcnXGXwyWJ8VqJOKChpf.webp",
-        video: "https://www.w3schools.com/html/movie.mp4",
-      },
-    ],
-    [
-      {
-        img: "https://static.getimg.ai/media/getimg_ai_img-uXoR2am8GLjT2zVydBc9t.webp",
-        video: "https://www.w3schools.com/html/mov_bbb.mp4",
-      },
-      {
-        img: "https://static.getimg.ai/media/getimg_ai_img-8rcnXGXwyWJ8VqJOKChpf.webp",
-        video: "https://www.w3schools.com/html/movie.mp4",
-      },
-    ],
-    // ... repeat same as your original
+    // ... more sections as needed
   ];
 
-  useEffect(() => {
-    // Animate whole sections when scrolling
-    gsap.utils.toArray(".clientcontrol-main").forEach((section, i) => {
-      gsap.from(section, {
-        opacity: 0,
-        y: 100,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-      });
-    });
+  useGSAP(
+    () => {
+      if (!containerRef.current) return;
 
-    // Animate cards inside each section with stagger
-    gsap.utils.toArray(".client-card").forEach((card) => {
-      gsap.from(card, {
-        opacity: 0,
-        scale: 0.8,
-        duration: 0.8,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: card,
-          start: "top 85%",
-        },
-      });
-    });
-
-    // Floating hover effect
-    const cards = document.querySelectorAll(".client-card");
-    cards.forEach((card) => {
-      card.addEventListener("mouseenter", () => {
-        gsap.to(card, {
-          scale: 1.05,
-          y: -10,
-          duration: 0.4,
-          ease: "power2.out",
+      const mainSections = containerRef.current.querySelectorAll(
+        ".clientcontrol-main"
+      );
+      mainSections.forEach((section) => {
+        gsap.from(section, {
+          opacity: 0,
+          y: 100,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
         });
       });
-      card.addEventListener("mouseleave", () => {
-        gsap.to(card, { scale: 1, y: 0, duration: 0.4, ease: "power2.inOut" });
+
+      const cards = containerRef.current.querySelectorAll(".client-card");
+      cards.forEach((card) => {
+        gsap.from(card, {
+          opacity: 0,
+          scale: 0.8,
+          duration: 0.8,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+          },
+        });
+
+        // Floating hover effect with GSAP timeline for smoothness
+        card.addEventListener("mouseenter", () => {
+          gsap.to(card, {
+            scale: 1.05,
+            y: -10,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+        });
+        card.addEventListener("mouseleave", () => {
+          gsap.to(card, {
+            scale: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power2.inOut",
+          });
+        });
       });
-    });
-  }, []);
+    },
+    { scope: containerRef }
+  );
 
   return (
-    <div className="clientpage-container">
+    <div className="clientpage-container" ref={containerRef}>
       <div className="clientpage-main">
         {sections.map((clients, sectionIndex) => (
           <div
@@ -131,12 +111,14 @@ export default function HappyClients() {
                   }-card${index}`}
                   onMouseEnter={(e) => {
                     const video = e.currentTarget.querySelector("video");
-                    video.play();
+                    video?.play();
                   }}
                   onMouseLeave={(e) => {
                     const video = e.currentTarget.querySelector("video");
-                    video.pause();
-                    video.currentTime = 0;
+                    if (video) {
+                      video.pause();
+                      video.currentTime = 0;
+                    }
                   }}
                 >
                   <img
@@ -145,6 +127,7 @@ export default function HappyClients() {
                     }-thumb${index}`}
                     src={client.img}
                     alt={`Client ${sectionIndex}-${index}`}
+                    loading="lazy"
                   />
                   <video
                     className={`hover-video section${

@@ -15,6 +15,8 @@ export default function Contact() {
   const paraRef = useRef(null);
   const cardRefs = useRef([]);
   const afterCardsRef = useRef(null);
+  const instaWrapperRef = useRef(null);
+  const instaTextRef = useRef(null);
 
   cardRefs.current = [];
 
@@ -25,46 +27,48 @@ export default function Contact() {
   };
 
   const splitText = (element) => {
-    if (!element || element.querySelector("span span")) return; // Already split
-  
+    if (!element || element.querySelector("span span")) return;
+
     const text = element.innerText;
     const words = text.split(" ");
     element.innerHTML = "";
-  
+
     words.forEach((word) => {
       const wordSpan = document.createElement("span");
       wordSpan.style.display = "inline-block";
       wordSpan.style.whiteSpace = "nowrap";
       wordSpan.style.marginRight = "8px";
-  
+
       word.split("").forEach((char) => {
         const charSpan = document.createElement("span");
         charSpan.textContent = char;
         charSpan.style.display = "inline-block";
         charSpan.style.opacity = "0";
+        charSpan.style.transform = "translateY(40px)"; // <-- ensure they start lower
         wordSpan.appendChild(charSpan);
       });
-  
+
       element.appendChild(wordSpan);
     });
   };
-  
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       splitText(headingRef.current);
       splitText(paraRef.current);
-      splitText(afterCardsRef.current)
+      splitText(afterCardsRef.current);
+      splitText(instaTextRef.current);
 
       const headingSpans = headingRef.current.querySelectorAll("span span");
       const paraSpans = paraRef.current.querySelectorAll("span span");
       const afterSpans = afterCardsRef.current.querySelectorAll("span span");
+      const instaSpans = instaTextRef.current.querySelectorAll("span span");
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=600%",
+          end: "+=700%", // longer scroll
           scrub: true,
           pin: true,
         },
@@ -79,54 +83,23 @@ export default function Contact() {
       })
         .to(
           headingSpans,
-          {
-            opacity: 0,
-            // y: -30,
-            stagger: 0.05,
-            duration: 1,
-            ease: "power3.in",
-          },
+          { opacity: 0, y: -40, stagger: 0.05, duration: 1, ease: "power3.in" },
           "+=0.3"
         )
         .to(
           paraSpans,
-          {
-            opacity: 1,
-            y: 0,
-            stagger: 0.03,
-            duration: 1,
-            ease: "power3.out",
-          },
+          { opacity: 1, y: 0, stagger: 0.03, duration: 1, ease: "power3.out" },
           "-=0.4"
         )
         .to(
           paraSpans,
-          {
-            opacity: 0,
-            // y: 30,
-            stagger: 0.03,
-            duration: 1,
-            ease: "power3.in",
-          },
+          { opacity: 0, y: -40, stagger: 0.03, duration: 1, ease: "power3.in" },
           "+=0.3"
         )
-        .to(
-          ".contact-cards-wrapper",
-          {
-            opacity: 1,
-            duration: 0.01,
-          },
-          "-=0.4"
-        )
+        .to(".contact-cards-wrapper", { opacity: 1, duration: 0.01 }, "-=0.4")
         .from(
           cardRefs.current,
-          {
-            x: 300,
-            opacity: 0,
-            stagger: 0.5,
-            duration: 5.5,
-            ease: "power3.out",
-          },
+          { x: 300, opacity: 0, stagger: 0.5, duration: 4, ease: "power3.out" },
           "-=0.3"
         )
         .to(
@@ -140,34 +113,35 @@ export default function Contact() {
           },
           "+=0.2"
         )
-
         .to(
           afterSpans,
-          {
-            opacity: 1,
-            y: 0,
-            stagger: 0.03,
-            duration: 1,
-            ease: "power3.out",
-          },
+          { opacity: 1, y: 0, stagger: 0.03, duration: 1, ease: "power3.out" },
           "-=0.4"
         )
         .to(
           afterSpans,
-          {
-            opacity: 0,
-            // y: 30,
-            stagger: 0.03,
-            duration: 1,
-            ease: "power3.in",
-          },
+          { opacity: 0, y: -40, stagger: 0.03, duration: 1, ease: "power3.in" },
+          "+=0.3"
+        )
+        // Centered Insta reveal
+        // Insta reveal
+        // Centered Insta reveal
+        .to(
+          instaWrapperRef.current,
+          { opacity: 1, scale: 1, duration: 1.2, ease: "power3.out" },
+          "+=0.3"
+        )
+        // Fade in the parent text first
+        .to(
+          instaSpans,
+          { opacity: 1, y: 0, stagger: 0.03, duration: 1, ease: "power3.out" },
+          "-=0.4"
+        )
+        .to(
+          instaSpans,
+          { opacity: 0, y: -40, stagger: 0.03, duration: 1, ease: "power3.in" },
           "+=0.3"
         );
-        
-        
-        
-
-      
     }, sectionRef);
 
     return () => ctx.revert();
@@ -178,14 +152,7 @@ export default function Contact() {
       <Breadcrumb />
       <div className="contact-container">
         <div className="contact-section1" ref={sectionRef}>
-          <div
-            className="contact-section1-content"
-            style={{
-              position: "relative",
-              textAlign: "center",
-              width: "100%",
-            }}
-          >
+          <div className="contact-section1-content">
             <h1 ref={headingRef}>ready to glow?</h1>
             <p ref={paraRef} className="intro-text">
               Have any beauty queries or simply need to enquire about any of our
@@ -193,9 +160,7 @@ export default function Contact() {
               appointments.
             </p>
 
-            {/* Cards */}
-            <div
-              className="contact-cards-wrapper">
+            <div className="contact-cards-wrapper">
               <div ref={addToRefs} className="cardStyle">
                 <Milestone size={28} />
                 <span>Chennai, India</span>
@@ -214,26 +179,22 @@ export default function Contact() {
               We&apos;re here to help you shine — whether it&apos;s your first
               visit or your hundredth, your beauty journey begins here.
             </p>
+
+            {/* Insta Section (centered inside pinned area) */}
+            <div className="insta-wrapper" ref={instaWrapperRef}>
+              <Image
+                src="/Gallery/01.webp"
+                alt="Instagram Preview"
+                width={400}
+                height={400}
+              />
+              <p ref={instaTextRef} className="insta-text">
+                Follow us on Insta
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-const cardStyle = {
-  width: "400px",
-  height: "250px",
-  background: "#f9f9f9",
-  borderRadius: "10px",
-  boxShadow: "0 8px 25px rgba(0,0,0,0.08)",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  fontSize: "1rem",
-  fontWeight: "500",
-  gap: "10px",
-  padding: "20px",
-  textAlign: "center",
-};
