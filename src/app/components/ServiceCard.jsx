@@ -42,7 +42,7 @@ export default function ServiceCard() {
     {
       title: "Service 2",
       desc: "Detail about service 2",
-      img: "https://pics.craiyon.com/2024-09-04/lVIdzSccREy2xW2pf853oA.webp",
+      img: "https://images.unsplash.com/photo-1755134148217-2dd89cc6a2c2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       title: "Service 3",

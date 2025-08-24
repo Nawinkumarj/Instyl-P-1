@@ -16,9 +16,9 @@ export default function RippleImage({ src, alt, style }) {
   const imgRef = useRef(null);
 
   // Ripple parameters
-  const rippleRadius = 32; // size of each ripple
-  const rippleStrength = 0.6; // 0.0–1.0
-  const decay = 0.92; // how fast ripples fade
+  const rippleRadius = 40; // size of each ripple
+  const rippleStrength = 1.6; // 0.0–1.0
+  const decay = 1.05; // how fast ripples fade
 
   // Stores ongoing ripples
   const ripples = useRef([]);
@@ -64,7 +64,16 @@ export default function RippleImage({ src, alt, style }) {
             r.radius * 2,
             r.radius * 2
           );
-          ctx.restore();
+            ctx.restore();
+            
+            // ctx.save();
+            // ctx.beginPath();
+            // ctx.arc(r.x, r.y, r.radius * 0.95, 0, 2 * Math.PI);
+            // ctx.closePath();
+            // ctx.globalAlpha = r.alpha * 0.25; // change for intensity
+            // ctx.fillStyle = "rgba(0,150,255,1)"; // change color here!
+            // ctx.fill();
+            // ctx.restore();
 
           r.radius += 1.6 + r.strength * 2;
           r.alpha *= decay;

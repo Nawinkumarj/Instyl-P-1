@@ -27,23 +27,34 @@ function applyGoogleTranslateDOMPatch() {
 export default function ServiceMain() {
   const containerRef = useRef(null);
 
-  const data = [
-    {
-      title: "Service 1",
-      desc: "Detail about service 1",
-      img: "https://pics.craiyon.com/2024-09-04/lVIdzSccREy2xW2pf853oA.webp",
-    },
-    {
-      title: "Service 2",
-      desc: "Detail about service 2",
-      img: "https://pics.craiyon.com/2024-09-04/lVIdzSccREy2xW2pf853oA.webp",
-    },
-    {
-      title: "Service 3",
-      desc: "Detail about service 3",
-      img: "https://pics.craiyon.com/2024-09-04/lVIdzSccREy2xW2pf853oA.webp",
-    },
-  ];
+ const data = [
+   {
+     title: "Service 1",
+     desc: "Detail about service 1",
+     img: "https://pics.craiyon.com/2024-09-04/lVIdzSccREy2xW2pf853oA.webp",
+   },
+   {
+     title: "Service 2",
+     desc: "Detail about service 2",
+     img: "https://pics.craiyon.com/2024-09-04/lVIdzSccREy2xW2pf853oA.webp",
+   },
+   {
+     title: "Service 3",
+     desc: "Detail about service 3",
+     img: "https://pics.craiyon.com/2024-09-04/lVIdzSccREy2xW2pf853oA.webp",
+   },
+   {
+     title: "Service 4",
+     desc: "Detail about service 4",
+     img: "https://pics.craiyon.com/2024-09-04/lVIdzSccREy2xW2pf853oA.webp",
+   },
+ ];
+
+  const groupedData = [];
+  for (let i = 0; i < data.length; i += 2) {
+    groupedData.push(data.slice(i, i + 2));
+  }
+
 
   useGSAP(
     () => {
@@ -89,7 +100,7 @@ export default function ServiceMain() {
           }).to(
             section,
             {
-              height: "50vh", // expand current
+              height: "70vh", // expand current
               ease: "power2.inOut",
               duration: 0.4,
             },
@@ -120,21 +131,25 @@ export default function ServiceMain() {
       <div className="servicemain-heading" translate="no">
         <h1>Services</h1>
       </div>
-      {data.map((item, i) => (
+
+
+      {groupedData.map((row, i) => (
         <section className="servicemain-section" key={i} translate="no">
-          <div className="servicemain-img">
-            <img src={item.img} alt={`service ${i + 1}`} loading="lazy" />
-          </div>
-          <div className="servicemain-content">
-            <h2>{item.title}</h2>
-            <p>{item.desc}</p>
-          </div>
-          <div className="servicemain-img">
-            <img src={item.img} alt={`service ${i + 1}`} loading="lazy" />
-          </div>
+          {row.map((item, j) => (
+            <div className="servicemain-card" key={j}>
+              <div className="servicemain-img">
+                <img src={item.img} alt={`service ${i * 2 + j + 1}`} />
+              </div>
+              <div className="servicemain-content">
+                <h2>{item.title}</h2>
+                <p>{item.desc}</p>
+              </div>
+            </div>
+          ))}
         </section>
       ))}
-      
+
+
     </div>
   );
 }

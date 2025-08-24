@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Breadcrumb from "../components/Breadcrumb";
 import { Milestone, Phone, Mail } from "lucide-react";
 import Image from "next/image";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import FAQ from "../components/FAQ";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function Contact() {
   const sectionRef = useRef(null);
@@ -19,7 +21,6 @@ export default function Contact() {
   const instaTextRef = useRef(null);
 
   cardRefs.current = [];
-
   const addToRefs = (el) => {
     if (el && !cardRefs.current.includes(el)) {
       cardRefs.current.push(el);
@@ -44,7 +45,7 @@ export default function Contact() {
         charSpan.textContent = char;
         charSpan.style.display = "inline-block";
         charSpan.style.opacity = "0";
-        charSpan.style.transform = "translateY(40px)"; // <-- ensure they start lower
+        charSpan.style.transform = "translateY(40px)"; // start lower
         wordSpan.appendChild(charSpan);
       });
 
@@ -52,8 +53,8 @@ export default function Contact() {
     });
   };
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
+  useGSAP(
+    () => {
       splitText(headingRef.current);
       splitText(paraRef.current);
       splitText(afterCardsRef.current);
@@ -68,7 +69,7 @@ export default function Contact() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=700%", // longer scroll
+          end: "+=700%",
           scrub: true,
           pin: true,
         },
@@ -123,15 +124,12 @@ export default function Contact() {
           { opacity: 0, y: -40, stagger: 0.03, duration: 1, ease: "power3.in" },
           "+=0.3"
         )
-        // Centered Insta reveal
         // Insta reveal
-        // Centered Insta reveal
         .to(
           instaWrapperRef.current,
           { opacity: 1, scale: 1, duration: 1.2, ease: "power3.out" },
           "+=0.3"
         )
-        // Fade in the parent text first
         .to(
           instaSpans,
           { opacity: 1, y: 0, stagger: 0.03, duration: 1, ease: "power3.out" },
@@ -142,10 +140,9 @@ export default function Contact() {
           { opacity: 0, y: -40, stagger: 0.03, duration: 1, ease: "power3.in" },
           "+=0.3"
         );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+    },
+    { scope: sectionRef }
+  );
 
   return (
     <div style={{ padding: "20px" }}>
@@ -160,7 +157,7 @@ export default function Contact() {
               appointments.
             </p>
 
-            <div className="contact-cards-wrapper">
+            <div className="contact-cards-wrapper" style={{ opacity: 0 }}>
               <div ref={addToRefs} className="cardStyle">
                 <Milestone size={28} />
                 <span>Chennai, India</span>
@@ -180,8 +177,10 @@ export default function Contact() {
               visit or your hundredth, your beauty journey begins here.
             </p>
 
-            {/* Insta Section (centered inside pinned area) */}
-            <div className="insta-wrapper" ref={instaWrapperRef}>
+            <div
+              className="insta-wrapper"
+              ref={instaWrapperRef}
+            >
               <Image
                 src="/Gallery/01.webp"
                 alt="Instagram Preview"
@@ -195,6 +194,8 @@ export default function Contact() {
           </div>
         </div>
       </div>
+      <FAQ/>
     </div>
   );
 }
+
