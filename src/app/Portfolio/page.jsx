@@ -3,31 +3,51 @@
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRouter } from "next/navigation";
-import "../page.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const commonImages = Array.from(
+  { length: 20 },
+  (_, i) => `https://picsum.photos/seed/common${i}/500/500`
+);
+
+const frameSizes = [
+  "size-4x6",
+  "size-5x5",
+  "size-5x7",
+  "size-8x10",
+  "size-12x12",
+];
+
+function shuffleAndBuild(images, totalCount = 50) {
+  const result = [];
+  let idx = 0;
+  for (let i = 0; i < totalCount; i++) {
+    const size = frameSizes[Math.floor(Math.random() * frameSizes.length)];
+    const img = images[idx % images.length];
+    result.push({ src: img, sizeClass: size, key: `${size}-${i}` });
+    idx++;
+  }
+  return result.sort(() => 0.5 - Math.random());
+}
 
 const Page = () => {
   const containerRef = useRef(null);
   const leftTextRef = useRef(null);
   const rightTextRef = useRef(null);
   const blurRef = useRef(null);
-  const cardsRef = useRef(null);
-  const spacerRef = useRef(null)
-
-  const router = useRouter();
+  const spacerRef = useRef(null);
+  const masonryRef = useRef(null);
 
   useLayoutEffect(() => {
-
-      if (window.innerWidth <= 768) return;
+    if (window.innerWidth <= 768) return;
 
     const ctx = gsap.context(() => {
       if (
         !leftTextRef.current ||
         !rightTextRef.current ||
         !blurRef.current ||
-        !cardsRef.current
+        !masonryRef.current
       )
         return;
 
@@ -38,53 +58,56 @@ const Page = () => {
           end: "+=150%",
           scrub: true,
           pin: true,
-          // pinSpacing:false,
         },
       });
 
       tl.to(
         leftTextRef.current,
-        { xPercent: -100, opacity: 0.2, ease: "power2.inOut" },
+        {
+          xPercent: -100,
+          opacity: 0.2,
+          ease: "power2.inOut",
+        },
         0
       );
+
       tl.fromTo(
         blurRef.current,
         { opacity: 0, scale: 0.6 },
         { opacity: 1, scale: 1, ease: "power2.out" },
         0.1
       );
+
       tl.to(
         rightTextRef.current,
-        { xPercent: 100, opacity: 0.2, ease: "power2.inOut" },
+        {
+          xPercent: 100,
+          opacity: 0.2,
+          ease: "power2.inOut",
+        },
         0
       );
+
+      // ✅ Reveal masonry only after animation completes
       tl.to(
-        cardsRef.current,
+        masonryRef.current,
         {
-          autoAlpha: 1,
-          pointerEvents: "auto",
-          duration: 0.3,
+          autoAlpha: 1, // fade in & enable pointer events
+          duration: 0.5,
           ease: "power2.out",
         },
-        0.45
-      );
-      tl.fromTo(
-        cardsRef.current.querySelectorAll(".category-card"),
-        { y: 50, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, stagger: 0.2, ease: "power2.out" },
-        0.5
-      );
+        ">"
+      ); // after previous animations finish
     }, containerRef);
+
     if (spacerRef.current) {
-      spacerRef.current.style.height = `${window.innerHeight * 1.5}px`; // For end: '+=150%'
+      spacerRef.current.style.height = `${window.innerHeight * 1.5}px`;
     }
 
     return () => ctx.revert();
   }, []);
 
-  const handleNavigate = (category) => {
-    router.push(`/Portfolio/${category}`);
-  };
+  const shuffledImages = shuffleAndBuild(commonImages, 50);
 
   return (
     <div className="portfolio-container" ref={containerRef}>
@@ -101,23 +124,19 @@ const Page = () => {
 
       <div className="portfolio-blur-layer" ref={blurRef}></div>
 
-      <div className="card-section" ref={cardsRef}>
-        <div className="category-card">
-          <img src="https://wallpaperaccess.com/full/4788268.jpg" alt="Kids" />
-          <h2>For Kids</h2>
-          <p>Fun and educational visuals crafted for young minds.</p>
-          <button onClick={() => handleNavigate("kids")}>Explore More</button>
-        </div>
-        <div className="category-card">
-          <img
-            src="https://static.getimg.ai/media/getimg_ai_img-8rcnXGXwyWJ8VqJOKChpf.webp"
-            alt="Adults"
-          />
-          <h2>For Adults</h2>
-          <p>Elegant and professional designs suited for mature audiences.</p>
-          <button onClick={() => handleNavigate("adults")}>Explore More</button>
-        </div>
+      {/* Initially hidden */}
+      <div
+        className="masonry-container"
+        ref={masonryRef}
+        style={{ opacity: 0, pointerEvents: "none" }}
+      >
+        {shuffledImages.map(({ src, sizeClass, key }) => (
+          <div className={`masonry-item ${sizeClass}`} key={key}>
+            <img src={src} alt="portfolio-image" />
+          </div>
+        ))}
       </div>
+
       <div ref={spacerRef}></div>
     </div>
   );

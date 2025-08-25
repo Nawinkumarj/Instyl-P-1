@@ -151,7 +151,13 @@ export default function ServiceCard() {
         ))}
         <Link href="/Services">
           <div className="view-more-wrapper">
-            <button className="view-more-btn">View More</button>
+            <button class="view-more-btn">
+              <span>Explore more</span>
+              <svg width="15px" height="10px" viewBox="0 0 13 10">
+                <path d="M1,5 L11,5"></path>
+                <polyline points="8 1 12 5 8 9"></polyline>
+              </svg>
+            </button>
           </div>
         </Link>
       </div>
