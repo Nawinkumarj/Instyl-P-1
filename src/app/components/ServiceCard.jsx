@@ -4,12 +4,12 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
-import CTA from "./CTA"; // Assuming you have a CTA component
+import CTA from "./CTA";
 import RippleImage from "./RippleImage";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-// Google Translate DOM protection (optional but recommended)
+// Google Translate DOM protection
 function applyGoogleTranslateDOMPatch() {
   if (
     typeof Node === "function" &&
@@ -59,56 +59,106 @@ export default function ServiceCard() {
       if (!containerRef.current) return;
 
       const ctx = gsap.context(() => {
-        const sections = gsap.utils.toArray(".servicecard-section"); // or ".servicemain-section"
+        const sections = gsap.utils.toArray(".servicecard-section");
         if (!sections.length) return;
 
-        // Always reset heights initially
-        gsap.set(sections, { height: "50vh" });
+        // Set initial states with smooth transitions
+        gsap.set(sections, { 
+          height: "50vh",
+          transformOrigin: "center center"
+        });
 
-        // Compute smart pin distance
-        const pinDistance =
-          window.innerHeight * (sections.length - 1) +
-          window.innerHeight * 0.25;
+        // Enhanced smooth pin distance calculation
+        const pinDistance = window.innerHeight * (sections.length - 1) + window.innerHeight * 0.3;
 
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top top",
             end: "+=" + pinDistance,
-            scrub: 0.7, // smoother!
+            scrub: 1.2, // Increased for smoother animation
             pin: true,
             anticipatePin: 1,
             invalidateOnRefresh: true,
+            // Add smooth refreshing
+            onRefresh: () => {
+              gsap.set(sections, { clearProps: "all" });
+              gsap.set(sections, { height: "50vh" });
+            },
           },
         });
 
+        // Enhanced animations with better easing
         sections.forEach((section, index) => {
           if (index === 0) return;
           const prev = sections[index - 1];
           if (!prev) return;
 
+          // Smoother height transitions with custom ease
           tl.to(prev, {
             height: "20vh",
             ease: "power2.inOut",
-            duration: 0.4,
+            duration: 1, // Increased duration for smoothness
           }).to(
             section,
-            { height: "50vh", ease: "power2.inOut", duration: 0.4 },
-            "<"
+            { 
+              height: "50vh", 
+              ease: "power2.inOut", 
+              duration: 1,
+            },
+            "<0.2" // Slight offset for more organic feel
+          );
+
+          // Add subtle scale and opacity effects for extra smoothness
+          tl.fromTo(
+            section.querySelector('.service-card-content'),
+            { opacity: 0.7, scale: 0.95 },
+            { 
+              opacity: 1, 
+              scale: 1, 
+              ease: "power2.out",
+              duration: 0.8
+            },
+            "<0.3"
           );
         });
 
+        // Final section animation
         const last = sections[sections.length - 1];
         if (last) {
-          tl.to(last, { height: "25vh", ease: "power2.out", duration: 0.4 });
+          tl.to(last, { 
+            height: "25vh", 
+            ease: "power3.out", 
+            duration: 1
+          });
         }
+
+        // Add smooth entrance animation for content
+        sections.forEach((section, index) => {
+          gsap.fromTo(
+            section.querySelector('.service-card-content'),
+            { y: 30, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: section,
+                start: "top 80%",
+                end: "top 20%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        });
+
       }, containerRef);
 
       return () => ctx.revert();
     },
     { scope: containerRef, dependencies: [data.length] }
   );
-
 
   return (
     <>
@@ -119,6 +169,9 @@ export default function ServiceCard() {
         style={{
           position: "relative",
           isolation: "isolate",
+          // Add CSS for smoother rendering
+          willChange: "transform",
+          backfaceVisibility: "hidden",
         }}
       >
         <div className="servicecard-heading" translate="no">
@@ -130,7 +183,12 @@ export default function ServiceCard() {
             className="servicecard-section"
             key={i}
             translate="no"
-            style={{ position: "relative" }}
+            style={{ 
+              position: "relative",
+              // Optimize for smooth animations
+              willChange: "height, transform",
+              backfaceVisibility: "hidden",
+            }}
           >
             <div className="service-card-content">
               <h2>{item.title}</h2>
@@ -149,9 +207,10 @@ export default function ServiceCard() {
             </div>
           </section>
         ))}
+        
         <Link href="/Services">
           <div className="view-more-wrapper">
-            <button class="view-more-btn">
+            <button className="view-more-btn">
               <span>Explore more</span>
               <svg width="15px" height="10px" viewBox="0 0 13 10">
                 <path d="M1,5 L11,5"></path>
@@ -161,10 +220,6 @@ export default function ServiceCard() {
           </div>
         </Link>
       </div>
-
-      {/* ✅ Single "View More" button below all cards */}
-
-      {/* <div className="service-card-dummy"></div> */}
     </>
   );
 }

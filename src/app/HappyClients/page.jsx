@@ -31,6 +31,36 @@ export default function HappyClients() {
         video: "https://www.w3schools.com/html/movie.mp4",
       },
     ],
+    [
+      {
+        img: "https://static.getimg.ai/media/getimg_ai_img-uXoR2am8GLjT2zVydBc9t.webp",
+        video: "https://www.w3schools.com/html/mov_bbb.mp4",
+      },
+      {
+        img: "https://static.getimg.ai/media/getimg_ai_img-8rcnXGXwyWJ8VqJOKChpf.webp",
+        video: "https://www.w3schools.com/html/movie.mp4",
+      },
+    ],
+    [
+      {
+        img: "https://static.getimg.ai/media/getimg_ai_img-uXoR2am8GLjT2zVydBc9t.webp",
+        video: "https://www.w3schools.com/html/mov_bbb.mp4",
+      },
+      {
+        img: "https://static.getimg.ai/media/getimg_ai_img-8rcnXGXwyWJ8VqJOKChpf.webp",
+        video: "https://www.w3schools.com/html/movie.mp4",
+      },
+    ],
+    [
+      {
+        img: "https://static.getimg.ai/media/getimg_ai_img-uXoR2am8GLjT2zVydBc9t.webp",
+        video: "https://www.w3schools.com/html/mov_bbb.mp4",
+      },
+      {
+        img: "https://static.getimg.ai/media/getimg_ai_img-8rcnXGXwyWJ8VqJOKChpf.webp",
+        video: "https://www.w3schools.com/html/movie.mp4",
+      },
+    ],
     // ... more sections as needed
   ];
 
@@ -144,6 +174,9 @@ export default function HappyClients() {
             </div>
           </div>
         ))}
+        <div className="clients-arrow">
+          <img src="/arrow.png"/>
+        </div>
       </div>
     </div>
   );

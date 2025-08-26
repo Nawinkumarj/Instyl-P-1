@@ -9,7 +9,16 @@ export default function MemberIcon() {
         <Link href="/Membership">
           <div className="memberfloat-icon">
             <MdCardMembership className="member-float-icon" />
-            <p>Membership</p>
+            <p>M</p>
+            <p>E</p>
+            <p>M</p>
+            <p>B</p>
+            <p>E</p>
+            <p>R</p>
+            <p>S</p>
+            <p>H</p>
+            <p>I</p>
+            <p>P</p>
           </div>
         </Link>
       </div>

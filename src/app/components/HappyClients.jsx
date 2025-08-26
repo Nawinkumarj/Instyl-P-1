@@ -149,9 +149,9 @@ export default function Clients() {
       </div>
       <div className="view-more-wrapper">
         <button
-          class="view-more-btn"
+          className="view-more-btn"
           onClick={() => router.push("/HappyClients")}
-          className="see-more-btn"
+         
         >
           <span>Explore more</span>
           <svg width="15px" height="10px" viewBox="0 0 13 10">
