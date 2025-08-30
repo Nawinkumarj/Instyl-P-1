@@ -81,7 +81,7 @@ export default function ServiceMain() {
           trigger: containerRef.current,
           start: "top top",
           end: "+=" + pinDistance,
-          scrub: 2,
+          scrub: 1.2,
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,

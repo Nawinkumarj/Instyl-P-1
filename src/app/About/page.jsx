@@ -337,8 +337,8 @@ export default function About() {
   return (
     <>
       {/* Add translate="no" to prevent Google Translate interference */}
-      <div style={{ padding: "0" }} translate="no">
-        <Breadcrumb />
+      <div style={{ paddingTop: "5rem" }} translate="no">
+        {/* <Breadcrumb /> */}
         <div ref={containerRef} className="about-container">
           <div className="about-img" ref={imageRef}>
             <img

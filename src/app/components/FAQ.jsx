@@ -34,8 +34,7 @@ export default function FAQ() {
             {/* Question Row */}
             <button className="faq-question" onClick={() => toggleFAQ(index)}>
               <span>{faq.question}</span>
-              <Plus
-                size={20}
+              <img src="/plusIcon.png"
                 className={`faq-icon ${openIndex === index ? "rotate" : ""}`}
               />
             </button>

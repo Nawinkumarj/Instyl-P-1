@@ -1,8 +1,9 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,10 +40,12 @@ const Page = () => {
   const spacerRef = useRef(null);
   const masonryRef = useRef(null);
 
-  useLayoutEffect(() => {
-    if (window.innerWidth <= 768) return;
+  // ✅ useGSAP wrapper instead of useLayoutEffect
+  useGSAP(
+    () => {
+      // Disable GSAP animations for mobile
+      // if (window.innerWidth <= 768) return;
 
-    const ctx = gsap.context(() => {
       if (
         !leftTextRef.current ||
         !rightTextRef.current ||
@@ -88,24 +91,23 @@ const Page = () => {
         0
       );
 
-      // ✅ Reveal masonry only after animation completes
+      // ✅ Reveal masonry after animation completes
       tl.to(
         masonryRef.current,
         {
-          autoAlpha: 1, // fade in & enable pointer events
+          autoAlpha: 1,
           duration: 0.5,
           ease: "power2.out",
         },
         ">"
-      ); // after previous animations finish
-    }, containerRef);
+      );
 
-    if (spacerRef.current) {
-      spacerRef.current.style.height = `${window.innerHeight * 1.5}px`;
-    }
-
-    return () => ctx.revert();
-  }, []);
+      if (spacerRef.current) {
+        spacerRef.current.style.height = `${window.innerHeight * 1.5}px`;
+      }
+    },
+    { scope: containerRef } // ✅ gsap context auto-cleanup
+  );
 
   const shuffledImages = shuffleAndBuild(commonImages, 50);
 
@@ -120,6 +122,7 @@ const Page = () => {
             folio
           </span>
         </h1>
+        {/* <h2>Portfolio</h2> */}
       </div>
 
       <div className="portfolio-blur-layer" ref={blurRef}></div>

@@ -1,105 +1,118 @@
 "use client";
-import { useLayoutEffect, useRef } from "react";
-// import { gsap } from "gsap";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ModelViewer from "./ModelViewer";
+import { useGSAP } from "@gsap/react";
 
-// gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ModelScroll() {
   const modelRef = useRef(null);
   const section1Ref = useRef(null);
   const section2Ref = useRef(null);
+  const paraRef = useRef(null);
+   const headingRef = useRef(null);
+  const originalContent = useRef({});
 
-  useLayoutEffect(() => {
-    const model = modelRef.current;
-    const section1 = section1Ref.current;
-    const section2 = section2Ref.current;
-    const modelWidth = 600;
-    const startRight = 50;
-    const endLeft = 50;
-    const totalXMove = -(window.innerWidth - startRight - endLeft - modelWidth);
 
-    // // Set model position fixed once
-    // gsap.set(model, {
-    //   position: "fixed",
-    //   top: "50%",
-    //   right: `${startRight}px`,
-    //   transform: "translateY(-50%)",
-    //   zIndex: 10,
-    // });
+     const words = ["perfect", "beauty", "elegant", "stylish"]; // cycle words
+     const [displayWord, setDisplayWord] = useState(words[0]);
+     const [currentIndex, setCurrentIndex] = useState(0);
 
-    // // Animate model horizontally as you scroll through section1
-    // const scrollTween = gsap.to(model, {
-    //   x: totalXMove,
-    //   ease: "none",
-    //   scrollTrigger: {
-    //     trigger: section1,
-    //     start: "top top",
-    //     end: "bottom top",
-    //     scrub: true,
-    //     pin: section1,
-    //     anticipatePin: 1,
-    //     markers: true,
-    //     onLeave: () => {
-    //       gsap.set(model, {
-    //         position: "absolute",
-    //         top: "50%",
-    //         left: "50%",
-    //         transform: "translate(-50%, -50%)",
-    //         x: 0,
-    //         right: "auto",
-    //       });
-    //     },
-    //     onEnterBack: () => {
-    //       gsap.set(model, {
-    //         position: "fixed",
-    //         top: "50%",
-    //         right: `${startRight}px`,
-    //         transform: "translateY(-50%)",
-    //         x: 0,
-    //         left: "auto",
-    //       });
-    //     },
-    //   },
-    // });
+     useEffect(() => {
+       const interval = setInterval(() => {
+         const nextIndex = (currentIndex + 1) % words.length;
+         setDisplayWord(words[nextIndex]);
+         setCurrentIndex(nextIndex);
+       }, 2000); // change every 2 seconds
 
-    // // Create a ScrollTrigger for section2 to keep the model fixed in place
-    // const section2Trigger = ScrollTrigger.create({
-    //   trigger: section2,
-    //   start: "top top",
-    //   end: "bottom top",
-    //   pin: false,
-    //   markers: true,
-    //   onEnter: () => {
-    //     gsap.set(model, {
-    //       position: "absolute",
-    //       top: "50%",
-    //       left: "50%",
-    //       transform: "translate(-50%, -50%)",
-    //       x: 0,
-    //       right: "auto",
-    //     });
-    //   },
-    //   onLeaveBack: () => {
-    //     gsap.set(model, {
-    //       position: "fixed",
-    //       top: "50%",
-    //       right: `${startRight}px`,
-    //       transform: "translateY(-50%)",
-    //       x: 0,
-    //       left: "auto",
-    //     });
-    //   },
-    // });
+       return () => clearInterval(interval);
+     }, [currentIndex]);
+  
+  
+  
+   const splitText = (element) => {
+     if (!element || element.querySelector("span span")) return;
 
-    return () => {
-      // scrollTween.kill();
-      // section2Trigger.kill();
-      // ScrollTrigger.getAll().forEach((t) => t.kill());
-      // return () => ctx.revert();
-    };
-  }, []);
+     // Store original content before splitting
+     originalContent.current[element] = element.innerHTML;
+
+     const text = element.innerText;
+     const words = text.split(" ");
+     element.innerHTML = "";
+
+     words.forEach((word) => {
+       const wordSpan = document.createElement("span");
+       wordSpan.style.display = "inline-block";
+       wordSpan.style.whiteSpace = "nowrap";
+       wordSpan.style.marginRight = "8px";
+
+       word.split("").forEach((char) => {
+         const charSpan = document.createElement("span");
+         charSpan.textContent = char;
+         charSpan.style.display = "inline-block";
+         charSpan.style.opacity = "0";
+         wordSpan.appendChild(charSpan);
+       });
+
+       element.appendChild(wordSpan);
+     });
+  };
+  const restoreOriginalContent = () => {
+    Object.entries(originalContent.current).forEach(([element, content]) => {
+      if (element && element.parentNode) {
+        element.innerHTML = content;
+      }
+    });
+    originalContent.current = {};
+  };
+
+
+
+      useGSAP(
+        () => {
+          const para = paraRef.current;
+          const heading = headingRef.current;
+          if (!para || !heading) return;
+
+          splitText(para);
+          splitText(heading);
+
+          const chars = para.querySelectorAll("span");
+          const headingtxt = heading.querySelectorAll("span");
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: section2Ref.current,
+              start: "top top",
+              end: "bottom+=200% top",
+              scrub: true,
+              pin: true,
+              anticipatePin: 1,
+              // markers: true,
+            },
+          });
+
+          tl.to(headingtxt, {
+            opacity: 1,
+            y: 0,
+            stagger: 0.02,
+            ease: "power2.out",
+            duration: 1,
+          });
+
+          tl.to(chars, {
+            opacity: 1,
+            y: 0,
+            stagger: 0.02,
+            ease: "power2.out",
+            duration: 1,
+          });
+        },
+        { scope: section2Ref }
+      );
+
 
   return (
     <div className="home-scroller">
@@ -111,8 +124,15 @@ export default function ModelScroll() {
         <div className="home-section1-content">
           <div className="home-main-content">
             <h1>
-              unveil your <span className="home-perfect">perfect</span> bridal
-              look
+              unveil your <br/>
+              <span key={displayWord} className="home-perfect morph-text">
+                {displayWord.split("").map((letter, i) => (
+                  <span key={i} className="letter">
+                    {letter}
+                  </span>
+                ))}
+              </span>{" "}
+              <br /> bridal look
             </h1>
           </div>
           <div className="home-model" ref={modelRef} style={{ width: 600 }}>
@@ -123,11 +143,11 @@ export default function ModelScroll() {
       <section
         className="home-section2"
         ref={section2Ref}
-        style={{ height: "100vh"}}
+        style={{ height: "100vh" }}
       >
         <div className="home-main-content">
-          <h1>About us</h1>
-          <p>
+          <h1 ref={headingRef}>About us</h1>
+          <p ref={paraRef}>
             Instyl Hair N Bridal Studio stands as North Chennai’s biggest female
             salon, celebrated for its exceptional creativity and commitment to
             excellence. With over 15 years of dedicated service, INSTYL has

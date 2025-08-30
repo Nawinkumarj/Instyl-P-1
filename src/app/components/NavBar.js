@@ -66,14 +66,14 @@ const Navbar = () => {
         <Link href="/Contact" onClick={() => setIsOpen(false)}>
           Contact
         </Link>
-        <Link href="/Pricelist" onClick={() => setIsOpen(false)}>
-          Pricelist
+        <Link href="/Instyl_Glam" onClick={() => setIsOpen(false)}>
+          Instyl Glam
         </Link>
         <Link href="/Offers" onClick={() => setIsOpen(false)}>
           Offers
         </Link>
         <Link href="/Membership" onClick={() => setIsOpen(false)}>
-          Membership
+          Instyl Book
         </Link>
       </div>
       <div className="navbar-grid1">
