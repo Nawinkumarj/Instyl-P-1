@@ -20,8 +20,8 @@ export default function ScrollFocusList() {
       items.forEach((item, index) => {
         gsap.set(item, {
           scale: index === 0 ? 1 : 0.9,
-          opacity: index === 0 ? 1 : 0.6,
-          filter: index === 0 ? "blur(0px)" : "blur(2px)",
+          opacity: index === 0 ? 1 : 0.9,
+          filter: index === 0 ? "blur(0px)" : "blur(1px)",
           rotationX: index === 0 ? 0 : 5,
         });
       });
@@ -48,7 +48,7 @@ export default function ScrollFocusList() {
                 filter: "blur(0px)",
                 rotationX: 0,
                 rotationY: 0,
-                duration: 0.4,
+                duration: 1,
                 ease: "power2.out",
               });
             } else {
@@ -57,7 +57,7 @@ export default function ScrollFocusList() {
                 3
               );
               const scaleAmount = Math.max(
-                0.9 - (distance / (window.innerHeight * 0.5)) * 0.1,
+                1 - (distance / (window.innerHeight * 0.5)) * 0.2,
                 0.8
               );
               const opacityAmount = Math.max(
@@ -70,7 +70,7 @@ export default function ScrollFocusList() {
                 opacity: opacityAmount,
                 filter: `blur(${blurAmount}px)`,
                 rotationX: isAboveCenter ? 15 : -40,
-                duration: 0.4,
+                duration: 1,
                 ease: "power2.out",
               });
             }

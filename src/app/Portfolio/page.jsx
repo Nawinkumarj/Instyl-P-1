@@ -97,6 +97,7 @@ const Page = () => {
         {
           autoAlpha: 1,
           duration: 0.5,
+          pointerEvents: "auto",
           ease: "power2.out",
         },
         ">"
@@ -131,7 +132,7 @@ const Page = () => {
       <div
         className="masonry-container"
         ref={masonryRef}
-        style={{ opacity: 0, pointerEvents: "none" }}
+        style={{ opacity: 0}}
       >
         {shuffledImages.map(({ src, sizeClass, key }) => (
           <div className={`masonry-item ${sizeClass}`} key={key}>
@@ -140,7 +141,7 @@ const Page = () => {
         ))}
       </div>
 
-      <div ref={spacerRef}></div>
+      {/* <div ref={spacerRef}></div> */}
     </div>
   );
 };

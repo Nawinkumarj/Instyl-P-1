@@ -146,7 +146,7 @@ export default function ModelScroll() {
         style={{ height: "100vh" }}
       >
         <div className="home-main-content">
-          <h1 ref={headingRef}>About us</h1>
+          <h1 ref={headingRef}>About&nbsp;us</h1>
           <p ref={paraRef}>
             Instyl Hair N Bridal Studio stands as North Chennai’s biggest female
             salon, celebrated for its exceptional creativity and commitment to

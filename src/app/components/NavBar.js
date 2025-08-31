@@ -63,26 +63,23 @@ const Navbar = () => {
         <Link href="/Portfolio" onClick={() => setIsOpen(false)}>
           Portfolio
         </Link>
-        <Link href="/Contact" onClick={() => setIsOpen(false)}>
-          Contact
-        </Link>
-        <Link href="/Instyl_Glam" onClick={() => setIsOpen(false)}>
-          Instyl Glam
-        </Link>
         <Link href="/Offers" onClick={() => setIsOpen(false)}>
           Offers
         </Link>
+        <Link href="/Instyl_Glam" onClick={() => setIsOpen(false)} className="nav-link-with-badge">
+          Instyl Glam
+          <span className="new-badge">NEW</span>
+        </Link>
         <Link href="/Membership" onClick={() => setIsOpen(false)}>
           Instyl Book
+        </Link>
+        <Link href="/Contact" onClick={() => setIsOpen(false)}>
+          Contact
         </Link>
       </div>
       <div className="navbar-grid1">
         <p>
           <span>@</span>instyl_hairnbridalstudio
-        </p>
-        <p>
-          {" "}
-          <span>@</span>instyl_makeupartistry
         </p>
         <p>
           {" "}
@@ -94,4 +91,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-  

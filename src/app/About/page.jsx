@@ -337,7 +337,7 @@ export default function About() {
   return (
     <>
       {/* Add translate="no" to prevent Google Translate interference */}
-      <div style={{ paddingTop: "5rem" }} translate="no">
+      <div style={{ paddingTop: "3rem" }} translate="no">
         {/* <Breadcrumb /> */}
         <div ref={containerRef} className="about-container">
           <div className="about-img" ref={imageRef}>
@@ -348,7 +348,7 @@ export default function About() {
             />
           </div>  
           <div className="about-head">
-            <h1 ref={headingRef}>About Instyl</h1>
+            <h1 ref={headingRef}>fbfsb</h1>
             <p ref={paraRef}>
               Instyl Hair N Bridal Studio was established in the year of March
               11, 2010 (which is now of 14years) by Bindu Baskaran. INSTYL is
