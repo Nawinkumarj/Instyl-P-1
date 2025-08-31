@@ -38,9 +38,8 @@ const BookFlip = ({ menuData = [] }) => {
   };
 
   return (
-    <>
-
-      <div className="flipbook-container">
+    <div className="flipbook-container">
+      {menuData.length > 0 && (
         <HTMLFlipBook
           width={500}
           height={700}
@@ -64,19 +63,15 @@ const BookFlip = ({ menuData = [] }) => {
             <p>Category-wise Selection</p>
           </div>
 
-          {/* One Category Per Page */}
+          {/* Dynamic Pages */}
           {menuData.map((category, categoryIndex) => (
             <div key={categoryIndex} className="page">
               <div className="category-page">
-                {/* Category Header */}
                 <div className="category-header">
                   <h2>{category.name}</h2>
                   <p>{category.description}</p>
                 </div>
-
-                {/* Menu Table */}
                 <div className="menu-table">
-                  {/* Pricing Header */}
                   <div className="pricing-header">
                     <div className="dish-column">Dish</div>
                     <div>Regular</div>
@@ -84,35 +79,28 @@ const BookFlip = ({ menuData = [] }) => {
                     <div>Elite Regular</div>
                     <div>Elite Premium</div>
                   </div>
-
-                  {/* Menu Items */}
                   <div className="menu-items-list">
                     {category.items.map((item, itemIndex) => (
                       <div key={itemIndex} className="menu-item-row">
-                        {/* Dish Info */}
                         <div className="dish-info">
                           <div className="dish-name">{item.name}</div>
-                          {/* <p className="dish-description">{item.description}</p> */}
                         </div>
-
-                        {/* Price Columns */}
-                        <div className="price-cell price-regular">
+                        <div className="price-cell">
                           ${item.pricing.regular}
                         </div>
-                        <div className="price-cell price-premium">
+                        <div className="price-cell">
                           ${item.pricing.premium}
                         </div>
-                        <div className="price-cell price-elite-regular">
+                        <div className="price-cell">
                           ${item.pricing.eliteRegular}
                         </div>
-                        <div className="price-cell price-elite-premium">
+                        <div className="price-cell">
                           ${item.pricing.elitePremium}
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
-
                 <div className="page-number">
                   Page {categoryIndex + 1} - {category.name}
                 </div>
@@ -128,53 +116,14 @@ const BookFlip = ({ menuData = [] }) => {
             <p>Enjoy our premium dining experience</p>
           </div>
         </HTMLFlipBook>
-
-        {/* Navigation Controls */}
-
-        {/* <div className="book-controls">
-          <button
-            className="nav-btn"
-            onClick={prevPage}
-            disabled={currentPageIndex === 0}
-          >
-            ← Previous
-          </button>
-
-          <div className="page-indicator">
-            {currentPageIndex + 1} / {totalPages}
-          </div>
-
-          <button
-            className="nav-btn"
-            onClick={nextPage}
-            disabled={currentPageIndex >= totalPages - 1}
-          >
-            Next →
-          </button>
-        </div> */}
-
-        {/* Page Navigator */}
-
-        {/* <div className="page-navigator">
-          {Array.from({ length: totalPages }, (_, index) => (
-            <button
-              key={index}
-              className={`page-dot ${
-                index === currentPageIndex ? "active" : ""
-              }`}
-              onClick={() => goToPage(index)}
-            >
-              {index + 1}
-            </button>
-          ))}
-        </div> */}
-      </div>
-    </>
+      )}
+    </div>
   );
 };
 
+
 export default function Home() {
-  const [menuData, setMenuData] = useState(mockData);
+  const [menuData, setMenuData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

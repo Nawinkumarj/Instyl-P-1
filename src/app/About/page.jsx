@@ -344,7 +344,7 @@ export default function About() {
         <div ref={containerRef} className="about-container">
           <div className="about-img" ref={imageRef}>
             <img
-              src="https://cdn.pixabay.com/photo/2023/01/08/14/22/sample-7705346_640.jpg"
+              src="/Team/instyl_team.jpg"
               alt="About"
               rel="preload"
             />
