@@ -260,7 +260,7 @@ body {
 
 /* Alternative badge styles (choose one) */
 .new-badge-alt {
-  background: #ff4444;
+  background: #12c718;
   color: white;
   font-size: 9px;
   font-weight: 600;
@@ -269,7 +269,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.3px;
   position: absolute;
-  top: -8px;
+  top: 0px;
   right: -15px;
   animation: bounce-subtle 1.5s ease-in-out infinite;
 }
@@ -903,12 +903,15 @@ display: none;
   height: 90%;
   object-fit: cover;
   transform-origin: center center;
+  border-radius: 10px;
+
 }
 
 .about-head {
   position: absolute;
   top: 50%;
-  left: 28%;
+  padding: 20px;
+  text-align: center;
   transform: translateY(-50%);
   color: #000;
   max-width: 100%;
@@ -3281,6 +3284,7 @@ display: flex;
   top: 15px;
   float: left;
   z-index: 1000;
+  cursor: pointer !important;
 }
 
 .whatsapp-main {

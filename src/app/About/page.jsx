@@ -128,14 +128,16 @@ export default function About() {
             end: "+=4000",
             scrub: true,
             pin: true,
-            id: "main-timeline", // Add ID for easier cleanup
+            id: "main-timeline",
+            markers: true
           },
         });
 
         tl.to(imageRef.current, {
-          scale: 0.4,
-          xPercent: -50,
-          ease: "power2.out",
+          scale: 0.5,
+          xPercent: 0,
+          opacity: 0.2,
+          ease: "power2.inout",
         });
 
         tl.set(headingRef.current, { opacity: 1 });

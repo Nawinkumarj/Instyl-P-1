@@ -174,7 +174,7 @@ const BookFlip = ({ menuData = [] }) => {
 };
 
 export default function Home() {
-  const [menuData, setMenuData] = useState([]);
+  const [menuData, setMenuData] = useState(mockData);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -470,23 +470,23 @@ export default function Home() {
     fetchMenuData();
   }, []);
 
-  if (loading) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100vh",
-          fontSize: "1.2rem",
-          color: "#7f8c8d",
-          background: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
-        }}
-      >
-        Loading menu data...
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div
+  //       style={{
+  //         display: "flex",
+  //         alignItems: "center",
+  //         justifyContent: "center",
+  //         height: "100vh",
+  //         fontSize: "1.2rem",
+  //         color: "#7f8c8d",
+  //         background: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+  //       }}
+  //     >
+  //       Loading menu data...
+  //     </div>
+  //   );
+  // }
 
   return <BookFlip menuData={menuData} />;
 }

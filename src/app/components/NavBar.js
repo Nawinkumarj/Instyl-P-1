@@ -22,7 +22,7 @@ const Navbar = () => {
       <div className="navbar-header">
         <div className="navbar-logo">
           <div className="logo-wrapper">
-            {/* Large logo */}
+            {/* Full logo */}
             <Image
               src="/Instyl.webp"
               alt="Large Logo"
