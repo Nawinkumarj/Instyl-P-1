@@ -182,10 +182,14 @@ export default function Contact() {
               ref={instaWrapperRef}
             >
               <Image
-                src="/Gallery/01.webp"
+                src="/insta.png"
                 alt="Instagram Preview"
-                width={400}
+                width={700}
                 height={400}
+                style={{
+                  objectFit: "cover",
+                  objectPosition: "top"
+                }}
               />
               <p ref={instaTextRef} className="insta-text">
                 Follow us on Insta

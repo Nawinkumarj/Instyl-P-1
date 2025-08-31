@@ -30,7 +30,7 @@ import Link from 'next/link';
               </div>
               <div className="sect1-grid">
                 <div className="sect1-grid1">
-                  <h1>heading</h1>
+                  <h1>Quick Links</h1>
                   <Link href="/About">
                     <p>about us</p>
                   </Link>
@@ -45,7 +45,7 @@ import Link from 'next/link';
                   </Link>
                 </div>
                 <div className="sect1-grid1">
-                  <h1>heading</h1>
+                  <h1>InStyl PACKAGES</h1>
                   <Link href="/Pricelsit">
                     <p>Pricelist</p>
                   </Link>
@@ -60,7 +60,7 @@ import Link from 'next/link';
                   </Link>
                 </div>
                 <div className="sect1-grid1">
-                  <h1>heading</h1>
+                  <h1>GET IN TOUCH</h1>
                   <div className="sect1-flex">
                     <CgProfile className="sect1-flex-ic" size={30} />
                     <p> +91 8056168713</p>
@@ -73,13 +73,13 @@ import Link from 'next/link';
                   </div>
                 </div>
                 <div className="sect1-grid1">
-                  <h1>heading</h1>
+                  <h1>LEGAL NOTICES</h1>
                   <p>terms of service</p>
                   <p>privacy policy</p>
                   <p>cookies policy</p>
                 </div>
                 <div className="sect1-grid1">
-                  <h1>heading</h1>
+                  <h1>FOLLOW US</h1>
                   <p>
                     <span>@</span>instyl_hairnbridalstudio
                   </p>
