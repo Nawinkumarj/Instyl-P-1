@@ -4,6 +4,8 @@ import Image from 'next/image'
 import React from 'react'
 import { CgProfile } from "react-icons/cg";
 import { TbSignRight } from "react-icons/tb";
+import { FaArrowRight } from "react-icons/fa";
+
 import Link from 'next/link';
 
 
@@ -32,16 +34,43 @@ import Link from 'next/link';
                 <div className="sect1-grid1">
                   <h1>Quick Links</h1>
                   <Link href="/About">
-                    <p>about us</p>
+                    <p className="footer-animated-button">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="footer-arr-2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                      </svg>
+                      <span className="footer-text">About us</span>
+                      {/* <span className="footer-circle"></span> */}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="footer-arr-1"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                      </svg>
+                    </p>
                   </Link>
+
                   <Link href="/Services">
-                    <p>services</p>
+                    <p>
+                      <FaArrowRight size={12} />
+                      services
+                    </p>
                   </Link>
                   <Link href="/Contact">
-                    <p>contact</p>
+                    <p>
+                      <FaArrowRight size={12} />
+                      contact
+                    </p>
                   </Link>
                   <Link href="/About">
-                    <p>faq's</p>
+                    <p>
+                      <FaArrowRight size={12} />
+                      faq's
+                    </p>
                   </Link>
                 </div>
                 <div className="sect1-grid1">

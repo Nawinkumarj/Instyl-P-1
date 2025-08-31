@@ -11,7 +11,6 @@ const StackCards = () => {
   const containerRef = useRef(null);
   const cardsRef = useRef([]);
 
-  // Use GSAP's official React hook for automatic cleanup
   useGSAP(
     () => {
       const validCards = cardsRef.current.filter(

@@ -8,6 +8,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import FAQ from "../components/FAQ";
+import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -158,10 +159,10 @@ export default function Contact() {
             </p>
 
             <div className="contact-cards-wrapper" style={{ opacity: 0 }}>
+                <Link href="https://maps.app.goo.gl/Xn4T7LBeDscN9n5n6" target="_blank">
               <div ref={addToRefs} className="cardStyle">
-                <Milestone size={28} />
-                <span>Chennai, India</span>
               </div>
+                </Link>
               <div ref={addToRefs} className="cardStyle">
                 <Phone size={28} />
                 <span>+91 98765 43210</span>
@@ -184,16 +185,24 @@ export default function Contact() {
               <Image
                 src="/insta.png"
                 alt="Instagram Preview"
-                width={700}
-                height={400}
+                width={650}
+                height={350}
                 style={{
                   objectFit: "cover",
-                  objectPosition: "top"
+                  objectPosition: "top",
+                  borderRadius: "10px"
                 }}
+                quality={90}
               />
-              <p ref={instaTextRef} className="insta-text">
-                Follow us on Insta
-              </p>
+              <div className="insta-follow">
+                <p ref={instaTextRef} className="insta-text">
+                  Follow us on
+                </p>
+                <div className="follow-social-media">
+                  <a href="http://">Instagram</a>
+                  <a href="http://">Youtube</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
