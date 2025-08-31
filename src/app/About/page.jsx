@@ -135,8 +135,8 @@ export default function About() {
 
         tl.to(imageRef.current, {
           scale: 0.5,
-          xPercent: 0,
-          opacity: 0.2,
+          yPercent: -20,
+          opacity: 0.9,
           ease: "power2.inout",
         });
 

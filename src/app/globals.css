@@ -909,7 +909,7 @@ display: none;
 
 .about-head {
   position: absolute;
-  top: 50%;
+  top: 70%;
   padding: 20px;
   text-align: center;
   transform: translateY(-50%);
