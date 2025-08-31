@@ -8,6 +8,7 @@ import { HiMenu, HiX } from "react-icons/hi";
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -15,7 +16,25 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Real-time clock effect
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const formatTime = (date) => {
+    return date.toLocaleTimeString('en-US', {
+      hour12: true,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+  };
 
   return (
     <nav className={`navbar-container ${scrolled ? "scrolled" : ""}`}>
@@ -66,25 +85,37 @@ const Navbar = () => {
         <Link href="/Offers" onClick={() => setIsOpen(false)}>
           Offers
         </Link>
+        <Link href="/Membership" onClick={() => setIsOpen(false)}>
+          Instyl Book
+        </Link>
         <Link href="/Instyl_Glam" onClick={() => setIsOpen(false)} className="nav-link-with-badge">
           Instyl Glam
           <span className="new-badge">NEW</span>
-        </Link>
-        <Link href="/Membership" onClick={() => setIsOpen(false)}>
-          Instyl Book
         </Link>
         <Link href="/Contact" onClick={() => setIsOpen(false)}>
           Contact
         </Link>
       </div>
+      
       <div className="navbar-grid1">
         <p>
-          <span>@</span>instyl_hairnbridalstudio
+          <span>@</span>instylhairnbridalstudio
         </p>
         <p>
-          {" "}
-          <span>@</span>binduinstyl_
+          <span>@</span>instylwithbindu
         </p>
+        
+        {/* Location and Time  */}
+        <div className="location-time-section">
+          <div className="location">
+            <span className="location-icon">📍</span>
+            <span className="location-span">Chennai, Tamil Nadu</span>
+          </div>
+          <div className="current-time">
+            <span className="time-icon">🕒</span>
+            <span className="location-span">{formatTime(currentTime)}</span>
+          </div>
+        </div>
       </div>
     </nav>
   );

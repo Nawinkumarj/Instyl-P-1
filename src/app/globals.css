@@ -62,8 +62,9 @@ html {
   max-width: 100vw;
   overflow-x: hidden;
 /* background: radial-gradient(circle, rgba(156, 39, 176, 1) 0%, rgba(255, 255, 255, 1) 100%); */
-background: radial-gradient(circle, rgba(248, 223, 239, 1) 5%, rgba(255, 255, 255, 1) 100%);
+/* background: radial-gradient(circle, rgba(248, 223, 239, 1) 5%, rgba(255, 255, 255, 1) 100%); */
 /* background-image: linear-gradient(to left bottom, #9c27b0, #ba59bc, #d486ca, #e8b2db, #f8dfef); */
+background: black;
   height: 100%;
 }
 
@@ -91,6 +92,15 @@ body {
     padding-left: 0 !important;
     /* padding-top: 70px; */
   }
+}
+
+
+/* galaxy */
+
+.galaxy-container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
 }
 
 /* plasma */
@@ -402,6 +412,78 @@ body {
     color: white;
   }
 }
+/* Time & location */
+.location-time-section {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+  color: #666;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 10px;
+}
+
+.location,
+.current-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+.location-span{
+  background-color: #313131 !important;
+  color: white !important;
+}
+.location-icon,
+.time-icon {
+  font-size: 14px;
+}
+
+.location span:last-child,
+.current-time span:last-child {
+  color: #909090;
+  font-family: 'Courier New', monospace;
+}
+
+.current-time span:last-child {
+  font-weight: 600;
+  color: #818181;
+}
+
+/* Alternative styling with background */
+.location-time-section.styled {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 15px;
+  border: 1px solid #e9ecef;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .location-time-section {
+    font-size: 11px;
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 8px;
+  }
+  
+  .location-icon,
+  .time-icon {
+    font-size: 12px;
+  }
+}
+
+/* Animation for time updates */
+.current-time span:last-child {
+  transition: color 0.3s ease;
+}
+
+.current-time span:last-child:hover {
+  color: #818181;
+}
+
 
 /* Navbar Ends */
 
@@ -1086,7 +1168,7 @@ display: none;
   word-spacing: 1px;
   letter-spacing: 1px;
   opacity: 0;
-  font-family: var(--text);
+  font-family: var(--font);
 
 }
 

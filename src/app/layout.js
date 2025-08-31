@@ -6,6 +6,7 @@ import FooterWrapper from "./components/FooterWrapper"; // client component
 import MemberIcon from "./components/Member";
 import Aurora from "./components/Aurora";
 import Plasma from "./components/Plasma";
+import Galaxy from "./components/Galaxy";
 
 export const metadata = {
   title: "Instyl Hair n Bridal Studio",
@@ -16,19 +17,27 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Plasma
+        <Galaxy
+          mouseRepulsion={true}
+          mouseInteraction={true}
+          density={1.5}
+          glowIntensity={0.1}
+          saturation={0.8}
+          hueShift={240}
+        />
+        {/* <Plasma
           color="#9c27b0"
           speed={0.6}
           direction="forward"
-          scale={2}
-          opacity={0.6}
+          scale={1}
+          opacity={0.8}
           mouseInteractive={true}
-        />
+        /> */}
         {/* <Aurora
-          colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
+          colorStops={["#f8dfef", "#ffd6e8", "#9c27b0"]}
           blend={0.5}
-          amplitude={1.0}
-          speed={0.5}
+          amplitude={0.5}
+          speed={0.9}
         /> */}
         <Navbar />
         <WhatsAppHoverCard />
