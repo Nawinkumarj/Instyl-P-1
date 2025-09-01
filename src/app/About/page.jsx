@@ -227,7 +227,6 @@ export default function About() {
             end: "+=4000",
             scrub: true,
             pin: true,
-            markers: false,
             id: "next-content-timeline", // Add ID for easier cleanup
           },
         });
@@ -321,18 +320,18 @@ export default function About() {
   const cardData = [
     {
       img: "https://madewithgsap.com/assets/img/card1.svg",
-      title: "Beginners friendly",
-      text: "Perfect for all skill levels.",
+      title: "14+",
+      text: "Years of Instyl",
     },
     {
       img: "https://madewithgsap.com/assets/img/card2.svg",
-      title: "Easy to implement",
-      text: "Reusable and quick to integrate.",
+      title: "30k+",
+      text: "Happy Customers.",
     },
     {
       img: "https://madewithgsap.com/assets/img/card3.svg",
-      title: "Performance optimized",
-      text: "Built for speed and polish.",
+      title: "5+",
+      text: "Awards.",
     },
   ];
 
@@ -388,18 +387,18 @@ export default function About() {
               <h3 style={{ fontSize: "1.3rem" }}>
                 {
                   [
-                    "Beginners Friendly",
-                    "Easy to Implement",
-                    "Performance Optimized",
+                    "14+",
+                    "30K+",
+                    "5+",
                   ][i]
                 }
               </h3>
               <p style={{ fontSize: "0.9rem", marginTop: "0.5rem" }}>
                 {
                   [
-                    "Perfect for all skill levels.",
-                    "Reusable and quick to integrate.",
-                    "Built for speed and polish.",
+                    "Years of Instyl",
+                    "Happy Customers.",
+                    "Awards.",
                   ][i]
                 }
               </p>

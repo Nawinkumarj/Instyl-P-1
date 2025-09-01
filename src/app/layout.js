@@ -6,7 +6,7 @@ import FooterWrapper from "./components/FooterWrapper"; // client component
 import MemberIcon from "./components/Member";
 import Aurora from "./components/Aurora";
 import Plasma from "./components/Plasma";
-import Galaxy from "./components/Galaxy";
+import Particles from "./components/Galaxy";
 
 export const metadata = {
   title: "Instyl Hair n Bridal Studio",
@@ -17,13 +17,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Galaxy
-          mouseRepulsion={true}
-          mouseInteraction={true}
-          density={1.5}
-          glowIntensity={0.1}
-          saturation={0.8}
-          hueShift={240}
+        <Particles
+          particleColors={["#ffffff", "#ffffff"]}
+          particleCount={200}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
         />
         {/* <Plasma
           color="#9c27b0"

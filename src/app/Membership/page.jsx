@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import { FaInstagram } from "react-icons/fa6";
 
 export default function CardForm() {
   const [formData, setFormData] = useState({
@@ -110,7 +111,7 @@ export default function CardForm() {
         >
           <div
             className="card-3d"
-            style={{ transform: `rotateY(${rotation}deg)` }}
+            // style={{ transform: `rotateY(${rotation}deg)` }}
           >
             {/* Front */}
             <div className="card-face card-front">
@@ -125,11 +126,19 @@ export default function CardForm() {
                 <div>
                   <h2>{formData.name || "Your Name"}</h2>
                   <p>Expires On: {formData.expiresOn || "MM/YYYY"}</p>
-                  <p>Phone: +91 {formData.phone || "XXXXXXXXXX"}</p>
+                  <p>Phone: +91 {formData.phone || "_ _ _ _ _ _ _ _ _ _ _ "}</p>
                   <p>{formData.description || "Small description here..."}</p>
                 </div>
-                <div>
-                  <p>Contact: {formData.contact || "contact@email.com"}</p>
+                <div className="membership-contact">
+                  <div className="membership-left">
+                  <p>+91 8056168713 <span>Appointment</span> </p>
+                  <p>+91 9840188177 <span>Consultation</span></p>
+                  </div>
+                  <div className="membership-right">
+                    <p><FaInstagram /> instylhairnbridalstudio</p>
+                    <p>No.6/A,G.A. ROAD, Rajarathinam, 7th Ln, Oldwasermenpet, Chennai, Tamil Nadu 600021</p>
+                  </div>
+                 
                 </div>
               </div>
             </div>
@@ -137,6 +146,7 @@ export default function CardForm() {
             {/* Back */}
             <div className="card-face card-back">
               <img src="/Instyl.webp" alt="Logo" />
+              <p>Premium Membership Card</p>
             </div>
           </div>
         </div>

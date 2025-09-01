@@ -35,57 +35,96 @@ import Link from 'next/link';
                   <h1>Quick Links</h1>
                   <Link href="/About">
                     <p className="footer-animated-button">
+                      <span className="footer-text">about us</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="footer-arr-2"
                         viewBox="0 0 24 24"
                       >
-                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                      </svg>
-                      <span className="footer-text">About us</span>
-                      {/* <span className="footer-circle"></span> */}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="footer-arr-1"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
                       </svg>
                     </p>
                   </Link>
 
                   <Link href="/Services">
-                    <p>
-                      <FaArrowRight size={12} />
-                      services
+                    <p className="footer-animated-button">
+                      <span className="footer-text">services</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+                      </svg>
                     </p>
                   </Link>
                   <Link href="/Contact">
-                    <p>
-                      <FaArrowRight size={12} />
-                      contact
+                    <p className="footer-animated-button">
+                      <span className="footer-text">contact</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+                      </svg>
                     </p>
                   </Link>
                   <Link href="/About">
-                    <p>
-                      <FaArrowRight size={12} />
-                      faq's
+                    <p className="footer-animated-button">
+                      <span className="footer-text">faq's</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+                      </svg>
                     </p>
                   </Link>
                 </div>
                 <div className="sect1-grid1">
                   <h1>InStyl PACKAGES</h1>
-                  <Link href="/Pricelsit">
-                    <p>Pricelist</p>
+                  <Link href="/Pricelist">
+                    <p className="footer-animated-button">
+                      <span className="footer-text">pricelist</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+                      </svg>
+                    </p>
                   </Link>
+
                   <Link href="/Offers">
-                    <p>Exclusive offers</p>
+                    <p className="footer-animated-button">
+                      <span className="footer-text">exclusive offers</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+                      </svg>
+                    </p>
                   </Link>
                   <Link href="/Portfolio">
-                    <p>Portfolio</p>
+                    <p className="footer-animated-button">
+                      <span className="footer-text">portfolio</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+                      </svg>
+                    </p>
                   </Link>
                   <Link href="/HappyClients">
-                    <p>Happy Clients</p>
+                    <p className="footer-animated-button">
+                      <span className="footer-text">happy clients</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
+                      </svg>
+                    </p>
                   </Link>
                 </div>
                 <div className="sect1-grid1">
@@ -103,7 +142,10 @@ import Link from 'next/link';
                 </div>
                 <div className="sect1-grid1">
                   <h1>LEGAL NOTICES</h1>
-                  <p>terms of service</p>
+                  <Link href="/Terms">
+                    <p>terms of service</p>
+                  </Link>
+
                   <p>privacy policy</p>
                   <p>cookies policy</p>
                 </div>
