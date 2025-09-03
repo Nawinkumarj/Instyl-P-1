@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { IoLogoWhatsapp } from "react-icons/io";
+import Link from "next/link";
 
 
 
@@ -22,10 +23,16 @@ export default function WhatsAppHoverCard() {
             <p>Scan the QR code to chat with us via your smartphone.</p>
           </div>
           <div className="whatsapp-hover">
-            <p data-tooltip="click me">
-              Chat via desktop
-              <span className="whatsapp-underline" aria-hidden="true"></span>
-            </p>
+            <Link
+              href="https://wa.me/1234567890" // replace with your WhatsApp number
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <p data-tooltip="click me">
+                Chat via desktop
+                <span className="whatsapp-underline" aria-hidden="true"></span>
+              </p>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,6 +1,9 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { FaInstagram } from "react-icons/fa6";
+import { SiGooglemaps } from "react-icons/si";
+import { PiPhoneCall } from "react-icons/pi";
+import { IoCallOutline } from "react-icons/io5";
 
 export default function CardForm() {
   const [formData, setFormData] = useState({
@@ -111,41 +114,52 @@ export default function CardForm() {
         >
           <div
             className="card-3d"
-            // style={{ transform: `rotateY(${rotation}deg)` }}
+            style={{ transform: `rotateY(${rotation}deg)` }}
           >
             {/* Front */}
             <div className="card-face card-front">
               <div className="card-left">
-                <img src="/Instyl.webp" alt="Logo" />
+                <img src="/Instyl.webp" className="card-front-img" alt="Logo" />
                 <div className="qr-code">
-                  <img src="/instyl-s.png" alt="QR" />
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/375px-QR_code_for_mobile_English_Wikipedia.svg.png"
+                    alt="QR"
+                  />
                 </div>
-                <small>{formData.leftDesc || "Short desc"}</small>
+                <p className="membership-scan">Scan For Offers, Appointments, Pricelist., Bookings</p>
               </div>
               <div className="card-right">
                 <div>
-                  <h2>{formData.name || "Your Name"}</h2>
-                  <p>Expires On: {formData.expiresOn || "MM/YYYY"}</p>
-                  <p>Phone: +91 {formData.phone || "_ _ _ _ _ _ _ _ _ _ _ "}</p>
-                  <p>{formData.description || "Small description here..."}</p>
+                  <p>Name: {formData.name || " _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _"}</p>
+                  <p>Expires On: {formData.expiresOn || "_ _ _ _ _ _ _ _ _ _ _ _ _ _"}</p>
+                  <p>Phone: +91 {formData.phone || "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ "}</p>
                 </div>
+                <p className="mambership-description">This Card is Valid for the Person who Registered it</p>
                 <div className="membership-contact">
                   <div className="membership-left">
-                  <p>+91 8056168713 <span>Appointment</span> </p>
-                  <p>+91 9840188177 <span>Consultation</span></p>
+                    <p>
+                      <PiPhoneCall /> +91 8056168713 <span>Appointment</span>{" "}
+                    </p>
+                    <p>
+                      <IoCallOutline /> +91 9840188177 <span>Consultation</span>
+                    </p>
                   </div>
                   <div className="membership-right">
-                    <p><FaInstagram /> instylhairnbridalstudio</p>
-                    <p>No.6/A,G.A. ROAD, Rajarathinam, 7th Ln, Oldwasermenpet, Chennai, Tamil Nadu 600021</p>
+                    <p>
+                      <FaInstagram /> instylhairnbridalstudio
+                    </p>
+                    <p>
+                      <SiGooglemaps /> No.6/A, G.A. ROAD, Rajarathinam, 7th Ln,
+                      Oldwasermenpet, Chennai, Tamil Nadu 600021
+                    </p>
                   </div>
-                 
                 </div>
               </div>
             </div>
 
             {/* Back */}
             <div className="card-face card-back">
-              <img src="/Instyl.webp" alt="Logo" />
+              <img src="/Instyl.webp" className="card-back-img" alt="Logo" />
               <p>Premium Membership Card</p>
             </div>
           </div>

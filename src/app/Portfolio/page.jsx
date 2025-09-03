@@ -7,9 +7,10 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const totalImages = 100; 
 const commonImages = Array.from(
-  { length: 20 },
-  (_, i) => `https://picsum.photos/seed/common${i}/500/500`
+  { length: totalImages },
+  (_, i) => `/portfolio/gallery_${i + 1}.webp` // adjust extension & path
 );
 
 const frameSizes = [
@@ -115,7 +116,7 @@ const Page = () => {
   return (
     <div className="portfolio-container" ref={containerRef}>
       <div className="portfolio-heading">
-        <h1>
+        <h1 className="heading">
           <span className="split-word left" ref={leftTextRef}>
             Port
           </span>

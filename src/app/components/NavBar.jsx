@@ -8,7 +8,8 @@ import { HiMenu, HiX } from "react-icons/hi";
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [currentTime, setCurrentTime] = useState(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -16,8 +17,9 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Real-time clock effect
   useEffect(() => {
+    setIsClient(true); // Mark that we are running on client
+    setCurrentTime(new Date());
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
@@ -28,12 +30,18 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const formatTime = (date) => {
-    return date.toLocaleTimeString('en-US', {
-      hour12: true,
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    });
+    if (!date) return "";
+    try {
+      return date.toLocaleTimeString("en-US", {
+        hour12: true,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      });
+    } catch (error) {
+      console.error("Time formatting error:", error);
+      return date.toLocaleTimeString();
+    }
   };
 
   return (
@@ -64,7 +72,11 @@ const Navbar = () => {
         </div>
 
         {/* Hamburger button */}
-        <button className="hamburger" onClick={toggleMenu}>
+        <button
+          className="hamburger"
+          onClick={toggleMenu}
+          aria-label="Toggle Menu"
+        >
           {isOpen ? <HiX size={30} /> : <HiMenu size={30} />}
         </button>
       </div>
@@ -85,18 +97,25 @@ const Navbar = () => {
         <Link href="/Offers" onClick={() => setIsOpen(false)}>
           Offers
         </Link>
-        <Link href="/Membership" onClick={() => setIsOpen(false)}>
+        <Link href="/Instyl_Book" onClick={() => setIsOpen(false)}>
           Instyl Book
         </Link>
-        <Link href="/Instyl_Glam" onClick={() => setIsOpen(false)} className="nav-link-with-badge">
+        <Link
+          href="/Instyl_Glam"
+          onClick={() => setIsOpen(false)}
+          className="nav-link-with-badge"
+        >
           Instyl Glam
           <span className="new-badge-alt">NEW</span>
         </Link>
         <Link href="/Contact" onClick={() => setIsOpen(false)}>
           Contact
         </Link>
+        <button className="nav-close-btn" onClick={toggleMenu}>
+          <HiX size={30} color="white" />
+        </button>
       </div>
-      
+
       <div className="navbar-grid1">
         <p>
           <span>@</span>instylhairnbridalstudio
@@ -104,16 +123,26 @@ const Navbar = () => {
         <p>
           <span>@</span>instylwithbindu
         </p>
-        
-        {/* Location and Time  */}
+
+        {/* Location and Time */}
         <div className="location-time-section">
           <div className="location">
-            <span className="location-icon">📍</span>
+            <span className="location-icon" aria-label="Location">
+              📍
+            </span>
             <span className="location-span">Chennai, Tamil Nadu</span>
           </div>
-          <div className="current-time">
-            <span className="time-icon">🕒</span>
-            <span className="location-span">{formatTime(currentTime)}</span>
+          <div className="current-time" aria-live="polite" aria-atomic="true">
+            <span className="time-icon" aria-label="Time">
+              🕒
+            </span>
+            <span className="location-span">
+              {isClient
+                ? currentTime
+                  ? formatTime(currentTime)
+                  : "Loading..."
+                : "Loading..."}
+            </span>
           </div>
         </div>
       </div>

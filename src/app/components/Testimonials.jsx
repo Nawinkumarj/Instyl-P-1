@@ -150,7 +150,12 @@ export const Testimonials = () => {
 
   return (
     <>
-      <section ref={sectionRef} className="testimonials-section">
+      <section ref={sectionRef} className="testimonials-section"
+        style={{
+              backgroundImage: "url('/bg3.jpg')",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover"
+            }}>
         <div className="background-title">
           <h1 className="title-part title-left" ref={titleLeftRef}>
             What<br />People

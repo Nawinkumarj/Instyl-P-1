@@ -368,7 +368,6 @@ export default function About() {
           </div>
         </div>
       </div>
-
       <section className="about-card-stack" ref={cardSectionRef} translate="no">
         <div className="about-card-wrapper">
           {[...Array(3)].map((_, i) => (
@@ -384,7 +383,7 @@ export default function About() {
                 alt={`Card ${i + 1}`}
                 style={{ width: "80px", marginBottom: "1rem" }}
               />
-              <h3 style={{ fontSize: "1.3rem" }}>
+              <h3 style={{ fontSize: "3rem" }}>
                 {
                   [
                     "14+",
@@ -393,12 +392,13 @@ export default function About() {
                   ][i]
                 }
               </h3>
-              <p style={{ fontSize: "0.9rem", marginTop: "0.5rem" }}>
+              <p style={{
+                fontSize: "1.5rem", marginTop: "0.5rem" }}>
                 {
                   [
                     "Years of Instyl",
-                    "Happy Customers.",
-                    "Awards.",
+                    "Valued Clients",
+                    "Awards",
                   ][i]
                 }
               </p>

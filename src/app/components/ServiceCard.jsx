@@ -1,11 +1,12 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import CTA from "./CTA";
 import RippleImage from "./RippleImage";
+import CustomCursor from "./CustomCursor";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -32,6 +33,7 @@ function applyGoogleTranslateDOMPatch() {
 
 export default function ServiceCard() {
   const containerRef = useRef(null);
+  const [cursorVisible, setCursorVisible] = useState(false);
 
   const data = [
     {
@@ -162,6 +164,13 @@ export default function ServiceCard() {
 
   return (
     <>
+      {/* Render custom cursor only when hovering services */}
+      
+        <CustomCursor
+          cursorImage="/click.svg"
+          cursorSize={{ width: 100, height: 100 }}
+          isVisible={cursorVisible}
+        />
       <div
         ref={containerRef}
         className="servicecard-container"
@@ -183,6 +192,8 @@ export default function ServiceCard() {
             className="servicecard-section"
             key={i}
             translate="no"
+            onMouseEnter={() => setCursorVisible(true)}
+            onMouseLeave={() => setCursorVisible(false)}
             style={{
               position: "relative",
               // Optimize for smooth animations
@@ -207,7 +218,6 @@ export default function ServiceCard() {
             </div>
           </section>
         ))}
-
         <Link href="/Services">
           <div className="view-more-wrapper">
             <button className="view-more-btn">

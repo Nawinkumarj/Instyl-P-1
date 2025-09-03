@@ -124,7 +124,7 @@ export default function ModelScroll() {
         <div className="home-section1-content">
           <div className="home-main-content">
             <h1>
-              unveil your <br/>
+              unveil your <br />
               <span key={displayWord} className="home-perfect morph-text">
                 {displayWord.split("").map((letter, i) => (
                   <span key={i} className="letter">
@@ -143,7 +143,14 @@ export default function ModelScroll() {
       <section
         className="home-section2"
         ref={section2Ref}
-        style={{ height: "100vh" }}
+        style={{
+          height: "100vh",
+          backgroundImage: "url('/Stickers/st-12.PNG')",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          position: 'relative',
+          zIndex: -9
+        }}
       >
         <div className="home-main-content">
           <h1 ref={headingRef}>About&nbsp;us</h1>

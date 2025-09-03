@@ -10,6 +10,8 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 export default function HappyClients() {
   const containerRef = useRef(null);
 
+ 
+
   const sections = [
     [
       {
@@ -64,61 +66,110 @@ export default function HappyClients() {
     // ... more sections as needed
   ];
 
-  useGSAP(
-    () => {
-      if (!containerRef.current) return;
+ useGSAP(
+   () => {
+     if (!containerRef.current) return;
 
-      const mainSections = containerRef.current.querySelectorAll(
-        ".clientcontrol-main"
-      );
-      mainSections.forEach((section) => {
-        gsap.from(section, {
-          opacity: 0,
-          y: 100,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        });
-      });
+     // 🔹 Position random stickers randomly
+     const randomImgs = containerRef.current.querySelectorAll(
+       ".clients-random-imgs"
+     );
 
-      const cards = containerRef.current.querySelectorAll(".client-card");
-      cards.forEach((card) => {
-        gsap.from(card, {
-          opacity: 0,
-          scale: 0.8,
-          duration: 0.8,
-          ease: "back.out(1.7)",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-          },
-        });
+     randomImgs.forEach((img) => {
+       const x = Math.random() * window.innerWidth * 0.7;
+       const y = Math.random() * window.innerHeight * 4;
+       gsap.set(img, {
+         position: "absolute",
+         top: y,
+         left: x,
+         width: 120,
+         height: "auto",
+       });
 
-        // Floating hover effect with GSAP timeline for smoothness
-        card.addEventListener("mouseenter", () => {
-          gsap.to(card, {
-            scale: 1.05,
-            y: -10,
-            duration: 0.4,
-            ease: "power2.out",
-          });
-        });
-        card.addEventListener("mouseleave", () => {
-          gsap.to(card, {
-            scale: 1,
-            y: 0,
-            duration: 0.4,
-            ease: "power2.inOut",
-          });
-        });
-      });
-    },
-    { scope: containerRef }
-  );
+       // Animate in
+       gsap.from(img, {
+         opacity: 0,
+         scale: 0.5,
+         duration: 0.8,
+         ease: "back.out(1.7)",
+         scrollTrigger: {
+           trigger: img,
+           start: "top 90%",
+         },
+       });
+
+       // Floating hover effect
+       img.addEventListener("mouseenter", () => {
+         gsap.to(img, {
+           scale: 1.1,
+           y: -15,
+           duration: 0.4,
+           ease: "power2.out",
+         });
+       });
+       img.addEventListener("mouseleave", () => {
+         gsap.to(img, {
+           scale: 1,
+           y: 0,
+           duration: 0.4,
+           ease: "power2.inOut",
+         });
+       });
+     });
+
+     // 🔹 Animate sections
+     const mainSections = containerRef.current.querySelectorAll(
+       ".clientcontrol-main"
+     );
+     mainSections.forEach((section) => {
+       gsap.from(section, {
+         opacity: 0,
+         y: 100,
+         duration: 1,
+         ease: "power3.out",
+         scrollTrigger: {
+           trigger: section,
+           start: "top 80%",
+           toggleActions: "play none none reverse",
+         },
+       });
+     });
+
+     // 🔹 Animate client cards
+     const cards = containerRef.current.querySelectorAll(".client-card");
+     cards.forEach((card) => {
+       gsap.from(card, {
+         opacity: 0,
+         scale: 0.8,
+         duration: 0.8,
+         ease: "back.out(1.7)",
+         scrollTrigger: {
+           trigger: card,
+           start: "top 85%",
+         },
+       });
+
+       // Floating hover effect
+       card.addEventListener("mouseenter", () => {
+         gsap.to(card, {
+           scale: 1.05,
+           y: -10,
+           duration: 0.4,
+           ease: "power2.out",
+         });
+       });
+       card.addEventListener("mouseleave", () => {
+         gsap.to(card, {
+           scale: 1,
+           y: 0,
+           duration: 0.4,
+           ease: "power2.inOut",
+         });
+       });
+     });
+   },
+   { scope: containerRef }
+ );
 
   return (
     <div className="clientpage-container" ref={containerRef}>
@@ -174,8 +225,26 @@ export default function HappyClients() {
             </div>
           </div>
         ))}
-        <div className="clients-arrow">
-          <img src="/arrow.png"/>
+        <div className="clients-random-imgs randoms1">
+          <img src="/Stickers/st-1.png" alt="" />
+        </div>
+        <div className="clients-random-imgs randoms2">
+          <img src="/Stickers/st-2.png" alt="" />
+        </div>
+        <div className="clients-random-imgs randoms3">
+          <img src="/Stickers/st-3.png" alt="" />
+        </div>
+        <div className="clients-random-imgs randoms4">
+          <img src="/Stickers/st-4.png" alt="" />
+        </div>
+        <div className="clients-random-imgs randoms5">
+          <img src="/Stickers/st-5.png" alt="" />
+        </div>
+        <div className="clients-random-imgs randoms6">
+          <img src="/Stickers/st-6.png" alt="" />
+        </div>
+        <div className="clients-random-imgs randoms7">
+          <img src="/Stickers/st-7.png" alt="" />
         </div>
       </div>
     </div>

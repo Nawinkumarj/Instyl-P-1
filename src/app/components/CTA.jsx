@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function CTA() {
     return (
-      <div className="cta-container">
+      <div className="cta-container" >
         <div className="cta-main">
           <div className="cta-main-icon">
             <Image src="/Instyl.webp" width={50} height={50} alt="" />

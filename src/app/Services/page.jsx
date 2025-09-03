@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import CustomCursor from "../components/CustomCursor";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,6 +27,7 @@ function applyGoogleTranslateDOMPatch() {
 
 export default function ServiceMain() {
   const containerRef = useRef(null);
+  const [cursorVisible, setCursorVisible] = useState(false);  
 
  const data = [
    {
@@ -71,7 +73,7 @@ export default function ServiceMain() {
         const sectionHeight = window.innerHeight;
 
         // Restore all heights before setting up timeline
-        gsap.set(sections, { height: "50vh" }); // set default expanded height
+        gsap.set(sections, { height: "60vh" }); // set default expanded height
 
         // Timeline to animate sections
       const pinDistance =
@@ -122,34 +124,44 @@ export default function ServiceMain() {
 
   // render
   return (
-    <div
-      ref={containerRef}
-      className="servicemain-container"
-      translate="no"
-      style={{ position: "relative", isolation: "isolate" }}
-    >
-      <div className="servicemain-heading" translate="no">
-        <h1>Services</h1>
+    <>
+      <CustomCursor
+        cursorImage="/click.svg"
+        cursorSize={{ width: 80, height: 80 }}
+        isVisible={cursorVisible}
+      />
+      <div
+        ref={containerRef}
+        className="servicemain-container"
+        translate="no"
+        style={{ position: "relative", isolation: "isolate" }}
+      >
+        <div className="servicemain-heading" translate="no">
+          <h1>Services</h1>
+        </div>
+
+        {groupedData.map((row, i) => (
+          <section className="servicemain-section" key={i} translate="no">
+            {row.map((item, j) => (
+              <div
+                className="servicemain-card"
+                key={j}
+                onMouseEnter={() => setCursorVisible(true)} 
+                onMouseLeave={() => setCursorVisible(false)} 
+                style={{ cursor: "none" }} 
+              >
+                <div className="servicemain-img">
+                  <img src={item.img} alt={`service ${i * 2 + j + 1}`} />
+                </div>
+                <div className="servicemain-content">
+                  <h2>{item.title}</h2>
+                  <p>{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </section>
+        ))}
       </div>
-
-
-      {groupedData.map((row, i) => (
-        <section className="servicemain-section" key={i} translate="no">
-          {row.map((item, j) => (
-            <div className="servicemain-card" key={j}>
-              <div className="servicemain-img">
-                <img src={item.img} alt={`service ${i * 2 + j + 1}`} />
-              </div>
-              <div className="servicemain-content">
-                <h2>{item.title}</h2>
-                <p>{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </section>
-      ))}
-
-
-    </div>
+    </>
   );
 }
