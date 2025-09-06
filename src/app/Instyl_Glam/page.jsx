@@ -14,7 +14,7 @@ const BookFlip = ({ menuData = [] }) => {
       {menuData.length > 0 && (
         <HTMLFlipBook
           width={750}
-          height={900}
+          height={850}
           size="stretch"
           minWidth={350}
           maxWidth={650}
@@ -37,9 +37,9 @@ const BookFlip = ({ menuData = [] }) => {
           {/* Pages */}
           {menuData.map((item, index) => (
             <div key={index} className="page">
-              <div className="instyl-glam-card">
+              {/* <div className="instyl-glam-card"> */}
                 {/* Dish Title */}
-                <h3 className="instyl-glam-title">{item.packageName}</h3>
+                {/* <h3 className="instyl-glam-title">{item.packageName}</h3> */}
 
                 {/* Main Image */}
                 <div className="instyl-glam-image">
@@ -48,13 +48,13 @@ const BookFlip = ({ menuData = [] }) => {
                     alt={item.name}
                     className="instyl-glam-img"
                   />
-                  <p className="instyl-glam-image-name">
+                  {/* <p className="instyl-glam-image-name">
                     {item.packageDescription}
-                  </p>
+                  </p> */}
                 </div>
 
                 {/* Three Flex Images */}
-                <div className="instyl-glam-flex-images">
+                {/* <div className="instyl-glam-flex-images">
                   {(item.extraImages || []).slice(0, 3).map((img, idx) => (
                     <div key={idx} className="instyl-glam-flex-image-item">
                       <img
@@ -65,16 +65,12 @@ const BookFlip = ({ menuData = [] }) => {
                       <p>{img.name}</p>
                     </div>
                   ))}
-                </div>
-
-                {/* Description */}
-                <p className="instyl-glam-description">
+                </div> */}
+                {/* <p className="instyl-glam-description">
                   {item.mainDescription}
                 </p>
-
-                {/* Price at bottom-right */}
-                <div className="instyl-glam-price-tag">INR.{item.pricing}/-</div>
-              </div>
+                <div className="instyl-glam-price-tag">INR.{item.pricing}/-</div> */}
+              {/* </div> */}
             </div>
           ))}
 
@@ -101,8 +97,7 @@ export default function Home() {
         {
           packageName: "Instyl Director Package",
           packageDescription: "Airbrush make-up",
-          image:
-            "https://4.img-dpreview.com/files/p/E~TS590x0~articles/3925134721/0266554465.jpeg",
+          image: "/PriceList/glam1.png",
           extraImages: [
             {
               src: "https://imgs.search.brave.com/kBh53hOzMmKhsbHwi1B8vnqnTnOrYKC_V7jXoHD8fb8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzFiLzZj/LzY5LzFiNmM2OTUz/YmY1ZjBkMzk3OTg4/YWI2MTJhNGI1NGQy/LmpwZw",

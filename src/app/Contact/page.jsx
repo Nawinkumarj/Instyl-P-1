@@ -159,15 +159,24 @@ export default function Contact() {
             </p>
 
             <div className="contact-cards-wrapper" style={{ opacity: 0 }}>
-                <Link href="https://maps.app.goo.gl/Xn4T7LBeDscN9n5n6" target="_blank">
-              <div ref={addToRefs} className="cardStyle">
-              </div>
-                </Link>
+              <Link
+                href="https://maps.app.goo.gl/Xn4T7LBeDscN9n5n6"
+                target="_blank"
+              >
+                <div ref={addToRefs} className="cardStyle"></div>
+              </Link>
               <div ref={addToRefs} className="cardStyle">
                 <Phone size={28} />
                 <span>+91 98765 43210</span>
               </div>
-              <div ref={addToRefs} className="cardStyle">
+              <div
+                ref={addToRefs}
+                className="cardStyle"
+                style={{
+                  backgroundImage:
+                    "url('https://imgs.search.brave.com/Um-otkvpCOIaocTPYLs_XdTgeJNhkJOZVIQ88LRfW4U/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTg0/MzIwNDQ2L3Bob3Rv/L3B1c2gtc2VuZC1i/dXR0b24uanBnP3M9/NjEyeDYxMiZ3PTAm/az0yMCZjPXhwQ3c0/alNXSHdDeVBHS3dt/Tkczd1FJamljcHZK/RVFTcE40TElvcm5C/VFE9')",
+                }}
+              >
                 <Mail size={28} />
                 <span>contact@yourdomain.com</span>
               </div>
@@ -178,10 +187,7 @@ export default function Contact() {
               visit or your hundredth, your beauty journey begins here.
             </p>
 
-            <div
-              className="insta-wrapper"
-              ref={instaWrapperRef}
-            >
+            <div className="insta-wrapper" ref={instaWrapperRef}>
               <Image
                 src="/insta.png"
                 alt="Instagram Preview"
@@ -190,7 +196,7 @@ export default function Contact() {
                 style={{
                   objectFit: "cover",
                   objectPosition: "top",
-                  borderRadius: "10px"
+                  borderRadius: "10px",
                 }}
                 quality={90}
               />
@@ -207,7 +213,7 @@ export default function Contact() {
           </div>
         </div>
       </div>
-      <FAQ/>
+      <FAQ />
     </div>
   );
 }
