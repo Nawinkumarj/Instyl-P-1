@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import React from "react";
-import { CgProfile } from "react-icons/cg";
-import { IoLocationOutline } from "react-icons/io5";
-import { FaArrowRight, FaInstagram, FaYoutube } from "react-icons/fa";
+// import { CgProfile } from "react-icons/cg";
+// import { IoLocationOutline } from "react-icons/io5";
+// import { FaArrowRight, FaInstagram, FaYoutube } from "react-icons/fa";
 import Link from "next/link";
 
 export default function Footer() {
