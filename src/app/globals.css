@@ -2038,10 +2038,11 @@ input[type="radio"]:checked + .book__page {
   }
   .home-section2 {
     flex-direction: column;
-    height: 100vh !important;
+    /* height: 100vh !important; */
   }
   .home-section2 .home-main-content p {
     line-height: 30px;
+    font-size: 1rem;
   }
   .home-section4 {
     margin-top: -5vh;

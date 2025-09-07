@@ -72,7 +72,7 @@ export default function ModelScroll() {
 
       useGSAP(
         () => {
-           if (window.innerWidth <= 568) return;
+          //  if (window.innerWidth <= 568) return;
           const para = paraRef.current;
           const heading = headingRef.current;
           if (!para || !heading) return;
