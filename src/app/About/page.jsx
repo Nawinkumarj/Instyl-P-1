@@ -2,6 +2,7 @@
 
 import { useLayoutEffect, useRef } from "react";
 import Breadcrumb from "../components/Breadcrumb";
+import { useGsap } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CTA from "../components/CTA";
@@ -293,7 +294,7 @@ export default function About() {
       });
     }, containerRef);
 
-    // Comprehensive cleanup function
+    
     return () => {
       // Kill all ScrollTriggers by ID first
       ["main-timeline", "cards-timeline", "next-content-timeline"].forEach(

@@ -72,6 +72,7 @@ export default function ModelScroll() {
 
       useGSAP(
         () => {
+           if (window.innerWidth <= 568) return;
           const para = paraRef.current;
           const heading = headingRef.current;
           if (!para || !heading) return;
@@ -135,7 +136,9 @@ export default function ModelScroll() {
               <br /> bridal look
             </h1>
           </div>
-          <div className="home-model" ref={modelRef} style={{ width: 600 }}>
+          <div
+            className="home-model"
+            style={{ width: "100%" }}>
             <ModelViewer />
           </div>
         </div>
