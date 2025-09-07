@@ -2429,7 +2429,7 @@ input[type="radio"]:checked + .book__page {
 
 /* testimonial Starts */
 .testimonials-section {
-  height: 100vh;
+  min-height: 100svh;
   /* background-image: url('/bg2.png');
   background-position: center;
   background-size: cover; */
