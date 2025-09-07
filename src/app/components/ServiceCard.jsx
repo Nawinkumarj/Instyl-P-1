@@ -20,9 +20,9 @@ function applyGoogleTranslateDOMPatch() {
     const originalRemoveChild = Node.prototype.removeChild;
     Node.prototype.removeChild = function (child) {
       if (!child || child.parentNode !== this) {
-        console.warn(
-          "DOM conflict detected, skipping unsafe removeChild operation"
-        );
+        // console.warn(
+        //   "DOM conflict detected, skipping unsafe removeChild operation"
+        // );
         return child;
       }
       return originalRemoveChild.apply(this, arguments);

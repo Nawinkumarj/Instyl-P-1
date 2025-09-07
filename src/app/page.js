@@ -17,6 +17,7 @@ export default function Home() {
   const section4Ref = useRef(null);
 
   useGSAP(() => {
+    if (window.innerWidth <= 768) return;
     gsap.from(section4Ref.current, {
       opacity: 0,
       y: 50,

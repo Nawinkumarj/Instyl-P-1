@@ -2,8 +2,9 @@
 
 import React, { useRef, useEffect } from "react";
 import { CgProfile } from "react-icons/cg";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -11,173 +12,195 @@ if (typeof window !== "undefined") {
 
 const testimonialData = [
   {
-    text: `I had an absolutely wonderful experience at Instyl Hair N Bridal Studio. Bindu mam was incredibly patient, kind, and professional throughout my visit. She took the time to understand my preferences and offered great suggestions on what would suit me best. The staff were also extremely good. I got a beautiful layer cut and brown highlights, and I couldn't be happier with the result!`,
+    text: `I had an absolutely wonderful experience at Instyl Hair N Bridal Studio...`,
     name: "SP",
     service: "Haircut",
     time: "10:15 AM • Jan 20, 2025",
   },
   {
-    text: `Loved my experience at this salon! Even though my hair is very thin, they suggested the perfect cut to add volume and shape. The stylist was patient, listened to my needs, and gave me tips for styling at home. My hair feels healthier and looks fuller. Highly recommend!`,
+    text: `Loved my experience at this salon! Even though my hair is very thin...`,
     name: "Rehana R",
-    service: "Layer Cut", 
+    service: "Layer Cut",
     time: "8:28 PM • Mar 02, 2025",
   },
   {
-    text: `I had an amazing hair smoothening experience! The stylist Ms.Latha was incredibly knowledgeable, very well experienced and made me feel completely at ease throughout the process. My hair feels unbelievably soft, looks sleek, and the results exceeded my expectations. I can't stop touching my hair—thank you for the fantastic service! She is a great asset to your brand.`,
+    text: `I had an amazing hair smoothening experience!...`,
     name: "Dhivya S",
     service: "Hair Styling",
     time: "12:28 PM • May 11, 2025",
   },
   {
-    text: `I had a hair spa and a full arm detan. It was a great experience. I particularly liked the massage part of the hair spa done by Kowsalya ma'am. It was so relaxing and satisfying. Thanks for the excellent service`,
+    text: `I had a hair spa and a full arm detan. It was a great experience...`,
     name: "Uvasri M",
     service: "Hair Spa",
     time: "7:34 PM • Apr 30, 2025",
   },
 ];
 
-const TestimonialCard = React.forwardRef(({ text, name, service, time }, ref) => (
-  <div className="testimonial-card" ref={ref}>
-    <div className="profile-section">
-      <div className="profile-avatar">
-        <CgProfile color="#FFA500" size={40} />
+const TestimonialCard = React.forwardRef(
+  ({ text, name, service, time }, ref) => (
+    <div className="testimonial-card" ref={ref}>
+      <div className="profile-section">
+        <div className="profile-avatar">
+          <CgProfile color="#FFA500" size={40} />
+        </div>
+        <div className="profile-info">
+          <h3>{name}</h3>
+          <p>{service}</p>
+        </div>
       </div>
-      <div className="profile-info">
-        <h3>{name}</h3>
-        <p>{service}</p>
+      <div className="testimonial-content">
+        <blockquote>"{text}"</blockquote>
+        <div className="testimonial-time">{time}</div>
       </div>
     </div>
-    <div className="testimonial-content">
-      <blockquote>"{text}"</blockquote>
-      <div className="testimonial-time">{time}</div>
-    </div>
-  </div>
-));
+  )
+);
 
 export const Testimonials = () => {
   const titleLeftRef = useRef(null);
   const titleRightRef = useRef(null);
-  const cardsRefs = useRef([]);
   const sectionRef = useRef(null);
+  const cardsRefs = useRef([]);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
+  // Initialize refs
+  cardsRefs.current = testimonialData.map(
+    (_, i) => cardsRefs.current[i] || React.createRef()
+  );
 
+  // Use useGSAP for animation context
+  useGSAP(() => {
     const ctx = gsap.context(() => {
-      // Set initial states for title
+      // Titles initial state
       gsap.set([titleLeftRef.current, titleRightRef.current], {
-        opacity: 0
+        opacity: 0,
       });
-      
       gsap.set(titleLeftRef.current, { x: "-100vw" });
       gsap.set(titleRightRef.current, { x: "100vw" });
 
-      // Set all cards to start from bottom, hidden
+      // Cards initial state
       cardsRefs.current.forEach((cardRef) => {
         if (cardRef.current) {
           gsap.set(cardRef.current, {
-            y: "100vh", // Start from bottom of viewport
+            y: "100vh",
             opacity: 0,
             scale: 0.8,
           });
         }
       });
 
-      // Create main timeline
-      const mainTimeline = gsap.timeline({
+      // Main timeline
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: () => `+=${window.innerHeight * 4}`, // Extended for more cards
+          end: () => `+=${window.innerHeight * 4}`,
           pin: true,
-          pinSpacing: true,
           scrub: 1,
-        }
+          invalidateOnRefresh: true,
+          // markers: true, // Uncomment to debug
+        },
       });
 
-      // Title animation (0-15% of scroll)
-      mainTimeline.to([titleLeftRef.current, titleRightRef.current], {
-        x: 0,
-        opacity: 1,
-        duration: 0.15,
-        ease: "power2.out",
-      }, 0);
+      // Animate titles
+      tl.to(
+        [titleLeftRef.current, titleRightRef.current],
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.3,
+          ease: "power2.out",
+        },
+        0
+      );
 
-      // Cards animation - each card appears one by one
+      // Animate each card
       cardsRefs.current.forEach((cardRef, index) => {
         if (!cardRef.current) return;
 
-        const startTime = 0.15 + (index * 0.15);
-        const midTime = startTime + 0.1;
-        const endTime = startTime + 0.1;
-
-        // Card enters from bottom to center
-        mainTimeline.to(cardRef.current, {
-          y: 0, // Move to center
-          opacity: 1,
-          scale: 1,
-          duration: 0.1,
-          ease: "back.out(1.2)",
-        }, startTime)
-
-        // Keep card visible in center
-        .to(cardRef.current, {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.05,
-        }, midTime)
-
-        // Card exits to top
-        .to(cardRef.current, {
-          y: "-100vh", // Exit to top
-          opacity: 0,
-          scale: 0.8,
-          duration: 0.05,
-          ease: "power2.in",
-        }, endTime);
+        const start = 0.3 + index * 0.2;
+        tl.to(
+          cardRef.current,
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.2,
+            ease: "back.out(1.2)",
+          },
+          start
+        )
+          .to(
+            cardRef.current,
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.05,
+            },
+            start + 0.15
+          )
+          .to(
+            cardRef.current,
+            {
+              y: "-100vh",
+              opacity: 0,
+              scale: 0.8,
+              duration: 0.15,
+              ease: "power2.in",
+            },
+            start + 0.2
+          );
       });
-
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
+  useEffect(() => {
+    const refresh = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", refresh);
+    window.addEventListener("orientationchange", refresh);
+    return () => {
+      window.removeEventListener("resize", refresh);
+      window.removeEventListener("orientationchange", refresh);
+    };
+  }, []);
 
-  // Initialize refs for cards
-  cardsRefs.current = testimonialData.map((_, i) => 
-    cardsRefs.current[i] || React.createRef()
-  );
 
   return (
-    <>
-      <section ref={sectionRef} className="testimonials-section"
-        style={{
-              backgroundImage: "url('/bg3.jpg')",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover"
-            }}>
-        <div className="background-title">
-          <h1 className="title-part title-left" ref={titleLeftRef}>
-            What<br />People
-          </h1>
-          <h1 className="title-part title-right" ref={titleRightRef}>
-            are<br />saying
-          </h1>
-        </div>
-        
-        <div className="cards-container">
-          {testimonialData.map((item, index) => (
-            <TestimonialCard
-              key={index}
-              text={item.text}
-              name={item.name}
-              service={item.service}
-              time={item.time}
-              ref={cardsRefs.current[index]}
-            />
-          ))}
-        </div>
-      </section>
-    </>
+    <section
+      ref={sectionRef}
+      className="testimonials-section"
+      style={{
+        backgroundImage: "url('/bg3.jpg')",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    >
+      <div className="background-title">
+        <h1 className="title-part title-left" ref={titleLeftRef}>
+          What
+          <br />
+          People
+        </h1>
+        <h1 className="title-part title-right" ref={titleRightRef}>
+          are
+          <br />
+          saying
+        </h1>
+      </div>
+      <div className="cards-container">
+        {testimonialData.map((item, index) => (
+          <TestimonialCard
+            key={index}
+            text={item.text}
+            name={item.name}
+            service={item.service}
+            time={item.time}
+            ref={cardsRefs.current[index]}
+          />
+        ))}
+      </div>
+    </section>
   );
 };

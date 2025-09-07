@@ -148,11 +148,11 @@ export default function Home() {
     fetchMenuData();
   }, []);
 
-  if (loading) {
-    return (
-      <div style={{ textAlign: "center", padding: "50px" }}>Loading...</div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div style={{ textAlign: "center", padding: "50px" }}>Loading...</div>
+  //   );
+  // }
 
   return <BookFlip menuData={menuData} />;
 }

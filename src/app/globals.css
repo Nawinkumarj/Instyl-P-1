@@ -739,6 +739,16 @@ display: none;
   grid-column: span 3;
 }
 
+@media (max-width:768px){
+  .masonry-container{
+    opacity: 1 !important;
+    margin-top: 1rem;
+  }
+  .portfolio-heading{
+    justify-content: flex-start;
+  }
+}
+
 /* new grid ends */
 
 

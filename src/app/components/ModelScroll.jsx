@@ -72,6 +72,7 @@ export default function ModelScroll() {
 
       useGSAP(
         () => {
+           if (window.innerWidth <= 768) return;
           const para = paraRef.current;
           const heading = headingRef.current;
           if (!para || !heading) return;
@@ -79,8 +80,8 @@ export default function ModelScroll() {
           splitText(para);
           splitText(heading);
 
-          const chars = para.querySelectorAll("span span");
-          const headingtxt = heading.querySelectorAll("span span");
+          const chars = para.querySelectorAll("span");
+          const headingtxt = heading.querySelectorAll("span");
 
           const tl = gsap.timeline({
             scrollTrigger: {
@@ -90,7 +91,7 @@ export default function ModelScroll() {
               scrub: true,
               pin: true,
               anticipatePin: 1,
-              markers: false,
+              // markers: true,
             },
           });
 
@@ -137,7 +138,7 @@ export default function ModelScroll() {
           </div>
           <div
             className="home-model"
-            style={{ width: "100%" }}>
+            style={{ width: "600px" }}>
             <ModelViewer />
           </div>
         </div>

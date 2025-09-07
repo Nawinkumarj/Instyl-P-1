@@ -72,6 +72,8 @@ export default function Clients() {
 
   // 3D Hover animation using GSAP, with cleanup
   useGSAP(() => {
+     if (window.innerWidth <= 768) return;
+
     cardsRef.current.forEach((card) => {
       if (!card) return;
       const onMove = (e) => {

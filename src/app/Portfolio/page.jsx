@@ -45,7 +45,7 @@ const Page = () => {
   useGSAP(
     () => {
       // Disable GSAP animations for mobile
-      // if (window.innerWidth <= 768) return;
+      if (window.innerWidth <= 768) return;
 
       if (
         !leftTextRef.current ||
