@@ -1812,6 +1812,7 @@ input[type="radio"]:checked + .book__page {
 
   .page {
     padding: 1.5rem;
+    height: 100% !important;
   }
 
   .pricing-header,
@@ -2250,6 +2251,9 @@ input[type="radio"]:checked + .book__page {
   }
   .service-card-dummy {
     margin-top: 0;
+  }
+  .service-card-content{
+    width:100%;
   }
 }
 @media (max-width: 576px) {

@@ -18,7 +18,7 @@ const BookFlip = ({ menuData = [] }) => {
           size="stretch"
           minWidth={350}
           maxWidth={650}
-          minHeight={450}
+          minHeight={550}
           maxHeight={850}
           maxShadowOpacity={0.5}
           showCover={true}
