@@ -187,7 +187,7 @@ z-index: 9999;
   left: 0;
   height: 100%;
   width: 220px;
-  padding: 1rem 0;
+  padding-top: 1rem;
   transition: all 0.3s ease;
   z-index: 1000;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
@@ -496,6 +496,9 @@ z-index: 9999;
   color: #818181;
 }
 .t-c{
+  position: absolute;
+  left: 15px;
+  bottom: 10px;
   display: flex;
   /* flex-direction: column; */
   font-size: .8rem;
@@ -4473,6 +4476,26 @@ input[type="radio"]:checked + .book__page {
   flex: 1;
   font-size: 1.2rem;
   line-height: 1.6;
+}
+
+
+@media (max-width:768px){
+  .faq-main {
+    width: 100%;
+  }
+  .faq-item{
+    width: 250px;
+  }
+  .faq-question{
+    font-size: 1.2rem;
+  }
+  .faq-content{
+    flex-direction: column;
+  }
+.faq-text{
+  font-size:1rem;
+  line-height: 25px;
+}
 }
 
 /* FAQ ENDS */

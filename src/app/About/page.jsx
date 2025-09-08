@@ -359,7 +359,7 @@ export default function About() {
               className="image-layer1"
             />
             <img
-              src="https://pics.craiyon.com/2024-09-04/lVIdzSccREy2xW2pf853oA.webp"
+              src="/Team/Bindu2.webp"
               alt="Second"
               ref={secondImageRef}
               className="image-layer2"
