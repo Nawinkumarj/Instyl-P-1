@@ -33,6 +33,9 @@
     const nextParaRef = useRef(null);
     const nextHeadRef = useRef(null); // Store original innerHTML for cleanup
     const originalContent = useRef({});
+
+
+
     const splitText = (element) => {
       if (!element || element.querySelector("span span")) return; // Store original content before splitting
       originalContent.current[element] = element.innerHTML;
@@ -53,7 +56,9 @@
         });
         element.appendChild(wordSpan);
       });
-    }; // Cleanup function to restore original content
+    };
+
+
     const restoreOriginalContent = () => {
       Object.entries(originalContent.current).forEach(([element, content]) => {
         if (element && element.parentNode) {
@@ -62,11 +67,14 @@
       });
       originalContent.current = {};
     };
+
+
     useLayoutEffect(() => {
+
+            if (window.innerWidth <= 768) return;
       // Apply Google Translate protection
       applyGoogleTranslateDOMPatch();
-      const mediaQuery = window.matchMedia("(min-width: 768px)");
-      if (!mediaQuery.matches) return;
+
       const ctx = gsap.context(() => {
         requestAnimationFrame(() => {
           // Split text elements
@@ -105,6 +113,7 @@
               scrub: true,
               pin: true,
               id: "main-timeline",
+              invalidateOnRefresh: true,
             },
           });
           tl.to(imageRef.current, {
@@ -142,7 +151,8 @@
                 scrub: true,
                 pin: true,
                 anticipatePin: 1,
-                id: "cards-timeline", // Add ID for easier cleanup
+                id: "cards-timeline",
+                invalidateOnRefresh: true,
               },
             });
             cards.forEach((card, i) => {
@@ -191,7 +201,8 @@
               end: "+=4000",
               scrub: true,
               pin: true,
-              id: "next-content-timeline", // Add ID for easier cleanup
+              id: "next-content-timeline",
+              invalidateOnRefresh: true,
             },
           });
           nextTl
@@ -328,16 +339,17 @@
                   alt={`Card ${i + 1}`}
                   style={{ width: "80px", marginBottom: "1rem" }}
                 />
-                <h3 style={{ fontSize: "3rem" }}>{["14+", "30K+", "5+"][i]}</h3>
+                <h3 style={{ fontSize: "3rem" }}>{["14 +", "30K +", "5 +"][i]}</h3>
+                <div>
                 <p
                   style={{
                     fontSize: "1.5rem",
                     marginTop: "0.5rem",
                   }}
                 >
-                  {["Years of Instyl", "Valued Clients", "Awards"][i]}           
-                   {" "}
-                </p>
+                  {["Years of Instyl", "Valued Clients", "Awards"][i]}
+                  </p>
+                  </div>
               </div>
             ))}
           </div>
@@ -365,22 +377,22 @@
           <div className="next-text">
             <h2 ref={nextHeadRef}>Bindu Baskaran</h2>
             <p ref={nextParaRef}>
-              Founder of INSTYL who has 20+years of experience in the beauty
-              industry. She is renowned for her creative Haircuts and  Skin-on
-              finish Makeups. She have curated atmost of 50,000+
-              haircuts and 3000+ makeups in her beauty jouney. Graduating
-              from international based beauty school and worked with top beauty
+              Founder of INSTYL who has 20+years of experience in the beauty
+              industry. She is renowned for her creative Haircuts and Skin-on
+              finish Makeups. She have curated atmost of 50,000+
+              haircuts and 3000+ makeups in her beauty jouney. Graduating
+              from international based beauty school and worked with top beauty
               professionals, she have masters the skill on providing the best
               service. With a 20+years of experience and so much of struggles
-              she owned her own salon INSTYL HAIR N BRIDAL STUDIO in the years
-              of 2010, which is now celebrating 14 years. She is always passionate
+              she owned her own salon INSTYL HAIR N BRIDAL STUDIO in the years
+              of 2010, which is now celebrating 14 years. She is always passionate
               about her work and never miss following trends when it comes to
-              makeup or haircut. Her only motive is to give highclass service in
-              a minimal budget to her customers. And she super encoraging towards
+              makeup or haircut. Her only motive is to give highclass service in
+              a minimal budget to her customers. And she super encoraging towards
               her team members. She keeps a periodical training for her team if
-              she updates herself.  All ladies come to her for a cut or makeup
+              she updates herself. All ladies come to her for a cut or makeup
               will defintely love her work. So if it is a cut or makeup your
-              looking for Bindu is the best choice.
+              looking for Bindu is the best choice.
             </p>
           </div>
         </section>

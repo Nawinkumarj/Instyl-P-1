@@ -68,6 +68,7 @@ export default function HappyClients() {
 
  useGSAP(
    () => {
+     if (window.innerWidth <= 768) return;
      if (!containerRef.current) return;
 
      // 🔹 Position random stickers randomly
@@ -173,6 +174,9 @@ export default function HappyClients() {
 
   return (
     <div className="clientpage-container" ref={containerRef}>
+      <div className="clientpage-heading">
+        <h1>happy clients</h1>
+      </div>
       <div className="clientpage-main">
         {sections.map((clients, sectionIndex) => (
           <div

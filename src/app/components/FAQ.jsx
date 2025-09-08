@@ -54,32 +54,41 @@ export default function FAQ() {
 
   return (
     <div className="faq-container">
-      {faqs.map((faq, index) => (
-        <div key={index} className="faq-wrapper">
-          <div
-            className={`faq-item ${openIndex === index ? "open" : ""}`}
-            onClick={() => toggleFAQ(index)}
-          >
-            <h3 className="faq-question">{faq.question}</h3>
+      <div className="faq-heading">
+        <h1>FAQ'S</h1>
+      </div>
+      <div className="faq-main">
+        {faqs.map((faq, index) => (
+          <div key={index} className="faq-wrapper">
             <div
-              className={`faq-answer-wrapper ${
-                openIndex === index ? "open" : ""
-              }`}
+              className={`faq-item ${openIndex === index ? "open" : ""}`}
+              onClick={() => toggleFAQ(index)}
             >
-              {faq.answer}
+              <h3 className="faq-question">{faq.question}</h3>
+              <div
+                className={`faq-answer-wrapper ${
+                  openIndex === index ? "open" : ""
+                }`}
+              >
+                {faq.answer}
+              </div>
             </div>
+            {/* External round button */}
+            <button
+              className={`faq-toggle ${openIndex === index ? "open" : ""}`}
+              style={{ backgroundColor: faq.color }}
+              onClick={() => toggleFAQ(index)}
+            >
+              <div className="plus-minus-icon">
+                <span className="line line1"></span>
+                <span className="line line2"></span>
+                <span className="line line3"></span>
+                <span className="line line4"></span>
+              </div>
+            </button>
           </div>
-
-          {/* External round button */}
-          <button
-            className={`faq-toggle ${openIndex === index ? "open" : ""}`}
-            style={{ backgroundColor: faq.color }}
-            onClick={() => toggleFAQ(index)}
-          >
-            <span className="faq-plus">+</span>
-          </button>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
