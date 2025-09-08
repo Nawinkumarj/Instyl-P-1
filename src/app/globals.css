@@ -67,13 +67,13 @@ p{
 
 html {
   max-width: 100vw;
-  overflow-x: hidden;
-/* background: radial-gradient(circle, rgba(156, 39, 176, 1) 0%, rgba(255, 255, 255, 1) 100%); */
-/* background: radial-gradient(circle, rgba(248, 223, 239, 1) 5%, rgba(255, 255, 255, 1) 100%); */
-/* background: linear-gradient(to left bottom, #9c27b0, #ba59bc, #d486ca, #e8b2db, #f8dfef); */
-background-repeat: no-repeat;
-/* background: black; */
-  height: 100%;
+  /* overflow-x: hidden; */
+  /* background: radial-gradient(circle, rgba(156, 39, 176, 1) 0%, rgba(255, 255, 255, 1) 100%); */
+  /* background: radial-gradient(circle, rgba(248, 223, 239, 1) 5%, rgba(255, 255, 255, 1) 100%); */
+  /* background: linear-gradient(to left bottom, #9c27b0, #ba59bc, #d486ca, #e8b2db, #f8dfef); */
+  background-repeat: no-repeat;
+  /* background: black; */
+  /* height: 100%; */
   background-attachment: fixed; 
 }
 
@@ -2418,7 +2418,7 @@ input[type="radio"]:checked + .book__page {
 
 .animated-button:active {
   scale: 0.95;
-  box-shadow: 0 0 0 4px greenyellow;
+  box-shadow: 0 0 0 4px var(--third-color);
 }
 
 .animated-button:hover .circle {
