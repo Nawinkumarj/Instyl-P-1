@@ -66,7 +66,7 @@ export default function Footer() {
         </div>
           <div className="footer-section-2">
             <div className="footer-link">
-              <Link href="'"><p className="footer-animated-button">
+              <Link href=""><p className="footer-animated-button">
                   <svg
                     className="footer-icon left"
                     aria-hidden="true"

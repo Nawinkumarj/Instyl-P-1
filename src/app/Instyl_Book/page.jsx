@@ -459,13 +459,13 @@ const BookFlip = ({ menuData = [] }) => {
     <div className="flipbook-container">
       {menuData.length > 0 && (
         <HTMLFlipBook
-          width={750}
-          height={850}
+          width={800}
+          height={1050}
           size="stretch"
           minWidth={350}
-          maxWidth={650}
+          maxWidth={850}
           minHeight={550}
-          maxHeight={850}
+          maxHeight={1300}
           maxShadowOpacity={0.5}
           showCover={true}
           mobileScrollSupport={true}
