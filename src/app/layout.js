@@ -7,6 +7,7 @@ import MemberIcon from "./components/Member";
 import Aurora from "./components/Aurora";
 import Plasma from "./components/Plasma";
 import Particles from "./components/Galaxy";
+import Image from "next/image";
 
 export const metadata = {
   title: "Instyl Hair n Bridal Studio",
@@ -46,6 +47,7 @@ export default function RootLayout({ children }) {
         <MemberIcon />
 
         <div className="main-content" style={{ paddingLeft: "220px" }}>
+        
           <main>{children}</main>
           <FooterWrapper />
         </div>

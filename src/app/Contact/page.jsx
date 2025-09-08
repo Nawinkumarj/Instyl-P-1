@@ -56,6 +56,7 @@ export default function Contact() {
 
   useGSAP(
     () => {
+      console.log("GSAP initialized on mobile or desktop");
       splitText(headingRef.current);
       splitText(paraRef.current);
       splitText(afterCardsRef.current);
@@ -66,13 +67,17 @@ export default function Contact() {
       const afterSpans = afterCardsRef.current.querySelectorAll("span span");
       const instaSpans = instaTextRef.current.querySelectorAll("span span");
 
+        const isMobile = window.innerWidth <= 768;
+  const endScroll = isMobile ? "+=300%" : "+=700%";
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=700%",
+          end: endScroll,
           scrub: true,
           pin: true,
+          invalidateOnRefresh: true,
         },
       });
 
@@ -146,7 +151,7 @@ export default function Contact() {
   );
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px", position: "relative", height: "100%" }}>
       <Breadcrumb />
       <div className="contact-container">
         <div className="contact-section1" ref={sectionRef}>
@@ -212,7 +217,14 @@ export default function Contact() {
             </div>
           </div>
         </div>
+        <div className="main-content-bg1">
+          <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
+        </div>
+        <div className="main-content-bg2">
+          <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
+        </div>
       </div>
+
       <FAQ />
     </div>
   );

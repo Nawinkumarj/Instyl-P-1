@@ -5,6 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import Image from "next/image";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -70,14 +71,15 @@ export const Testimonials = () => {
 
   // Use useGSAP for animation context
   useGSAP(() => {
-     if (window.innerWidth > 768) {
-       ScrollTrigger.normalizeScroll(true);
-     }
+    const isDesktop = window.innerWidth > 768;
+
+    if (isDesktop) {
+      ScrollTrigger.normalizeScroll(true);
+    }
+
     const ctx = gsap.context(() => {
       // Titles initial state
-      gsap.set([titleLeftRef.current, titleRightRef.current], {
-        opacity: 0,
-      });
+      gsap.set([titleLeftRef.current, titleRightRef.current], { opacity: 0 });
       gsap.set(titleLeftRef.current, { x: "-100vw" });
       gsap.set(titleRightRef.current, { x: "100vw" });
 
@@ -92,16 +94,16 @@ export const Testimonials = () => {
         }
       });
 
-      // Main timeline
+      // Main timeline with conditional pinning and responsive start/end
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top top",
+          start: isDesktop ? "top top" : "top 10%",
           end: () => `+=${window.innerHeight * 4}`,
-          pin: true,
+          pin: isDesktop,
           scrub: 1,
           invalidateOnRefresh: true,
-          // markers: true, // Uncomment to debug
+          // markers: true,
         },
       });
 
@@ -117,7 +119,7 @@ export const Testimonials = () => {
         0
       );
 
-      // Animate each card
+      // Animate each testimonial card
       cardsRefs.current.forEach((cardRef, index) => {
         if (!cardRef.current) return;
 
@@ -159,15 +161,18 @@ export const Testimonials = () => {
 
     return () => ctx.revert();
   }, []);
+
   useEffect(() => {
     const refresh = () => ScrollTrigger.refresh();
+
     window.addEventListener("resize", refresh);
     window.addEventListener("orientationchange", refresh);
+
     return () => {
       window.removeEventListener("resize", refresh);
       window.removeEventListener("orientationchange", refresh);
     };
-  }, []);
+  }, []); 
 
 
   return (
@@ -204,6 +209,12 @@ export const Testimonials = () => {
           />
         ))}
       </div>
+        <div className="main-content-bg1">
+                          <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
+                        </div>
+                        <div className="main-content-bg2">
+                          <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
+                        </div>
     </section>
   );
 };

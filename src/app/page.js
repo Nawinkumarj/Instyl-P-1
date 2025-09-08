@@ -26,7 +26,7 @@ export default function Home() {
       ease: "power2.out",
       scrollTrigger: {
         trigger: section4Ref.current,
-        start: "top 80%", // when the top of section4 is 80% from top of viewport
+        start: "top 60%",
         toggleActions: "play none none reverse",
       },
     });
@@ -41,7 +41,6 @@ export default function Home() {
           <ServiceCard />
         </section>
       </div>
-
       <div className="home-section4" ref={section4Ref}>
         <section>
           <CTA />
