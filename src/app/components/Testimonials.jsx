@@ -70,6 +70,9 @@ export const Testimonials = () => {
 
   // Use useGSAP for animation context
   useGSAP(() => {
+     if (window.innerWidth > 768) {
+       ScrollTrigger.normalizeScroll(true);
+     }
     const ctx = gsap.context(() => {
       // Titles initial state
       gsap.set([titleLeftRef.current, titleRightRef.current], {
