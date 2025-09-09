@@ -8,7 +8,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import FAQ from "../components/FAQ";
-import Link from 'next/link';
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -45,8 +45,6 @@ export default function Contact() {
         const charSpan = document.createElement("span");
         charSpan.textContent = char;
         charSpan.style.display = "inline-block";
-        charSpan.style.opacity = "0";
-        charSpan.style.transform = "translateY(40px)"; // start lower
         wordSpan.appendChild(charSpan);
       });
 
@@ -56,7 +54,6 @@ export default function Contact() {
 
   useGSAP(
     () => {
-      console.log("GSAP initialized on mobile or desktop");
       splitText(headingRef.current);
       splitText(paraRef.current);
       splitText(afterCardsRef.current);
@@ -67,8 +64,14 @@ export default function Contact() {
       const afterSpans = afterCardsRef.current.querySelectorAll("span span");
       const instaSpans = instaTextRef.current.querySelectorAll("span span");
 
-        const isMobile = window.innerWidth <= 768;
-  const endScroll = isMobile ? "+=300%" : "+=700%";
+      // Set heading visible at start, others hidden and moved down
+      gsap.set(headingSpans, { opacity: 1, y: 0 });
+      gsap.set(paraSpans, { opacity: 0, y: 40 });
+      gsap.set(afterSpans, { opacity: 0, y: 40 });
+      gsap.set(instaSpans, { opacity: 0, y: 40 });
+
+      const isMobile = window.innerWidth <= 768;
+      const endScroll = isMobile ? "+=300%" : "+=700%";
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -81,18 +84,12 @@ export default function Contact() {
         },
       });
 
-      tl.to(headingSpans, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.05,
-        duration: 1,
-        ease: "power3.out",
-      })
-        .to(
-          headingSpans,
-          { opacity: 0, y: -40, stagger: 0.05, duration: 1, ease: "power3.in" },
-          "+=0.3"
-        )
+      // Just animate heading out (fade/move up)
+      tl.to(
+        headingSpans,
+        { opacity: 0, y: -40, stagger: 0.05, duration: 1, ease: "power3.in" },
+        "+=0.3"
+      )
         .to(
           paraSpans,
           { opacity: 1, y: 0, stagger: 0.03, duration: 1, ease: "power3.out" },
@@ -224,9 +221,7 @@ export default function Contact() {
           <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
         </div>
       </div>
-
       <FAQ />
     </div>
   );
 }
-
