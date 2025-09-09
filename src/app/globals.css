@@ -526,7 +526,11 @@ z-index: 9999;
     display: none;
   }
 }
-
+@media (max-width: 1024px) {
+  .t-c{
+    display: none;
+  }
+}
 /* Animation for time updates */
 .current-time span:last-child {
   transition: color 0.3s ease;
