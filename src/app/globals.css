@@ -526,7 +526,7 @@ z-index: 9999;
     display: none;
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .t-c{
     display: none;
   }
