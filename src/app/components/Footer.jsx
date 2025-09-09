@@ -157,7 +157,7 @@ export default function Footer() {
           <div className="sect2-rights">
             <p>
                © 2025, instylhairnbridalstudio, All rights reserved. | Powered
-              by <span>Vcraftyu Company.</span>
+              by <Link href="" className="vcraftyu">Vcraftyu Company.</Link>
             </p>
           </div>
         </div>

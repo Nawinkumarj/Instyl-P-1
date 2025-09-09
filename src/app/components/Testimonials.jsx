@@ -63,6 +63,7 @@ export const Testimonials = () => {
   const titleRightRef = useRef(null);
   const sectionRef = useRef(null);
   const cardsRefs = useRef([]);
+  const bgRef = useRef(null);
 
   // Initialize refs
   cardsRefs.current = testimonialData.map(
@@ -82,6 +83,9 @@ export const Testimonials = () => {
       gsap.set([titleLeftRef.current, titleRightRef.current], { opacity: 0 });
       gsap.set(titleLeftRef.current, { x: "-100vw" });
       gsap.set(titleRightRef.current, { x: "100vw" });
+
+      gsap.set(bgRef.current, { opacity: 0 });
+
 
       // Cards initial state
       cardsRefs.current.forEach((cardRef) => {
@@ -106,6 +110,16 @@ export const Testimonials = () => {
           // markers: true,
         },
       });
+      // BG
+      tl.to(
+        bgRef.current,
+        {
+          opacity: 1,
+          duration: 0.3,
+          ease: "power2.inout",
+        },
+        0
+      );
 
       // Animate titles
       tl.to(
@@ -172,49 +186,53 @@ export const Testimonials = () => {
       window.removeEventListener("resize", refresh);
       window.removeEventListener("orientationchange", refresh);
     };
-  }, []); 
-
+  }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="testimonials-section"
-      style={{
-        backgroundImage: "url('/bg3.jpg')",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      }}
-    >
-      <div className="background-title">
-        <h1 className="title-part title-left" ref={titleLeftRef}>
-          What
-          <br />
-          People
-        </h1>
-        <h1 className="title-part title-right" ref={titleRightRef}>
-          are
-          <br />
-          saying
-        </h1>
-      </div>
-      <div className="cards-container">
-        {testimonialData.map((item, index) => (
-          <TestimonialCard
-            key={index}
-            text={item.text}
-            name={item.name}
-            service={item.service}
-            time={item.time}
-            ref={cardsRefs.current[index]}
-          />
-        ))}
-      </div>
+    <section ref={sectionRef} className="testimonials-section">
+      <div
+        ref={bgRef}
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url('/testtimonialsbg.svg')",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          zIndex: 0,
+          opacity: 0,
+        }}
+      >
+        <div className="background-title">
+          <h1 className="title-part title-left" ref={titleLeftRef}>
+            What
+            <br />
+            People
+          </h1>
+          <h1 className="title-part title-right" ref={titleRightRef}>
+            are
+            <br />
+            saying
+          </h1>
+        </div>
+        <div className="cards-container">
+          {testimonialData.map((item, index) => (
+            <TestimonialCard
+              key={index}
+              text={item.text}
+              name={item.name}
+              service={item.service}
+              time={item.time}
+              ref={cardsRefs.current[index]}
+            />
+          ))}
+        </div>
         <div className="main-content-bg1">
-                          <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
-                        </div>
-                        <div className="main-content-bg2">
-                          <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
-                        </div>
+          <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
+        </div>
+        <div className="main-content-bg2">
+          <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
+        </div>
+      </div>
     </section>
   );
 };

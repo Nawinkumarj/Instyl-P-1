@@ -71,43 +71,43 @@ export default function ScrollFocusList() {
 
   const content = [
     {
-      title: "SERVICES",
-      desc: "Technology meets design.",
+      title: "Offers 1",
+      desc: "Description.",
       bg: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
     },
     {
-      title: "WEB DEVELOPMENT",
-      desc: "We specialize in full-stack web dev with animation.",
+      title: "Offers 3 ",
+      desc: "Description",
       bg: "https://images.unsplash.com/photo-1755134148217-2dd89cc6a2c2?q=80&w=1170&auto=format&fit=crop",
     },
     {
-      title: "WEB3 DEVELOPMENT",
-      desc: "We help you pioneer Web3 world.",
+      title: "Offers 4",
+      desc: "Description",
       bg: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
     },
     {
-      title: "MOBILE APP DEVELOPMENT",
-      desc: "Great UX, backend & design.",
+      title: "Offers 5",
+      desc: "Description",
       bg: "https://images.unsplash.com/photo-1755134148217-2dd89cc6a2c2?q=80&w=1170&auto=format&fit=crop",
     },
     {
-      title: "UX/UI DESIGN",
-      desc: "Hand-drawn illustrations, motion & 3D.",
+      title: "Offers 6",
+      desc: "Description",
       bg: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
     },
     {
-      title: "IMMERSIVE WEBSITES",
-      desc: "We take audiences on a journey.",
+      title: "Offers 7",
+      desc: "Description",
       bg: "https://images.unsplash.com/photo-1755134148217-2dd89cc6a2c2?q=80&w=1170&auto=format&fit=crop",
     },
     {
-      title: "GAME UI DESIGN",
-      desc: "We connect players to gameplay.",
+      title: "Offers 8",
+      desc: "Description",
       bg: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
     },
     {
-      title: "GAMING WEBSITES",
-      desc: "Leveling up gaming presentations.",
+      title: "Offers 9",
+      desc: "Description",
       bg: "https://images.unsplash.com/photo-1755134148217-2dd89cc6a2c2?q=80&w=1170&auto=format&fit=crop",
     },
   ];
@@ -123,12 +123,13 @@ export default function ScrollFocusList() {
         className="scroll-focus-container"
         ref={containerRef}
         style={{
-          backgroundImage: "url('/offerBg.svg')",
-          backgroundRepeat: "repeat",
+          backgroundImage: "url('/ibg1.svg')",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
           backgroundSize: "cover",
           position: "relative",
-          width: '100%',
-          height:"100%",
+          width: "100%",
+          height: "100%",
           // zIndex: -9,
         }}
       >

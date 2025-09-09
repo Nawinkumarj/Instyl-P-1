@@ -292,7 +292,15 @@ export default function About() {
     },
   ];
   return (
-    <>
+    <div style={{
+      backgroundImage: "url('/ibg1.svg')",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+      position: "relative",
+      width: '100%',
+      height: "100%",
+    }}>
       <div style={{ paddingTop: "3rem" }} translate="no">
         <div ref={containerRef} className="about-container">
           <div className="about-img" ref={imageRef}>
@@ -328,7 +336,6 @@ export default function About() {
                 transform: `rotate(${[-4, 3, -2][i]}deg)`,
               }}
             >
-
               <h3 style={{ fontSize: "3rem" }}>
                 {["14 +", "30K +", "5 +"][i]}
               </h3>
@@ -353,13 +360,13 @@ export default function About() {
           </div>
           <div className="imaga-div">
             <img
-              src="/Team/Bindu-Mam.webp"
+              src="/Team/Bindu2.webp"
               alt="Initial"
               ref={firstImageRef}
               className="image-layer1"
             />
             <img
-              src="/Team/Bindu2.webp"
+              src="/Team/Bindu-Mam.webp"
               alt="Second"
               ref={secondImageRef}
               className="image-layer2"
@@ -386,11 +393,12 @@ export default function About() {
             So if it is a cut or makeup your looking for Bindu is the best
             choice.
           </p>
+          <p></p>
         </div>
       </section>
-      <section>
+      <section className="abt-cta">
         <CTA />
       </section>
-    </>
+    </div>
   );
 }

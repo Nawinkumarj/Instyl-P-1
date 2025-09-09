@@ -2015,7 +2015,6 @@ input[type="radio"]:checked + .book__page {
 .home-main-content h1 {
   font-size: 7rem;
   font-family: var(--banner-font);
-  /* font-family: 'RusillaSerif', sans-serif  ; */
   color: var(--third-color);
   text-transform: capitalize;
   padding-top: 5rem;
@@ -2032,8 +2031,8 @@ input[type="radio"]:checked + .book__page {
 }
 
 .home-section2 .home-main-content p {
-  font-size: 1.5rem;
-  line-height: 35px;
+  font-size: 2rem;
+  line-height: 40px;
   font-family: var(--font);
   font-weight: 200;
   color: white;
@@ -2329,6 +2328,9 @@ input[type="radio"]:checked + .book__page {
 /* service card ends */
 
 /* CTA starts */
+.abt-cta{
+  padding: 20px 0;
+}
 .cta-container{
   width: 80%;
   margin: auto;
@@ -2646,6 +2648,11 @@ input[type="radio"]:checked + .book__page {
   margin-left: auto;
   margin-right: 0;
   padding: 3rem 2rem 1rem 3rem;
+  border-top-left-radius: 35px;
+  border-top-right-radius: 35px;
+  box-shadow: 2px 0px 11px 2px rgba(0,0,0,0.51);
+-webkit-box-shadow: 2px 0px 11px 2px rgba(0,0,0,0.51);
+-moz-box-shadow: 2px 0px 11px 2px rgba(0,0,0,0.51);
 }
 
 .footer-main {
@@ -3613,7 +3620,8 @@ input[type="radio"]:checked + .book__page {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 40vh 0; /* Padding so first/last items center */
+  padding-top: 40vh;
+  padding-bottom: 10vh;
 }
 
 .offerpage-bg1 {
@@ -3774,7 +3782,7 @@ input[type="radio"]:checked + .book__page {
   text-transform: uppercase;
   color: var(--third-color);
   width: 100%;
-  margin: auto;
+  margin-left: 30px;
   text-align: left;
   padding-bottom: 2rem;
 }
@@ -4673,3 +4681,11 @@ input[type="radio"]:checked + .book__page {
   font-size: 2.5rem;
   color: #2c3e50;
 }
+/* Footer */
+.vcraftyu{
+  color: var(--third-color);
+  text-decoration: none;
+  font-family: var(--text);
+  font-size: 1.3rem;
+}
+/* Footer */

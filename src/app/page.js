@@ -23,15 +23,14 @@ export default function Home() {
       y: 50,
       delay: 0.3,
       duration: 1,
-      ease: "power2.out",
+      ease: "power2.inout",
       scrollTrigger: {
         trigger: section4Ref.current,
-        start: "top 60%",
+        start: "top 70%",
         toggleActions: "play none none reverse",
       },
     });
   }, []);
-
   return (
     <div className="home-container">
       <ModelScroll />
@@ -41,6 +40,7 @@ export default function Home() {
           <ServiceCard />
         </section>
       </div>
+
       <div className="home-section4" ref={section4Ref}>
         <section>
           <CTA />

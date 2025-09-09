@@ -43,11 +43,11 @@ export default function Clients() {
       {
         y: 0,
         opacity: 1,
-        duration: 1,
-        ease: "power4.out",
+        duration: .8,
+        ease: "power3.inout",
         scrollTrigger: {
           trigger: headingRef.current,
-          start: "top 80%",
+          start: "top 75%",
           toggleActions: "play none none reverse",
         },
       }

@@ -152,7 +152,7 @@ export default function Contact() {
 
   return (
     <div style={{ padding: "20px", position: "relative", height: "100%" }}>
-      <Breadcrumb />
+      {/* <Breadcrumb /> */}
       <div className="contact-container">
         <div className="contact-section1" ref={sectionRef}>
           <div className="contact-section1-content">

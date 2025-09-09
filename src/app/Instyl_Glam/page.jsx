@@ -11,7 +11,16 @@ const BookFlip = ({ menuData = [] }) => {
   };
 
   return (
-    <div className="flipbook-container">
+    <div className="flipbook-container" style={{
+      backgroundImage: "url('/mbg.svg')",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+      position: "relative",
+      width: "100%",
+      height: "100%",
+      // zIndex: -9,
+    }}>
       {menuData.length > 0 && (
         <HTMLFlipBook
           width={630}
@@ -83,12 +92,6 @@ const BookFlip = ({ menuData = [] }) => {
           </div>
         </HTMLFlipBook>
       )}
-      <div className="main-content-bg1">
-        <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
-      </div>
-      <div className="main-content-bg2">
-        <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
-      </div>
     </div>
   );
 };

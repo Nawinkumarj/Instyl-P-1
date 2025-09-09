@@ -1,6 +1,3 @@
-
-
-
 // "use client";
 // import { useState, useEffect, useRef } from "react";
 // import HTMLFlipBook from "react-pageflip";
@@ -149,7 +146,6 @@
 //     </div>
 //   );
 // };
-
 
 // export default function Home() {
 //   const [menuData, setMenuData] = useState([]);
@@ -437,12 +433,8 @@
 //     fetchMenuData();
 //   }, []);
 
-
-
 //   return <BookFlip menuData={menuData} />;
 // }
-
-
 
 "use client";
 import { useState, useEffect, useRef } from "react";
@@ -456,7 +448,19 @@ const BookFlip = ({ menuData = [] }) => {
   };
 
   return (
-    <div className="flipbook-container">
+    <div
+      className="flipbook-container"
+      style={{
+        backgroundImage: "url('/mbg.svg')",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        position: "relative",
+        width: "100%",
+        height: "100%",
+        // zIndex: -9,
+      }}
+    >
       {menuData.length > 0 && (
         <HTMLFlipBook
           width={630}
@@ -484,23 +488,23 @@ const BookFlip = ({ menuData = [] }) => {
           {menuData.map((item, index) => (
             <div key={index} className="page">
               {/* <div className="instyl-glam-card"> */}
-                {/* Dish Title */}
-                {/* <h3 className="instyl-glam-title">{item.packageName}</h3> */}
+              {/* Dish Title */}
+              {/* <h3 className="instyl-glam-title">{item.packageName}</h3> */}
 
-                {/* Main Image */}
-                <div className="instyl-glam-image">
-                  <img
-                    src={item.image || "/placeholder.jpg"}
-                    alt={item.name}
-                    className="instyl-glam-img"
-                  />
-                  {/* <p className="instyl-glam-image-name">
+              {/* Main Image */}
+              <div className="instyl-glam-image">
+                <img
+                  src={item.image || "/placeholder.jpg"}
+                  alt={item.name}
+                  className="instyl-glam-img"
+                />
+                {/* <p className="instyl-glam-image-name">
                     {item.packageDescription}
                   </p> */}
-                </div>
+              </div>
 
-                {/* Three Flex Images */}
-                {/* <div className="instyl-glam-flex-images">
+              {/* Three Flex Images */}
+              {/* <div className="instyl-glam-flex-images">
                   {(item.extraImages || []).slice(0, 3).map((img, idx) => (
                     <div key={idx} className="instyl-glam-flex-image-item">
                       <img
@@ -512,7 +516,7 @@ const BookFlip = ({ menuData = [] }) => {
                     </div>
                   ))}
                 </div> */}
-                {/* <p className="instyl-glam-description">
+              {/* <p className="instyl-glam-description">
                   {item.mainDescription}
                 </p>
                 <div className="instyl-glam-price-tag">INR.{item.pricing}/-</div> */}
