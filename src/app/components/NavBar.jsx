@@ -147,8 +147,8 @@ const Navbar = () => {
         </div>
       </div>
         <div className="t-c">
-          <Link href="">Terms & Condition | </Link>
-          <Link href="">&nbsp;Privacy Policy</Link>
+          <Link href="/Terms">Terms & Condition | </Link>
+          <Link href="/Privacy">&nbsp;Privacy Policy</Link>
         </div>
     </nav>
   );
