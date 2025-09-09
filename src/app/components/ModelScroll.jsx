@@ -13,10 +13,9 @@ export default function ModelScroll() {
   const section2Ref = useRef(null);
   const paraRef = useRef(null);
   const headingRef = useRef(null);
-  const originalContent = useRef({});
   const bgRef = useRef(null);
 
-  const words = ["perfect", "beauty", "elegant", "stylish"]; // cycle words
+  const words = ["perfect", "beauty", "elegant", "stylish"];
   const [displayWord, setDisplayWord] = useState(words[0]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -25,16 +24,13 @@ export default function ModelScroll() {
       const nextIndex = (currentIndex + 1) % words.length;
       setDisplayWord(words[nextIndex]);
       setCurrentIndex(nextIndex);
-    }, 2000); // change every 2 seconds
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [currentIndex]);
 
   const splitText = (element) => {
     if (!element || element.querySelector("span span")) return;
-
-    // Store original content before splitting
-    originalContent.current[element] = element.innerHTML;
 
     const text = element.innerText;
     const words = text.split(" ");
@@ -51,24 +47,18 @@ export default function ModelScroll() {
         charSpan.textContent = char;
         charSpan.style.display = "inline-block";
         charSpan.style.opacity = "0";
+        charSpan.style.transform = "translateY(40px)";
         wordSpan.appendChild(charSpan);
       });
 
       element.appendChild(wordSpan);
     });
   };
-  const restoreOriginalContent = () => {
-    Object.entries(originalContent.current).forEach(([element, content]) => {
-      if (element && element.parentNode) {
-        element.innerHTML = content;
-      }
-    });
-    originalContent.current = {};
-  };
 
   useGSAP(
     () => {
-      if (window.innerWidth <= 768) return;
+      if (!section2Ref.current) return;
+
       const para = paraRef.current;
       const heading = headingRef.current;
       if (!para || !heading) return;
@@ -76,46 +66,55 @@ export default function ModelScroll() {
       splitText(para);
       splitText(heading);
 
-      const chars = para.querySelectorAll("span");
-      const headingtxt = heading.querySelectorAll("span");
+      const chars = para.querySelectorAll("span span");
+      const headingtxt = heading.querySelectorAll("span span");
+
+      const isMobile = window.innerWidth <= 768;
+
+      // Set initial states
+      gsap.set(bgRef.current, { opacity: 0 });
+      gsap.set(headingtxt, { opacity: 0, y: 40 });
+      gsap.set(chars, { opacity: 0, y: 40 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section2Ref.current,
-          start: "top top",
-          end: "bottom+=200% top",
+          start: "top center",
+          end: isMobile ? "bottom bottom" : "bottom+=200% top",
           scrub: true,
-          pin: true,
-          anticipatePin: 1,
-          // markers: true,
+          pin: isMobile ? false : true,
+          anticipatePin: isMobile ? 0 : 1,
+          invalidateOnRefresh: true,
         },
       });
 
-      tl.to(
-        bgRef.current,
-        {
-          opacity: 1,
-          duration: 0.3,
-          ease: "power2.inout",
-        },
-        0
-      );
-
-      tl.to(headingtxt, {
+      tl.to(bgRef.current, {
         opacity: 1,
-        y: 0,
-        stagger: 0.02,
-        ease: "power2.out",
-        duration: 1,
-      });
-
-      tl.to(chars, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.02,
-        ease: "power2.out",
-        duration: 1,
-      });
+        duration: 0.3,
+        ease: "power2.inOut",
+      })
+        .to(
+          headingtxt,
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.02,
+            ease: "power2.out",
+            duration: 1,
+          },
+          0
+        )
+        .to(
+          chars,
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.02,
+            ease: "power2.out",
+            duration: 1,
+          },
+          ">-0.5"
+        );
     },
     { scope: section2Ref }
   );
@@ -146,9 +145,9 @@ export default function ModelScroll() {
           </div>
         </div>
       </section>
+
       <section className="home-section2" ref={section2Ref}>
         <div
-          // className="home-about-bg"
           ref={bgRef}
           style={{
             height: "100vh",
@@ -162,7 +161,7 @@ export default function ModelScroll() {
             opacity: 0,
           }}
         >
-          <div className="home-main-content">
+          <div className="home-main-content" style={{ position: "relative", zIndex: 1 }}>
             <h1 ref={headingRef}>About&nbsp;us</h1>
             <p ref={paraRef}>
               Instyl Hair N Bridal Studio stands as North Chennai’s biggest
