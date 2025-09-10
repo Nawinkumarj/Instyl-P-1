@@ -73,13 +73,26 @@ export default function ModelScroll() {
     () => {
       const para = paraRef.current;
       const heading = headingRef.current;
-      if (!para || !heading) return;
+      const bg = bgRef.current;
+      if (!para || !heading || !bg) return;
+
+      if (window.innerWidth <= 768) {
+        // Disable animation on mobile - show static content
+        para.style.opacity = "1";
+        para.style.transform = "none";
+        heading.style.opacity = "1";
+        heading.style.transform = "none";
+        bg.style.opacity = "1";
+        return;
+      }
 
       splitText(para);
       splitText(heading);
 
       const chars = para.querySelectorAll("span");
       const headingtxt = heading.querySelectorAll("span");
+
+      gsap.set([...headingtxt, ...chars], { y: 40, opacity: 0 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -90,12 +103,12 @@ export default function ModelScroll() {
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          // markers: true,  // uncomment to debug
+          // markers: true // uncomment for debugging
         },
       });
 
       tl.to(
-        bgRef.current,
+        bg,
         {
           opacity: 1,
           duration: 0.3,
@@ -112,13 +125,17 @@ export default function ModelScroll() {
         duration: 1,
       });
 
-      tl.to(chars, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.02,
-        ease: "power2.out",
-        duration: 1,
-      });
+      tl.to(
+        chars,
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.02,
+          ease: "power2.out",
+          duration: 1,
+        },
+        "<0.5"
+      );
 
       return () => {
         restoreOriginalContent();
@@ -161,7 +178,7 @@ export default function ModelScroll() {
         <div
           ref={bgRef}
           style={{
-            position: "absolute", // absolute full cover for sections
+            position: "absolute",
             top: 0,
             left: 0,
             right: 0,
@@ -173,7 +190,7 @@ export default function ModelScroll() {
             backgroundSize: "cover",
             zIndex: 0,
             opacity: 0,
-            pointerEvents: "none", // avoid blocking interaction
+            pointerEvents: "none",
           }}
         />
         <div className="home-main-content" style={{ position: "relative", zIndex: 1 }}>
