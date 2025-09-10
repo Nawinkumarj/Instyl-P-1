@@ -7,43 +7,79 @@ export default function FAQ() {
 
   const faqs = [
     {
-      question: "Inspiration",
+      question: "Where is your studio located?",
       answer: (
         <div className="faq-content">
           <img
-            src="https://imgs.search.brave.com/sqbcPAvHMpyATtHbxDr1I5xp-oL9voRTkRJ6iVGZ7k0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9zaWxo/b3VldHRlLXVmby1z/dGFycnktc2t5LWlj/b24taWNvbi1saW5l/YXItc3R5bGUtOTQ2/NzE3MzYuanBn"
+            src="/faq1.png"
             alt="Inspiration"
             className="faq-image"
           />
-          <div className="faq-text">
-            <p>
-              The Social Media license is needed for any commercial use of the
-              font on social platforms (Instagram, YouTube, TikTok, etc.).
-            </p>
-            <p>
-              All of our fonts are free to try for personal use as long as it is
-              not used in a commercial project...
-            </p>
-          </div>
+          <ul className="faq-text">
+            <li> We are located at Old Washermenpet.</li>
+            <li> Our studio is easily accessible via public (Sir Thiyagaraya College Metro) and private transport.</li>
+          </ul>
         </div>
       ),
       color: "#ec407a",
     },
     {
-      question: "Find work",
-      answer: <p>Here is how you can find work and grow your career...</p>,
+      question: "What services do you Instyl offer?",
+      answer: ( <div className="faq-content">
+      <img
+        src="/faq1.png"
+        alt="Inspiration"
+        className="faq-image"
+      />
+      <ul className="faq-text">
+        <li> Haircuts & Hair Styling</li>
+        <li> Hair Coloring % Hair Treatments</li>
+        <li> Bridal Makeup & Hairstyling</li>
+        <li> Facials, Threading & Waxing</li>
+      </ul>
+    </div>),
       color: "#ffb74d",
     },
     {
-      question: "Learn Design",
-      answer: (
-        <p>Resources, tutorials, and tools to learn design effectively...</p>
-      ),
+      question: "Do Instyl offer bridal packages?",
+      answer: ( <div className="faq-content">
+        <img
+          src="/faq1.png"
+          alt="Inspiration"
+          className="faq-image"
+        />
+        <ul className="faq-text">
+          <li> Yes! We offer customizable bridal packages that include makeup, hair styling, saree draping, pre-bridal skin care, and more. We also offer packages for destination weddings and group bookings.</li>
+        </ul>
+      </div>),
       color: "#ff7043",
     },
     {
-      question: "Hire Designers",
-      answer: <p>Connect with top designers for your projects...</p>,
+      question: "How early should I book my bridal appointment?",
+      answer: ( <div className="faq-content">
+        <img
+          src="/faq1.png"
+          alt="Inspiration"
+          className="faq-image"
+        />
+        <ul className="faq-text">
+          <li> We recommend booking at least 2–3 Weeks in advance to secure your preferred date, especially during peak wedding season in Chennai.</li>
+        </ul>
+      </div>),
+      color: "#ab47bc",
+    },
+    {
+      question: "How can I book an appointment?",
+      answer: ( <div className="faq-content">
+        <img
+          src="/faq1.png"
+          alt="Inspiration"
+          className="faq-image"
+        />
+        <ul className="faq-text">
+          <li> You can book online through our website, call us at 8056168713, or message us on WhatsApp. A 50% advance may be required to confirm your appointment.</li>
+        </ul>
+      </div>),
       color: "#ab47bc",
     },
   ];

@@ -6,7 +6,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Cherry+Cream+Soda&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
 /*  */
-@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Rock+Salt&family=Salsa&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Qwitcher+Grypen:wght@400;700&family=Salsa&display=swap');
 
 .italiana-regular {
   font-family: "Italiana", sans-serif;
@@ -50,6 +50,7 @@
   --founder-font: "Passions Conflict", cursive;
   --text: "Nanum Pen Script", cursive;
   --font: "Salsa", cursive;
+  --follow-text: "Qwitcher Grypen", cursive;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -996,13 +997,8 @@ display: none;
   margin-top: 60px;
   opacity: 0;
   position: relative;
-  z-index: -99;
 }
-.contact-cards-wrapper div:first-child {
-  background-image: url("/map.PNG");
-  background-position: center;
-  background-size: cover;
-}
+
 .cardStyle {
   width: 400px;
   height: 250px;
@@ -1017,6 +1013,7 @@ display: none;
   gap: 10px;
   padding: 20px;
   text-align: center;
+  cursor: pointer;
 }
 
 .insta-wrapper {
@@ -1027,24 +1024,30 @@ display: none;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  align-items: center;
+  align-items: end;
   gap: 40px;
   opacity: 0;
   padding: 10px 20px;
   width: 90%;
-  height: 400px;
-  background-color: var(--foreground);
+  height: 500px;
+  background-color: var(--secondary-color);
+  border-radius: 15px;
 }
 .insta-follow {
-  height: 300px;
+  height: 400px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
 }
+.insta-text{
+  font-family: var(--follow-text);
+  font-size: 4rem !important;
+}
 .follow-social-media {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   gap: 10px;
+  padding: 20px;
 }
 .follow-social-media a:first-child {
   background-color: var(--third-color);
@@ -1081,6 +1084,12 @@ display: none;
   .cardStyle {
     width: 70%;
     height: 150px;
+  }
+}
+/* Disbling mo contact for desktop */
+@media (min-width: 769px) {
+  .mobile-contact-root {
+    display: none !important;
   }
 }
 
@@ -2785,7 +2794,7 @@ input[type="radio"]:checked + .book__page {
 }
 @media (max-width: 768px){
   .footer-text{
-    font-size: 12px;
+    font-size: 16px;
   }
 }
 .footer-text {
@@ -2990,7 +2999,7 @@ input[type="radio"]:checked + .book__page {
 
 @media (max-width: 768px) {
   .footer-container {
-    padding: 2rem 1rem 2rem 1rem;
+    padding: 2rem .5rem;
   }
   .footer-main {
     width: 100%;
@@ -3002,7 +3011,7 @@ input[type="radio"]:checked + .book__page {
     flex-direction: column;
   }
   .sect2-brnd-name h1 {
-    font-size: 1.5rem;
+    font-size: 2.3rem;
     text-shadow: 4px 4px #0000001a;
   }
 }
@@ -4365,7 +4374,7 @@ input[type="radio"]:checked + .book__page {
 .faq-item {
   flex: 1;
   background: #f9f9f9;
-  border-radius: 30px; /* pill when closed */
+  border-radius: 30px;
   padding: 1rem 2rem;
   cursor: pointer;
   transition: all 0.4s ease;
@@ -4379,8 +4388,9 @@ input[type="radio"]:checked + .book__page {
 }
 
 .faq-question {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 500;
+  font-family: var(--font);
 }
 
 .faq-toggle {
@@ -4483,16 +4493,18 @@ input[type="radio"]:checked + .book__page {
 .faq-content {
   display: flex;
   gap: 2rem;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .faq-image {
-  width: 150px;
+  width: 180px;
   height: auto;
 }
 
 .faq-text {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   font-size: 1.2rem;
   line-height: 1.6;
 }
@@ -4500,7 +4512,8 @@ input[type="radio"]:checked + .book__page {
 
 @media (max-width:768px){
   .faq-main {
-    width: 100%;
+    width: 80%;
+    margin: auto;
   }
   .faq-item{
     width: 250px;
