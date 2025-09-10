@@ -37,13 +37,22 @@ export default function Clients() {
   // Entrance and reverse scroll animations
   useGSAP(() => {
     if (!headingRef.current || cardsRef.current.length === 0) return;
+
+    // Disable animations on mobile
+    if (window.innerWidth <= 768) {
+      // Immediately set opacity/y so elements appear visible and positioned normally
+      gsap.set(headingRef.current, { y: 0, opacity: 1 });
+      gsap.set(cardsRef.current, { y: 0, opacity: 1 });
+      return;
+    }
+
     gsap.fromTo(
       headingRef.current,
       { y: 80, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: .8,
+        duration: 0.8,
         ease: "power3.inout",
         scrollTrigger: {
           trigger: headingRef.current,
@@ -71,9 +80,9 @@ export default function Clients() {
     );
   }, []);
 
-  // 3D Hover animation using GSAP, with cleanup
+  // 3D Hover animation with cleanup, disabled on mobile
   useGSAP(() => {
-     if (window.innerWidth <= 768) return;
+    if (window.innerWidth <= 768) return;
 
     cardsRef.current.forEach((card) => {
       if (!card) return;
@@ -134,11 +143,7 @@ export default function Clients() {
               video.currentTime = 0;
             }}
           >
-            <img
-              className="thumbnail"
-              src={client.img}
-              alt={`Client ${index}`}
-            />
+            <img className="thumbnail" src={client.img} alt={`Client ${index}`} />
             <video
               className="hover-video"
               src={client.video}
@@ -154,7 +159,6 @@ export default function Clients() {
         <button
           className="view-more-btn"
           onClick={() => router.push("/HappyClients")}
-         
         >
           <span>Explore more</span>
           <svg width="15px" height="10px" viewBox="0 0 13 10">
@@ -163,12 +167,12 @@ export default function Clients() {
           </svg>
         </button>
       </div>
-        <div className="main-content-bg1">
-                          <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
-                        </div>
-                        <div className="main-content-bg2">
-                          <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
-                        </div>
+      <div className="main-content-bg1">
+        <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
+      </div>
+      <div className="main-content-bg2">
+        <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
+      </div>
     </div>
   );
 }
