@@ -16,6 +16,8 @@ export default function ScrollFocusList() {
 
   useGSAP(
     () => {
+      if (window.innerWidth <= 768) return;
+      
       const items = itemsRef.current;
       if (items.length === 0) return;
 

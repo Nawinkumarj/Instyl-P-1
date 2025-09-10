@@ -3701,6 +3701,7 @@ input[type="radio"]:checked + .book__page {
   align-items: center;
   padding-top: 40vh;
   padding-bottom: 10vh;
+  gap: 20px;
 }
 
 .offerpage-bg1 {
