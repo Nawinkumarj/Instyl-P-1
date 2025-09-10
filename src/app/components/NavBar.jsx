@@ -18,7 +18,7 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    setIsClient(true); // Mark that we are running on client
+    setIsClient(true);
     setCurrentTime(new Date());
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -50,6 +50,7 @@ const Navbar = () => {
         <div className="navbar-logo">
           <div className="logo-wrapper">
             {/* Full logo */}
+            <Link href="/">
             <Image
               src="/Instyl.webp"
               alt="Large Logo"
@@ -68,6 +69,7 @@ const Navbar = () => {
               style={{ objectFit: "contain" }}
               priority
             />
+            </Link>
           </div>
         </div>
 

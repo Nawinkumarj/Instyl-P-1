@@ -259,6 +259,17 @@ export default function About() {
             },
             ">0.2"
           );
+          gsap.set(paraRef.current, { color: "#000000" });
+
+          tl.to(
+            paraRef.current,
+            {
+              color: "#f8dfef",
+              ease: "back.inOut",
+              duration: 0.6 * (parseFloat(tl.scrollTrigger.end) - parseFloat(tl.scrollTrigger.start))
+            },
+            4 // Start at beginning of scroll timeline
+          );
       });
     }, containerRef);
     return () => {
@@ -307,7 +318,7 @@ export default function About() {
             <img src="/Team/instyl_team.jpg" alt="About" rel="preload" />
           </div>
           <div className="about-head">
-            <h1 ref={headingRef}>About</h1>
+            <h1 ref={headingRef}>Who We Are</h1>
             <p ref={paraRef}>
               Instyl Hair N Bridal Studio was established in the year of March
               11, 2010 (which is now of 14years) by Bindu Baskaran. INSTYL is

@@ -222,8 +222,8 @@ export default function Contact() {
                     <p className="insta-text">Follow us on</p>
                   </div>
                     <div className="follow-social-media">
-                      <a href="http://">Instagram</a>
-                      <a href="http://">Youtube</a>
+                      <a href="https://www.instagram.com/instyl_hairnbridalstudio" target="_blank">Instagram</a>
+                      <a href="https://youtube.com/@instylhairnbridalstudio?si=w_RJzMWPCxzEY0uT" target="_blank">Youtube</a>
                     </div>
                 </div>
               </div>

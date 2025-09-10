@@ -226,12 +226,6 @@ export const Testimonials = () => {
             />
           ))}
         </div>
-        <div className="main-content-bg1">
-          <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
-        </div>
-        <div className="main-content-bg2">
-          <Image src="/ibg.svg" width={400} height={500} alt="bg-img" />
-        </div>
       </div>
     </section>
   );

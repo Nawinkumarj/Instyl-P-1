@@ -22,11 +22,11 @@ export default function Home() {
       opacity: 0,
       y: 50,
       delay: 0.3,
-      duration: 1,
+      duration: 0.5,
       ease: "power2.inout",
       scrollTrigger: {
         trigger: section4Ref.current,
-        start: "top 70%",
+        start: "top 75%",
         toggleActions: "play none none reverse",
       },
     });

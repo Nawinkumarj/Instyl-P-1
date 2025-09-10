@@ -47,7 +47,6 @@ export default function RootLayout({ children }) {
         <MemberIcon />
 
         <div className="main-content" style={{ paddingLeft: "220px" }}>
-        
           <main>{children}</main>
           <FooterWrapper />
         </div>

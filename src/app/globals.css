@@ -6,7 +6,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Cherry+Cream+Soda&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
 /*  */
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Qwitcher+Grypen:wght@400;700&family=Salsa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Nanum+Pen+Script&family=Qwitcher+Grypen:wght@400;700&family=Salsa&display=swap');
 
 .italiana-regular {
   font-family: "Italiana", sans-serif;
@@ -51,6 +51,7 @@
   --text: "Nanum Pen Script", cursive;
   --font: "Salsa", cursive;
   --follow-text: "Qwitcher Grypen", cursive;
+  --about: "Jura", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -1120,7 +1121,7 @@ display: none;
 
 .about-head {
   position: absolute;
-  top: 70%;
+  top: 60%;
   padding: 20px;
   text-align: center;
   transform: translateY(-50%);
@@ -1129,9 +1130,12 @@ display: none;
 }
 
 .about-head h1 {
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 8rem;
+  font-weight: 600;
   margin-bottom: 1rem;
+  font-family: var(--about);
+  letter-spacing: 5px;
+  color: var(--primary-color);
 }
 
 .about-head p {
@@ -1182,7 +1186,7 @@ display: none;
     border-color: transparent;
   }
   50% {
-    border-color: #9c27b0;
+    border-color: #F1ED5C;
   }
 }
 .about-slide-card h3 {
@@ -2777,7 +2781,7 @@ input[type="radio"]:checked + .book__page {
   position: absolute;
   left: 0;
   bottom: 0px;
-  width: 200px;
+  width: 350px;
   height: 2px;
   background: var(--third-color);
   transform: scaleX(0);
@@ -3058,11 +3062,15 @@ input[type="radio"]:checked + .book__page {
 /* Stack Card ends */
 
 /* Membership Starts */
+.card-form-container{
+  height: 100vh;
+  overflow: hidden;
+}
 .membership-main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  padding: 0 2rem;
   gap: 5rem;
   justify-content: center;
   height: 100vh;
@@ -3267,38 +3275,6 @@ input[type="radio"]:checked + .book__page {
 .mem-submit-btn {
   margin-top: 1.5rem;
 }
-
-/* .mem-submit-btn {
- width: 9em;
- height: 3em;
- border-radius: 30em;
- font-size: 15px;
- font-family: inherit;
- border: none;
- position: relative;
- overflow: hidden;
- z-index: 1;
- box-shadow: 6px 6px 12px #c5c5c5,
-             -6px -6px 12px #ffffff;
-}
-
-.mem-submit-btn::before {
- content: '';
- width: 0;
- height: 3em;
- border-radius: 30em;
- position: absolute;
- top: 0;
- left: 0;
- background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);
- transition: .5s ease;
- display: block;
- z-index: -1;
-}
-
-.mem-submit-btn:hover::before {
- width: 9em;
-} */
 
 .type--A {
   --line_color: #555555;
@@ -4104,18 +4080,6 @@ input[type="radio"]:checked + .book__page {
 }
 
 .memberfloat-icon {
-  /* --r: 25px;
-
-  line-height: 1.8;
-  padding-inline: .5em;
-  border-inline: var(--r) solid #0000;
-  border-radius: calc(2*var(--r)) calc(2*var(--r)) 0 0/var(--r);
-  mask: 
-    radial-gradient(var(--r) at var(--r) 0,#0000 98%,#000 101%)
-      calc(-1*var(--r)) 100%/100% var(--r) repeat-x,
-    conic-gradient(#000 0 0) padding-box;
-  background: var(--third-color) border-box; 
-  width: fit-content; */
   width: 40px;
   height: 230px;
   background: white border-box;
@@ -4125,6 +4089,9 @@ input[type="radio"]:checked + .book__page {
   justify-content: center;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+  border-left: 3px solid var(--third-color);
+  border-top: 3px solid var(--third-color);
+  border-bottom: 3px solid var(--third-color);
   /* transform: rotate(-90deg); */
 }
 

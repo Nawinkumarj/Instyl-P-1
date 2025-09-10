@@ -76,9 +76,14 @@ export default function ScrollFocusList() {
       bg: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
     },
     {
+      title: "Offers 2 ",
+      desc: "Description",
+      bg: "https://plus.unsplash.com/premium_photo-1755873888790-d5fb2a1a8944?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxNHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
       title: "Offers 3 ",
       desc: "Description",
-      bg: "https://images.unsplash.com/photo-1755134148217-2dd89cc6a2c2?q=80&w=1170&auto=format&fit=crop",
+      bg: "https://images.unsplash.com/photo-1755134148217-2dd89cc6a2c2?q=80&w=1270&auto=format&fit=crop",
     },
     {
       title: "Offers 4",
