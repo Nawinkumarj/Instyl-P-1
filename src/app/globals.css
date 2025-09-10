@@ -2783,7 +2783,11 @@ input[type="radio"]:checked + .book__page {
   color: var(--third-color);
   opacity: 1;
 }
-
+@media (max-width: 768px){
+  .footer-text{
+    font-size: 12px;
+  }
+}
 .footer-text {
   display: inline-block;
   transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);

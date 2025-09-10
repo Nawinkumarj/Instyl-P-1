@@ -19,7 +19,6 @@ export default function Contact() {
   const cardRefs = useRef([]);
   const afterCardsRef = useRef(null);
   const instaWrapperRef = useRef(null);
-  const instaTextRef = useRef(null);
 
   cardRefs.current = [];
   const addToRefs = (el) => {
@@ -45,6 +44,8 @@ export default function Contact() {
         const charSpan = document.createElement("span");
         charSpan.textContent = char;
         charSpan.style.display = "inline-block";
+        charSpan.style.opacity = "0";
+        charSpan.style.transform = "translateY(40px)";
         wordSpan.appendChild(charSpan);
       });
 
@@ -54,24 +55,23 @@ export default function Contact() {
 
   useGSAP(
     () => {
+      // Disable GSAP animations and splitText on mobile to prevent layout issues
+      if (window.innerWidth <= 768) return;
+
       splitText(headingRef.current);
       splitText(paraRef.current);
       splitText(afterCardsRef.current);
-      splitText(instaTextRef.current);
 
       const headingSpans = headingRef.current.querySelectorAll("span span");
       const paraSpans = paraRef.current.querySelectorAll("span span");
       const afterSpans = afterCardsRef.current.querySelectorAll("span span");
-      const instaSpans = instaTextRef.current.querySelectorAll("span span");
 
-      // Set heading visible at start, others hidden and moved down
+      // Set heading visible at start, others hidden + moved down
       gsap.set(headingSpans, { opacity: 1, y: 0 });
       gsap.set(paraSpans, { opacity: 0, y: 40 });
       gsap.set(afterSpans, { opacity: 0, y: 40 });
-      gsap.set(instaSpans, { opacity: 0, y: 40 });
 
-      const isMobile = window.innerWidth <= 768;
-      const endScroll = isMobile ? "+=300%" : "+=700%";
+      const endScroll = "+=700%";
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -84,7 +84,6 @@ export default function Contact() {
         },
       });
 
-      // Just animate heading out (fade/move up)
       tl.to(
         headingSpans,
         { opacity: 0, y: -40, stagger: 0.05, duration: 1, ease: "power3.in" },
@@ -132,23 +131,24 @@ export default function Contact() {
           instaWrapperRef.current,
           { opacity: 1, scale: 1, duration: 1.2, ease: "power3.out" },
           "+=0.3"
-        )
-        .to(
-          instaSpans,
-          { opacity: 1, y: 0, stagger: 0.03, duration: 1, ease: "power3.out" },
-          "-=0.4"
-        )
-        .to(
-          instaSpans,
-          { opacity: 0, y: -40, stagger: 0.03, duration: 1, ease: "power3.in" },
-          "+=0.3"
         );
     },
     { scope: sectionRef }
   );
 
   return (
-    <div style={{ padding: "20px", position: "relative", height: "100%" }}>
+    <div
+      style={{
+        backgroundImage: "url('/cbg.svg')",
+        backgroundRepeat: "no-repeat",
+        backgroundColor: "#f8dfef",
+        backgroundPosition: "left",
+        backgroundSize: "cover",
+        position: "relative",
+        width: "100%",
+        minHeight: "100%",
+      }}
+    >
       {/* <Breadcrumb /> */}
       <div className="contact-container">
         <div className="contact-section1" ref={sectionRef}>
@@ -161,10 +161,7 @@ export default function Contact() {
             </p>
 
             <div className="contact-cards-wrapper" style={{ opacity: 0 }}>
-              <Link
-                href="https://maps.app.goo.gl/Xn4T7LBeDscN9n5n6"
-                target="_blank"
-              >
+              <Link href="https://maps.app.goo.gl/Xn4T7LBeDscN9n5n6" target="_blank">
                 <div ref={addToRefs} className="cardStyle"></div>
               </Link>
               <div ref={addToRefs} className="cardStyle">
@@ -203,9 +200,7 @@ export default function Contact() {
                 quality={90}
               />
               <div className="insta-follow">
-                <p ref={instaTextRef} className="insta-text">
-                  Follow us on
-                </p>
+                <p className="insta-text">Follow us on</p>
                 <div className="follow-social-media">
                   <a href="http://">Instagram</a>
                   <a href="http://">Youtube</a>
