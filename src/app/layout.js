@@ -11,7 +11,7 @@ import Image from "next/image";
 
 export const metadata = {
   title: "Instyl Hair n Bridal Studio",
-  description: "#",
+  description: "A luxury hair and bridal studio in Chennai dedicated to delivering exceptional beauty experiences. Our skilled artists specialize in elegant hairstyling, flawless bridal makeup, and personalized treatments, using premium products and techniques to ensure every client looks and feels radiant for their special day. Experience timeless glamour and sophisticated care in a serene, upscale environment.",
 };
 
 export default function RootLayout({ children }) {
