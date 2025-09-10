@@ -2638,6 +2638,89 @@ input[type="radio"]:checked + .book__page {
   margin-top: 1rem;
 }
 
+/*  */
+.desktop-testimonials {
+  display: block;
+}
+/* Mobile hidden above 768px */
+.mobile-testimonials {
+  display: none;
+  padding: 16px;
+  /* background: #f7f7f7; */
+  position: relative;
+  max-width: 350px;
+  height: 500px;
+  margin: 0 auto 2rem auto;
+  border-radius: 14px;
+  /* box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1); */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.mobile-testimonials p{
+  font-family: var(--banner-font);
+  font-size: 3rem;
+  color: var(--third-color);
+}
+@media (max-width: 768px) {
+  .desktop-testimonials {
+    display: none;
+  }
+  .mobile-testimonials {
+    display: block;
+  }
+}
+.testimonial-card-mobile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  width: 300px;
+  height: 250px;
+  max-width: 90vw;
+  transform: translate(-50%, -50%);
+  background: var(--primary-color);
+  border-radius: 16px;
+  padding: 18px 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none; /* To avoid interaction while hidden */
+}
+.profile-section-mobile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.profile-avatar-mobile {
+  flex-shrink: 0;
+}
+.profile-info-mobile {
+  margin-left: 14px;
+}
+.profile-info-mobile h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.profile-info-mobile p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+.testimonial-content-mobile {
+  font-style: italic;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 10px;
+  min-height: 60px;
+}
+.testimonial-time-mobile {
+  font-size: 12px;
+  color: #888;
+}
+
 @media (max-width: 768px) {
   .title-part {
     font-size: clamp(2rem, 8vw, 6rem);

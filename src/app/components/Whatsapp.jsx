@@ -24,7 +24,7 @@ export default function WhatsAppHoverCard() {
           </div>
           <div className="whatsapp-hover">
             <Link
-              href="https://wa.me/8056168713"
+              href="https://wa.me/+918056168713"
               target="_blank"
               rel="noopener noreferrer"
             >
