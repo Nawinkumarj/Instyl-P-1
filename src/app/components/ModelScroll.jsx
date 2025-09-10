@@ -8,7 +8,6 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ModelScroll() {
-  const modelRef = useRef(null);
   const section1Ref = useRef(null);
   const section2Ref = useRef(null);
   const paraRef = useRef(null);
@@ -16,24 +15,26 @@ export default function ModelScroll() {
   const originalContent = useRef({});
   const bgRef = useRef(null);
 
-  const words = ["perfect", "beauty", "elegant", "stylish"]; // cycle words
+  const words = ["perfect", "beauty", "elegant", "stylish"];
   const [displayWord, setDisplayWord] = useState(words[0]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Cycle words every 2s
   useEffect(() => {
     const interval = setInterval(() => {
-      const nextIndex = (currentIndex + 1) % words.length;
-      setDisplayWord(words[nextIndex]);
-      setCurrentIndex(nextIndex);
-    }, 2000); // change every 2 seconds
+      setCurrentIndex((prev) => (prev + 1) % words.length);
+    }, 2000);
 
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    setDisplayWord(words[currentIndex]);
   }, [currentIndex]);
 
   const splitText = (element) => {
     if (!element || element.querySelector("span span")) return;
 
-    // Store original content before splitting
     originalContent.current[element] = element.innerHTML;
 
     const text = element.innerText;
@@ -51,12 +52,14 @@ export default function ModelScroll() {
         charSpan.textContent = char;
         charSpan.style.display = "inline-block";
         charSpan.style.opacity = "0";
+        charSpan.style.transform = "translateY(40px)";
         wordSpan.appendChild(charSpan);
       });
 
       element.appendChild(wordSpan);
     });
   };
+
   const restoreOriginalContent = () => {
     Object.entries(originalContent.current).forEach(([element, content]) => {
       if (element && element.parentNode) {
@@ -68,7 +71,6 @@ export default function ModelScroll() {
 
   useGSAP(
     () => {
-      if (window.innerWidth <= 768) return;
       const para = paraRef.current;
       const heading = headingRef.current;
       if (!para || !heading) return;
@@ -87,7 +89,8 @@ export default function ModelScroll() {
           scrub: true,
           pin: true,
           anticipatePin: 1,
-          // markers: true,
+          invalidateOnRefresh: true,
+          // markers: true,  // uncomment to debug
         },
       });
 
@@ -116,6 +119,10 @@ export default function ModelScroll() {
         ease: "power2.out",
         duration: 1,
       });
+
+      return () => {
+        restoreOriginalContent();
+      };
     },
     { scope: section2Ref }
   );
@@ -146,39 +153,46 @@ export default function ModelScroll() {
           </div>
         </div>
       </section>
-      <section className="home-section2" ref={section2Ref}>
+      <section
+        className="home-section2"
+        ref={section2Ref}
+        style={{ position: "relative" }}
+      >
         <div
-          // className="home-about-bg"
           ref={bgRef}
           style={{
-            height: "100vh",
+            position: "absolute", // absolute full cover for sections
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: "100%",
             backgroundImage: "url('/aboutbg.svg')",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: "cover",
-            position: "relative",
-            zIndex: -9,
-            inset: 0,
+            zIndex: 0,
             opacity: 0,
+            pointerEvents: "none", // avoid blocking interaction
           }}
-        >
-          <div className="home-main-content">
-            <h1 ref={headingRef}>About&nbsp;us</h1>
-            <p ref={paraRef}>
-              Instyl Hair N Bridal Studio stands as North Chennai’s biggest
-              female salon, celebrated for its exceptional creativity and
-              commitment to excellence. With over 15 years of dedicated service,
-              INSTYL has redefined hairstyling and beauty, earning a reputation
-              for innovative haircuts and remarkable client satisfaction.
-              <br /> Renowned for its artistry, INSTYL has crafted over 1,00,000
-              unique haircuts, including a record-breaking achievement of 100+
-              cuts in a single day. Their unwavering dedication to quality and
-              personalized service has cultivated a loyal clientele, with nearly
-              40,000 regular customers and over 1,50,000 satisfied services
-              delivered. Additionally, INSTYL has transformed more than 3,000
-              clients with their expert makeup artistry.
-            </p>
-          </div>
+        />
+        <div className="home-main-content" style={{ position: "relative", zIndex: 1 }}>
+          <h1 ref={headingRef}>About&nbsp;us</h1>
+          <p ref={paraRef}>
+            Instyl Hair N Bridal Studio stands as North Chennai’s biggest female
+            salon, celebrated for its exceptional creativity and commitment to
+            excellence. With over 15 years of dedicated service, INSTYL has
+            redefined hairstyling and beauty, earning a reputation for innovative
+            haircuts and remarkable client satisfaction.
+            <br />
+            Renowned for its artistry, INSTYL has crafted over 1,00,000 unique
+            haircuts, including a record-breaking achievement of 100+ cuts in a
+            single day. Their unwavering dedication to quality and personalized
+            service has cultivated a loyal clientele, with nearly 40,000 regular
+            customers and over 1,50,000 satisfied services delivered.
+            Additionally, INSTYL has transformed more than 3,000 clients with their
+            expert makeup artistry.
+          </p>
         </div>
       </section>
     </div>
