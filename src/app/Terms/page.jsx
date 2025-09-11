@@ -5,38 +5,15 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const TermsConditions = () => {
-  const containerRef = useRef(null);
-
-  useGSAP(() => {
-    const sections = containerRef.current.querySelectorAll(".reveal");
-
-    gsap.fromTo(
-      sections,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        ease: "power3.out",
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-          toggleActions: "play reverse play reverse",
-        },
-      }
-    );
-  }, containerRef);
 
   return (
     <>
-      <div className="privacy-container" ref={containerRef}>
+      <div className="privacy-container">
         <div className="privacy-main">
           <h1 className="highlight-text reveal">Terms and Conditions</h1>
-          <p className="ggg reveal">Last updated: June 20, 2025</p>
+          <p className="ggg reveal">Last updated: September 11, 2025</p>
           <p className="reveal">
             Please read these terms and conditions carefully before using Our
             Service.
@@ -47,9 +24,7 @@ const TermsConditions = () => {
           <h3 className="reveal">Interpretation</h3>
           <p className="reveal">
             The words of which the initial letter is capitalized have meanings
-            defined under the following conditions. The following definitions
-            shall have the same meaning regardless of whether they appear in
-            singular or in plural.
+            defined under the following conditions.
           </p>
           <h3 className="reveal">Definitions</h3>
           <p className="reveal">
@@ -59,10 +34,7 @@ const TermsConditions = () => {
             <li className="reveal">
               <p className="reveal">
                 <strong>Affiliate</strong> means an entity that controls, is
-                controlled by or is under common control with a party, where
-                &quot;control&quot; means ownership of 50% or more of the
-                shares, equity interest or other securities entitled to vote for
-                election of directors or other managing authority.
+                controlled by or is under common control 
               </p>
             </li>
             <li className="reveal">
@@ -72,10 +44,8 @@ const TermsConditions = () => {
             </li>
             <li className="reveal">
               <p className="reveal">
-                <strong>Company</strong> (referred to as either &quot;the
-                Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot;
-                in this Agreement) refers to Vcraftyu Company ,
-                thirukazhukundram, chengalpattu .
+                <strong>Company</strong> refers to INSTYL HAIR N BRIDAL STUDIO,
+                6/2 G.A Road, 7th lane, Old Washermenpet, Chennai -21.
               </p>
             </li>
             <li className="reveal">
