@@ -259,17 +259,6 @@ export default function About() {
             },
             ">0.2"
           );
-          gsap.set(paraRef.current, { color: "#000000" });
-
-          tl.to(
-            paraRef.current,
-            {
-              color: "#f8dfef",
-              ease: "back.inOut",
-              duration: 0.6 * (parseFloat(tl.scrollTrigger.end) - parseFloat(tl.scrollTrigger.start))
-            },
-            4 // Start at beginning of scroll timeline
-          );
       });
     }, containerRef);
     return () => {
