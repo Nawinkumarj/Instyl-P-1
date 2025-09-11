@@ -90,7 +90,7 @@ export default function FAQ() {
 
   return (
     <div className="faq-container">
-      <div className="faq-heading">
+      <div className="faq-heading" style={{width: '90%', margin: 'auto'}}>
         <h1>FAQ'S</h1>
       </div>
       <div className="faq-main">

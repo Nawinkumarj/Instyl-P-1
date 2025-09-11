@@ -68,7 +68,7 @@ const Page = () => {
       tl.to(
         leftTextRef.current,
         {
-          xPercent: -100,
+          xPercent: -150,
           opacity: 0.2,
           ease: "power2.inOut",
         },
@@ -85,7 +85,7 @@ const Page = () => {
       tl.to(
         rightTextRef.current,
         {
-          xPercent: 100,
+          xPercent: 150,
           opacity: 0.2,
           ease: "power2.inOut",
         },

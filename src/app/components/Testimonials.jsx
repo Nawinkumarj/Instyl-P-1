@@ -174,7 +174,7 @@ export const Testimonials = () => {
   return (
     <>
       {/* Desktop Section */}
-      <section
+      <section id="testimonials"
         ref={sectionRef}
         className="testimonials-section desktop-testimonials"
         style={{ position: "relative", overflow: "hidden" }}

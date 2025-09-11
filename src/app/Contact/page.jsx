@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import Breadcrumb from "../components/Breadcrumb";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { gsap } from "gsap";

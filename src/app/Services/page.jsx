@@ -136,7 +136,7 @@ export default function ServiceMain() {
         translate="no"
         style={{ position: "relative", isolation: "isolate" }}
       >
-        <div className="servicemain-heading" translate="no">
+        <div className="servicemain-heading" translate="no" style={{width: '90%', margin: 'auto'}}>
           <h1>Services</h1>
         </div>
 

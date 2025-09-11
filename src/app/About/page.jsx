@@ -259,6 +259,17 @@ export default function About() {
             },
             ">0.2"
           );
+          gsap.set(headingRef.current, { color: "#9c27b0" });
+
+          tl.to(
+            headingRef.current,
+            {
+              color: "#f8dfef",
+              ease: "power2.in",
+              duration: 1,
+            },
+            4
+          );
       });
     }, containerRef);
     return () => {
