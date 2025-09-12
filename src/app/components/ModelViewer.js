@@ -1,37 +1,33 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import * as THREE from "three";
 
+// Model component
 const Model = ({ containerSize }) => {
   const groupRef = useRef();
-  const { scene } = useGLTF("/assets/Brush.glb", true, (loader) => {
+
+  
+  const { scene } = useGLTF("/assets/makeup_kit.glb", true, (loader) => {
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("/draco/");
     loader.setDRACOLoader(dracoLoader);
   });
 
   useEffect(() => {
-    if (
-      scene &&
-      groupRef.current &&
-      containerSize.width &&
-      containerSize.height
-    ) {
+    if (scene && groupRef.current && containerSize.width && containerSize.height) {
       const box = new THREE.Box3().setFromObject(scene);
       const size = new THREE.Vector3();
       box.getSize(size);
 
       const maxDimension = Math.max(size.x, size.y, size.z);
-
-      const scaleFactor =
-        Math.min(
-          containerSize.width / maxDimension,
-          containerSize.height / maxDimension
-        ) * 0.9;
+      const scaleFactor = Math.min(
+        containerSize.width / maxDimension,
+        containerSize.height / maxDimension
+      ) * 0.9;
 
       scene.scale.set(scaleFactor, scaleFactor, scaleFactor);
 
@@ -44,7 +40,7 @@ const Model = ({ containerSize }) => {
         -center.z * scaleFactor
       );
 
-      groupRef.current.position.set(0, -2, 0); // Shift entire group down
+      groupRef.current.position.set(0, -2, 0);
       groupRef.current.rotation.y = Math.PI / 4;
     }
   }, [scene, containerSize]);
@@ -57,15 +53,15 @@ const Model = ({ containerSize }) => {
 
   return (
     <group ref={groupRef}>
-      <primitive object={scene.clone()} />
+      <primitive object={scene} />
     </group>
   );
 };
 
-
+// ModelViewer component
 const ModelViewer = () => {
   const containerRef = useRef();
-  const [dimensions, setDimensions] = useState({ width: 600, height: 400 });
+  const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
 
   useEffect(() => {
     const updateSize = () => {
@@ -87,7 +83,7 @@ const ModelViewer = () => {
     <div ref={containerRef} style={{ width: "100%", height: "600px" }}>
       <Canvas
         style={{ background: "transparent", width: "100%", height: "100%" }}
-        camera={{ position: [0, 0, 8], fov: 50 }}
+        camera={{ position: [0, 0, 10], fov: 50 }}
       >
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 10]} intensity={1} />
@@ -98,4 +94,5 @@ const ModelViewer = () => {
   );
 };
 
-export default ModelViewer;
+// ✅ Use React.memo here to prevent unnecessary re-renders
+export default React.memo(ModelViewer);

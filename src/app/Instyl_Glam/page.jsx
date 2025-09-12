@@ -47,9 +47,6 @@ const BookFlip = ({ menuData = [] }) => {
           {/* Pages */}
           {menuData.map((item, index) => (
             <div key={index} className="page">
-              {/* <div className="instyl-glam-card"> */}
-              {/* Dish Title */}
-              {/* <h3 className="instyl-glam-title">{item.packageName}</h3> */}
 
               {/* Main Image */}
               <div className="instyl-glam-image">
@@ -58,29 +55,7 @@ const BookFlip = ({ menuData = [] }) => {
                   alt={item.name}
                   className="instyl-glam-img"
                 />
-                {/* <p className="instyl-glam-image-name">
-                    {item.packageDescription}
-                  </p> */}
               </div>
-
-              {/* Three Flex Images */}
-              {/* <div className="instyl-glam-flex-images">
-                  {(item.extraImages || []).slice(0, 3).map((img, idx) => (
-                    <div key={idx} className="instyl-glam-flex-image-item">
-                      <img
-                        src={img.src}
-                        alt={img.name}
-                        className="instyl-glam-thumb-img"
-                      />
-                      <p>{img.name}</p>
-                    </div>
-                  ))}
-                </div> */}
-              {/* <p className="instyl-glam-description">
-                  {item.mainDescription}
-                </p>
-                <div className="instyl-glam-price-tag">INR.{item.pricing}/-</div> */}
-              {/* </div> */}
             </div>
           ))}
 
@@ -157,12 +132,6 @@ export default function Home() {
 
     fetchMenuData();
   }, []);
-
-  // if (loading) {
-  //   return (
-  //     <div style={{ textAlign: "center", padding: "50px" }}>Loading...</div>
-  //   );
-  // }
 
   return <BookFlip menuData={menuData} />;
 }
